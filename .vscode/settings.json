@@ -1,0 +1,4 @@
+{
+    "cSpell.ignorePaths": ["./index.d.ts", "./src/original.d.ts"],
+    "cSpell.words": ["deployables", "MCOM"]
+}
