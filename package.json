@@ -20,7 +20,8 @@
         "prettier": "prettier --write ./**/*.{ts,js,mjs} ./*.md ./*.json ./**/*.md ./**/*.json",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "build": "node ./src/merge-docs.js && npm run prettier"
+        "build": "node ./src/merge-docs.js && npm run prettier",
+        "verify": "node ./src/verify-build.js"
     },
     "repository": {
         "type": "git",

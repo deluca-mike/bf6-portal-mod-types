@@ -1,4 +1,4 @@
-declare namespace mod {
+declare namespace documentedMod {
     /**
      * The Gadgets enum.
      *

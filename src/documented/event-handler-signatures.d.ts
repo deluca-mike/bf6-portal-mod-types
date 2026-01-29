@@ -1,4 +1,8 @@
-declare namespace mod {
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="./types.d.ts" />
+/* eslint-enable @typescript-eslint/triple-slash-reference */
+
+declare namespace documentedMod {
     namespace EventHandlerSignatures {
         /**
          * This will trigger when a Player enters an AreaTrigger.

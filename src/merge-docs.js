@@ -3,50 +3,73 @@ import path from 'path';
 import fs from 'fs';
 
 // --- CONFIGURATION ---
-const SRC_DIR = 'src';
-const OUTPUT_FILE = 'index.d.ts';
-const ORIGINAL_FILENAME = 'mod.d.ts';
-const OVERRIDES_FILENAME = 'documentedMod.d.ts';
 const NAMESPACE_NAME = 'mod';
+const OUTPUT_ROOT = '.'; // Project root
+const ORIGINAL_DIR = path.join('src', 'original');
+const DOCUMENTED_DIR = path.join('src', 'documented');
 
 async function main() {
-    console.log('--- HYBRID MERGE: AST READ + TEXT WRITE ---');
+    console.log('--- BF6 PORTAL DOCS BUILDER ---');
 
+    // 1. Initialize ts-morph (InMemory for speed)
     const project = new Project({
         skipAddingFilesFromTsConfig: true,
         useInMemoryFileSystem: true,
     });
 
-    const originalPath = path.join(SRC_DIR, ORIGINAL_FILENAME);
-    const overridesPath = path.join(SRC_DIR, OVERRIDES_FILENAME);
-    const outputPath = path.resolve(OUTPUT_FILE);
+    // 2. Get all files in 'src/original' recursively
+    const allFiles = getRelativeFiles(ORIGINAL_DIR);
+    console.log(`Found ${allFiles.length} files in ${ORIGINAL_DIR}`);
 
-    // Load Files into Memory (Read-Only)
-    console.log(`Loading ${ORIGINAL_FILENAME}...`);
-    const originalText = fs.readFileSync(originalPath, 'utf-8');
-    const originalFile = project.createSourceFile(`temp-${ORIGINAL_FILENAME}`, originalText);
+    for (const relPath of allFiles) {
+        const originalPath = path.join(ORIGINAL_DIR, relPath);
+        const documentedPath = path.join(DOCUMENTED_DIR, relPath);
+        const outputPath = path.join(OUTPUT_ROOT, relPath);
 
-    console.log(`Loading ${OVERRIDES_FILENAME}...`);
-    const overridesText = fs.readFileSync(overridesPath, 'utf-8');
-    const overridesFile = project.createSourceFile(`temp-${OVERRIDES_FILENAME}`, overridesText);
+        // Ensure output directory exists
+        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-    // Locate Namespaces
-    const sourceNS = overridesFile.getModules()[0];
-    const targetNamespaces = originalFile.getModules().filter((m) => m.getName() === NAMESPACE_NAME);
-
-    if (!sourceNS) {
-        console.error(`❌ Error: Could not find any namespace in ${OVERRIDES_FILENAME}`);
-        return;
+        // Check if we have documentation overrides for this file
+        if (fs.existsSync(documentedPath)) {
+            console.log(`[MERGE] ${relPath}`);
+            mergeFile(project, originalPath, documentedPath, outputPath);
+        } else {
+            console.log(`[COPY ] ${relPath}`);
+            fs.copyFileSync(originalPath, outputPath);
+        }
     }
 
-    if (targetNamespaces.length === 0) {
-        console.error(`❌ Error: Could not find namespace '${NAMESPACE_NAME}' in ${ORIGINAL_FILENAME}`);
+    console.log('--- BUILD COMPLETE ---');
+}
+
+/**
+ * Merges a single pair of files using AST-Read / Text-Write
+ */
+function mergeFile(project, originalPath, documentedPath, outputPath) {
+    // A. Load Files into Memory (Read-Only)
+    const originalText = fs.readFileSync(originalPath, 'utf-8');
+    const originalFile = project.createSourceFile('original.ts', originalText, { overwrite: true });
+
+    const documentedText = fs.readFileSync(documentedPath, 'utf-8');
+    const documentedFile = project.createSourceFile('documented.ts', documentedText, { overwrite: true });
+
+    // B. Locate Namespaces
+    // In 'documented', we look for ANY namespace (e.g. "documentedMod")
+    const sourceNS = documentedFile.getModules()[0];
+
+    // In 'original', we look for the namespace we're interested in
+    const targetNamespaces = originalFile.getModules().filter((m) => m.getName() === NAMESPACE_NAME);
+
+    // If structure doesn't match expectations, warn and fallback to direct copy
+    if (!sourceNS || targetNamespaces.length === 0) {
+        console.warn(`   ⚠️  Warning: Could not match namespaces in ${path.basename(originalPath)}. Copying original.`);
+        fs.writeFileSync(outputPath, originalText);
         return;
     }
 
     console.log(`Mapping '${sourceNS.getName()}' -> '${NAMESPACE_NAME}' (${targetNamespaces.length} blocks found)`);
 
-    // GENERATE EDITS (Read Phase)
+    // C. GENERATE EDITS (Read Phase)
     // We strictly gather numbers here. We do NOT modify the original text yet.
     const edits = [];
 
@@ -56,7 +79,7 @@ async function main() {
 
     console.log(`✅ Identified ${edits.length} documentation updates.`);
 
-    // APPLY EDITS (Write Phase)
+    // D. APPLY EDITS (Write Phase)
     // We work strictly on the raw string now using the coordinates found above.
     let finalContent = originalText;
 
@@ -66,12 +89,10 @@ async function main() {
     for (const edit of edits) {
         const before = finalContent.substring(0, edit.start);
         const after = finalContent.substring(edit.end);
-
         finalContent = before + edit.text + after;
     }
 
-    // Write Output
-    console.log(`Writing to ${OUTPUT_FILE}...`);
+    console.log(`Writing to ${outputPath}...`);
     fs.writeFileSync(outputPath, finalContent);
     console.log('Done!');
 }
@@ -150,6 +171,34 @@ function collectEdits(sourceParent, targetParent, edits) {
     }
 }
 
+// --- HELPERS ---
+
+/**
+ * Returns a list of file paths relative to the baseDir.
+ * recursive: true
+ */
+function getRelativeFiles(baseDir) {
+    const results = [];
+    const list = fs.readdirSync(baseDir);
+
+    list.forEach((file) => {
+        const fullPath = path.join(baseDir, file);
+        const stat = fs.statSync(fullPath);
+
+        if (stat && stat.isDirectory()) {
+            // Recurse into subdirectory
+            const subFiles = getRelativeFiles(fullPath);
+            // Append current dir name to results (e.g. "enums/file.d.ts")
+            subFiles.forEach((sub) => results.push(path.join(file, sub)));
+        } else {
+            // It's a file, just add the name
+            results.push(file);
+        }
+    });
+
+    return results;
+}
+
 function getSignatureId(node) {
     if (!isSignatureNode(node)) return '';
 
@@ -160,7 +209,7 @@ function getSignatureId(node) {
         if (typeNode) {
             typeText = typeNode.getText();
             typeText = typeText.replace(/\s+/g, '');
-            typeText = typeText.replace(/[a-zA-Z0-9_]+\./g, '');
+            typeText = typeText.replace(/[a-zA-Z0-9_]+\./g, ''); // Strip namespaces
         }
 
         const isOptional = p.isOptional() ? '?' : '';
