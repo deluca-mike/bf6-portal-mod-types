@@ -5,10 +5,15 @@
     "engines": {
         "node": ">=23.0.0"
     },
-    "main": "index.d.ts",
+    "main": "",
     "types": "index.d.ts",
     "files": [
         "index.d.ts",
+        "enums.d.ts",
+        "event-handler-signatures.d.ts",
+        "types.d.ts",
+        "enums/",
+        "runtime-spawn-enums/",
         "README.md"
     ],
     "exports": {
