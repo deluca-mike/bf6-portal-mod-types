@@ -1,14 +1,19 @@
 {
     "name": "bf6-portal-mod-types",
-    "version": "1.1.3-docs.0",
+    "version": "1.1.3-docs.1",
     "description": "TypeScript definitions for Battlefield 6 Portal mod namespace",
     "engines": {
         "node": ">=23.0.0"
     },
-    "main": "index.d.ts",
+    "main": "",
     "types": "index.d.ts",
     "files": [
         "index.d.ts",
+        "enums.d.ts",
+        "event-handler-signatures.d.ts",
+        "types.d.ts",
+        "enums/",
+        "runtime-spawn-enums/",
         "README.md"
     ],
     "exports": {
@@ -17,10 +22,12 @@
         }
     },
     "scripts": {
-        "prettier": "prettier --write ./**/*.{ts,js,mjs} ./*.md ./*.json ./**/*.md ./**/*.json",
+        "prettier": "prettier --no-error-on-unmatched-pattern --write '**/*.{ts,js,mjs,md,json}'",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "build": "node ./src/merge-docs.js && npm run prettier"
+        "build": "node ./src/merge-docs.js && npm run prettier",
+        "verify": "node ./src/verify-build.js",
+        "docs": "typedoc --commentStyle all && npm run prettier"
     },
     "repository": {
         "type": "git",
@@ -51,6 +58,7 @@
         "prettier": "^3.8.0",
         "ts-morph": "^27.0.2",
         "ts-node": "^10.9.2",
+        "typedoc": "^0.28.16",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.53.0"
     }
