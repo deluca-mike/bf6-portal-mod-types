@@ -4,11 +4,10 @@ import fs from 'fs';
 
 import { getRelativeFiles, getSignatureId, getNamedChildren, isSignatureNode, isContainer } from './common.js';
 
-// --- CONFIGURATION ---
 const NAMESPACE_NAME = 'mod';
-const OUTPUT_ROOT = '.'; // Project root
 const ORIGINAL_DIR = path.join('src', 'original');
 const DOCUMENTED_DIR = path.join('src', 'documented');
+const OUTPUT_ROOT = '.'; // Project root
 
 async function main() {
     console.log('--- BF6 PORTAL DOCS BUILDER ---');
@@ -91,6 +90,7 @@ function mergeFile(project, originalPath, documentedPath, outputPath) {
     for (const edit of edits) {
         const before = finalContent.substring(0, edit.start);
         const after = finalContent.substring(edit.end);
+
         finalContent = before + edit.text + after;
     }
 
@@ -149,7 +149,7 @@ function collectEdits(sourceParent, targetParent, edits) {
                     startPos = commentRanges[0].getPos();
 
                     // `getStart()` points to the 'export' keyword.
-                    // By extending the range here, we consume the old comments and  the whitespace/newline gap that followed them.
+                    // By extending the range here, we consume the old comments and the whitespace/newline gap that followed them.
                     endPos = targetNode.getStart();
                 } else {
                     // INSERT: Nothing exists, insert before the node.

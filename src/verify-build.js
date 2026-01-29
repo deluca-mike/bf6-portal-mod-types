@@ -4,7 +4,6 @@ import fs from 'fs';
 
 import { getRelativeFiles, getSignatureId, getNamedChildren, isSignatureNode, isContainer } from './common.js';
 
-// CONFIG
 const DOCUMENTED_DIR = path.join('src', 'documented');
 const OUTPUT_ROOT = '.'; // Check the actual root output
 
@@ -16,7 +15,7 @@ async function main() {
         useInMemoryFileSystem: true,
     });
 
-    // 1. Get list of files we expect to contain documentation
+    // Get list of files we expect to contain documentation
     const filesToCheck = getRelativeFiles(DOCUMENTED_DIR);
     let totalChecks = 0;
     let errors = 0;
@@ -61,6 +60,7 @@ async function main() {
     }
 
     console.log('--------------------------------------------------');
+
     if (errors === 0) {
         console.log(`SUCCESS: All ${totalChecks} documentation blocks verified in output.`);
     } else {
@@ -136,15 +136,16 @@ function compareNamespace(sourceParent, targetParentList) {
                 }
             }
 
+            if (!isContainer(sourceNode) || !isContainer(targetNode)) continue;
+
             // Recurse (Container check)
-            if (isContainer(sourceNode) && isContainer(targetNode)) {
-                // Wrap single target node in array for recursive call to match 'targetParentList' signature
-                const subStats = compareNamespace(sourceNode, [targetNode]);
-                stats.total += subStats.total;
-                stats.failures += subStats.failures;
-            }
+            // Wrap single target node in array for recursive call to match 'targetParentList' signature
+            const subStats = compareNamespace(sourceNode, [targetNode]);
+            stats.total += subStats.total;
+            stats.failures += subStats.failures;
         }
     }
+
     return stats;
 }
 

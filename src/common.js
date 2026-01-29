@@ -4,7 +4,6 @@ import fs from 'fs';
 
 /**
  * Returns a list of file paths relative to the baseDir.
- * recursive: true
  */
 export function getRelativeFiles(baseDir) {
     const results = [];
@@ -17,11 +16,11 @@ export function getRelativeFiles(baseDir) {
         if (stat && stat.isDirectory()) {
             // Recurse into subdirectory
             const subFiles = getRelativeFiles(fullPath);
+
             // Append current dir name to results (e.g. "enums/file.d.ts")
             subFiles.forEach((sub) => results.push(path.join(file, sub)));
         } else {
-            // It's a file, just add the name
-            results.push(file);
+            results.push(file); // It's a file, just add the name
         }
     });
 
