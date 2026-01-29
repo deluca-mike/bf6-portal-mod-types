@@ -23,5 +23,5 @@
         "useDefineForClassFields": true,
         "verbatimModuleSyntax": true
     },
-    "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.mjs"]
+    "include": ["*.d.ts", "runtime-spawn-enums/*.d.ts", "src/**/*.ts", "src/**/*.js"]
 }

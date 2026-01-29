@@ -991,7 +991,10 @@ declare namespace mod {
     // Pauses or unpauses the gamemode timer based on the provided boolean input.
     export function PauseGameModeTime(pauseTimer: boolean): void;
 
-    // Resets the gamemode time to its starting value.
+    /**
+     * Resets the gamemode time to its starting value.
+     * Note: This currently does not work and will not reset the gamemode time.
+     */
     export function ResetGameModeTime(): void;
 
     // Signals the RingOfFire to start shrinking.

@@ -6,7 +6,6 @@
 /// <reference path="./event-handler-signatures.d.ts" />
 /* eslint-enable @typescript-eslint/triple-slash-reference */
 
-// TODO: ResetGameModeTime is broken.
 // TODO: Z value in UIWIdget position is useless. Z-Index is most recent created on top, within container.
 
 declare namespace documentedMod {
@@ -841,6 +840,12 @@ declare namespace documentedMod {
         emplacementSpawner: EmplacementSpawner,
         emplacementType: StationaryEmplacements
     ): void;
+
+    /**
+     * Resets the gamemode time to its starting value.
+     * Note: This currently does not work and will not reset the gamemode time.
+     */
+    export function ResetGameModeTime(): void;
 
     /**
      * Request the system to evaluate if a straight line between two points is interrupted or not.

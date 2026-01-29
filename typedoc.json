@@ -1,0 +1,20 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["index.d.ts"],
+    "outputs": [
+        {
+            "name": "html",
+            "path": "./docs",
+            "options": {
+                "navigation": {
+                    "includeCategories": true,
+                    "includeGroups": true,
+                    "includeFolders": true,
+                    "compactFolders": false,
+                    "excludeReferences": false
+                },
+                "categorizeByGroup": false
+            }
+        }
+    ]
+}
