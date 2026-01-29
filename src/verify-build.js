@@ -1,6 +1,8 @@
-import { Project, Node } from 'ts-morph';
+import { Project } from 'ts-morph';
 import path from 'path';
 import fs from 'fs';
+
+import { getRelativeFiles, getSignatureId, getNamedChildren, isSignatureNode, isContainer } from './common.js';
 
 // CONFIG
 const DOCUMENTED_DIR = path.join('src', 'documented');
@@ -144,97 +146,6 @@ function compareNamespace(sourceParent, targetParentList) {
         }
     }
     return stats;
-}
-
-// --- REUSED HELPERS (Copy these from merge-docs.ts) ---
-// (Paste getRelativeFiles, getNamedChildren, getSignatureId, isSignatureNode, isContainer here)
-// For brevity, I assume you can copy/paste the helper functions from your build script.
-
-function getRelativeFiles(baseDir) {
-    const results = [];
-    const list = fs.readdirSync(baseDir);
-
-    list.forEach((file) => {
-        const fullPath = path.join(baseDir, file);
-
-        if (fs.statSync(fullPath).isDirectory()) {
-            getRelativeFiles(fullPath).forEach((sub) => results.push(path.join(file, sub)));
-        } else {
-            results.push(file);
-        }
-    });
-
-    return results;
-}
-
-function getNamedChildren(node) {
-    const map = new Map();
-    let scanNode = node;
-
-    if (Node.isModuleDeclaration(node)) {
-        const body = node.getBody();
-        if (body) scanNode = body;
-        else return map;
-    }
-
-    scanNode.forEachChild((child) => {
-        let name;
-        if (child.getName) name = child.getName();
-        else if (Node.isConstructorDeclaration(child)) name = 'constructor';
-        const isSupported =
-            Node.isClassDeclaration(child) ||
-            Node.isInterfaceDeclaration(child) ||
-            Node.isModuleDeclaration(child) ||
-            Node.isFunctionDeclaration(child) ||
-            Node.isMethodDeclaration(child) ||
-            Node.isPropertyDeclaration(child) ||
-            Node.isPropertySignature(child) ||
-            Node.isMethodSignature(child) ||
-            Node.isEnumDeclaration(child) ||
-            Node.isTypeAliasDeclaration(child);
-        if (name && isSupported) {
-            if (!map.has(name)) map.set(name, []);
-            map.get(name).push(child);
-        }
-    });
-
-    return map;
-}
-
-function getSignatureId(node) {
-    if (!isSignatureNode(node)) return '';
-
-    const params = node.getParameters().map((p) => {
-        let typeText = 'any';
-        const typeNode = p.getTypeNode();
-
-        if (typeNode) {
-            typeText = typeNode.getText();
-            typeText = typeText.replace(/\s+/g, '');
-            typeText = typeText.replace(/[a-zA-Z0-9_]+\./g, '');
-        }
-
-        const isOptional = p.isOptional() ? '?' : '';
-        const isRest = p.isRestParameter() ? '...' : '';
-
-        return `${isRest}${typeText}${isOptional}`;
-    });
-
-    return `(${params.join(',')})`;
-}
-
-function isSignatureNode(node) {
-    return (
-        Node.isFunctionDeclaration(node) ||
-        Node.isMethodDeclaration(node) ||
-        Node.isConstructorDeclaration(node) ||
-        Node.isMethodSignature(node) ||
-        Node.isCallSignatureDeclaration(node)
-    );
-}
-
-function isContainer(node) {
-    return Node.isClassDeclaration(node) || Node.isInterfaceDeclaration(node) || Node.isModuleDeclaration(node);
 }
 
 main().catch(console.error);
