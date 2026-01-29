@@ -27,7 +27,7 @@
         "lint:fix": "eslint . --fix",
         "build": "node ./src/merge-docs.js && npm run prettier",
         "verify": "node ./src/verify-build.js",
-        "docs": "typedoc --commentStyle all"
+        "docs": "typedoc --commentStyle all && npm run prettier"
     },
     "repository": {
         "type": "git",
