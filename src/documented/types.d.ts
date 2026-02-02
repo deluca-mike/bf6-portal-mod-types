@@ -1,4 +1,5 @@
 declare namespace documentedMod {
+    /* eslint-disable @typescript-eslint/no-empty-object-type */
     /**
      * The AreaTrigger opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
      * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.AreaTrigger, ...args) as mod.AreaTrigger`.
@@ -231,4 +232,5 @@ declare namespace documentedMod {
      * The Object type is the union of all other object types. They can be compared with `mod.Equals`, or by retrieving their id with `mod.GetObjId`.
      */
     export type Object = {};
+    /* eslint-enable @typescript-eslint/no-empty-object-type */
 }

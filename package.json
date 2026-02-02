@@ -1,6 +1,6 @@
 {
     "name": "bf6-portal-mod-types",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "TypeScript definitions for Battlefield 6 Portal mod namespace",
     "engines": {
         "node": ">=23.0.0"
@@ -14,7 +14,7 @@
         "types.d.ts",
         "enums/",
         "runtime-spawn-enums/",
-        "MOD_README.md"
+        "README.md"
     ],
     "exports": {
         ".": {
@@ -27,7 +27,7 @@
         "lint:fix": "eslint . --fix",
         "build": "node ./src/merge-docs.js && npm run prettier",
         "verify": "node ./src/verify-build.js",
-        "docs": "typedoc --commentStyle all --readme ./MOD_README.md && npm run prettier"
+        "docs": "typedoc --commentStyle all --readme ./README.md && npm run prettier"
     },
     "repository": {
         "type": "git",
@@ -56,6 +56,7 @@
         "@typescript-eslint/parser": "^8.53.0",
         "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-jsdoc": "^61.7.1",
         "eslint-plugin-prettier": "^5.5.5",
         "prettier": "^3.8.0",
         "ts-morph": "^27.0.2",
