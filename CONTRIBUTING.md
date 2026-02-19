@@ -43,10 +43,10 @@ The official Portal SDK uses a **four-part** version (e.g. `1.1.3.0`) and does n
 segment will not change (i.e. no "2.x.y.z" release). This package therefore **drops the first segment** and uses
 three-part semver:
 
-- **bf6-portal-mod-types** `1.3.0` corresponds to the official **1.1.3.0** `mod` namespace.
-- **Patch** releases (e.g. `1.3.1`, `1.3.2`) = same official API, with additional JSDoc or usability improvements only.
-- When the Portal team releases a new SDK version (e.g. `1.1.4.0`), this package would move to a new **minor** (e.g.
-  `1.4.0`) and the root types would be updated from the new official `index.d.ts`.
+- **bf6-portal-mod-types** `2.1.0` corresponds to the official **1.2.1.0** `mod` namespace.
+- **Patch** releases (e.g. `2.1.1`, `2.1.2`) = same official API, with additional JSDoc or usability improvements only.
+- When the Portal team releases a new SDK version (e.g. `1.2.2.0`), this package would move to a new **minor** (e.g.
+  `2.2.0`) and the root types would be updated from the new official `index.d.ts`.
 
 ## Scripts
 

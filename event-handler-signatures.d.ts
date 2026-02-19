@@ -179,7 +179,10 @@ declare namespace mod {
         // This will trigger when a Player joins the game.
         export function OnPlayerJoinGame(eventPlayer: mod.Player): void;
 
-        // This will trigger when any player leaves the game.
+        /**
+         * This will trigger when any player leaves the game.
+         * @param eventNumber - The id of the player that left the game.
+         */
         export function OnPlayerLeaveGame(eventNumber: number): void;
 
         // This will trigger when a Player changes team.

@@ -61,6 +61,7 @@ declare namespace mod {
         Launcher_Unguided_Rocket,
         Melee_Combat_Knife,
         Melee_Hunting_Knife,
+        Melee_Ice_Axe,
         Melee_Sledgehammer,
         Misc_Acoustic_Sensor_AV_Mine,
         Misc_Anti_Personnel_Mine,
@@ -107,14 +108,14 @@ declare namespace mod {
         Granite_ClubHouse,
         Granite_MainStreet,
         Granite_Marina,
+        Granite_MilitaryRnD,
+        Granite_MilitaryStorage,
         Granite_TechCampus,
         Limestone,
         Outskirts,
         Sand,
         Tungsten,
     }
-    export enum MeleeWeapons {}
-    export enum MiscGadgets {}
     export enum MoveSpeed {
         InvestigateRun,
         InvestigateSlowWalk,
@@ -183,9 +184,6 @@ declare namespace mod {
         Core_Urgency,
         Gauntlet_Amplitude,
     }
-    export enum OpenGadgets {
-        UnguidedRocketLauncher,
-    }
     export enum PlayerDamageTypes {
         Default,
         Explosion,
@@ -213,7 +211,6 @@ declare namespace mod {
         Squad,
         TeamId,
     }
-    export enum PrimaryWeapons {}
     export enum RestrictedInputs {
         CameraPitch,
         CameraYaw,
@@ -236,11 +233,6 @@ declare namespace mod {
         Sprint,
         Zoom,
     }
-    export enum ResupplyTypes {
-        AmmoBox,
-        AmmoCrate,
-        SupplyBag,
-    }
     export enum ScoreboardType {
         CustomFFA,
         CustomTwoTeams,
@@ -252,7 +244,6 @@ declare namespace mod {
         Saturated,
         Stealth,
     }
-    export enum SecondaryWeapons {}
     export enum SoldierClass {
         Assault,
         Engineer,
@@ -321,7 +312,6 @@ declare namespace mod {
         GDF009,
         M2MG,
     }
-    export enum Throwables {}
     export enum Types {
         AreaTrigger,
         Array,
@@ -332,26 +322,19 @@ declare namespace mod {
         EmplacementSpawner,
         Enum_AmmoTypes,
         Enum_Cameras,
-        Enum_ClassGadgets,
         Enum_CustomNotificationSlots,
         Enum_Factions,
         Enum_Gadgets,
         Enum_InventorySlots,
         Enum_Maps,
-        Enum_MedGadgetTypes,
-        Enum_MeleeWeapons,
-        Enum_MiscGadgets,
         Enum_MoveSpeed,
         Enum_MusicEvents,
         Enum_MusicPackages,
         Enum_MusicParams,
-        Enum_OpenGadgets,
         Enum_PlayerDamageTypes,
         Enum_PlayerDeathTypes,
         Enum_PlayerFilterTypes,
-        Enum_PrimaryWeapons,
         Enum_RestrictedInputs,
-        Enum_ResupplyTypes,
         Enum_RuntimeSpawn_Abbasid,
         Enum_RuntimeSpawn_Aftermath,
         Enum_RuntimeSpawn_Badlands,
@@ -373,7 +356,6 @@ declare namespace mod {
         Enum_RuntimeSpawn_Tungsten,
         Enum_ScoreboardType,
         Enum_ScreenEffects,
-        Enum_SecondaryWeapons,
         Enum_SoldierClass,
         Enum_SoldierEffects,
         Enum_SoldierStateBool,
@@ -383,7 +365,6 @@ declare namespace mod {
         Enum_SpotStatus,
         Enum_Stance,
         Enum_StationaryEmplacements,
-        Enum_Throwables,
         Enum_Types,
         Enum_UIAnchor,
         Enum_UIBgFill,
@@ -574,6 +555,8 @@ declare namespace mod {
         Echo,
         Foxtrot,
         Golf,
+        Hotel,
+        India,
     }
     export enum WeaponAttachments {
         Ammo_Buckshot,
@@ -687,7 +670,6 @@ declare namespace mod {
         Barrel_419mm_Boar_F,
         Barrel_430mm_Cut,
         Barrel_430mm_Factory,
-        Barrel_432mm_Fluted,
         Barrel_442_mm_CQB,
         Barrel_45_Compact,
         Barrel_450mm_Factory,
@@ -897,9 +879,9 @@ declare namespace mod {
         Scope_SF_G2_500x,
         Scope_SM_Rifle_Variable,
         Scope_SSDS_600x,
-        Scope_ST_Prisim_500x,
+        Scope_ST_Prism_500x,
+        Scope_SU_123_150x,
         Scope_SU_230_LPVO,
-        Scope_SU_231_150x,
         Scope_TS_HD_600x,
         Top_120_mW_Blue,
         Top_5_mW_Green,
@@ -925,6 +907,7 @@ declare namespace mod {
         Carbine_M4A1,
         Carbine_QBZ_192,
         Carbine_SG_553R,
+        Carbine_SOR_300SC,
         DMR_LMR27,
         DMR_M39_EMR,
         DMR_SVDM,
@@ -938,9 +921,11 @@ declare namespace mod {
         LMG_M250,
         LMG_RPKM,
         Shotgun__185KS_K,
+        Shotgun_DB_12,
         Shotgun_M1014,
         Shotgun_M87A1,
         Sidearm_ES_57,
+        Sidearm_GGH_22,
         Sidearm_M357_Trait,
         Sidearm_M44,
         Sidearm_M45A1,
@@ -954,6 +939,7 @@ declare namespace mod {
         SMG_UMG_40,
         SMG_USG_90,
         Sniper_M2010_ESR,
+        Sniper_Mini_Scout,
         Sniper_PSR,
         Sniper_SV_98,
     }

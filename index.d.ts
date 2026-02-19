@@ -149,18 +149,18 @@ declare namespace mod {
     export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
 
     /**
-     * Sets the value of a Variable.
-     * @param variable - The variable to set the value of.
-     * @param value - The value to set the variable to.
-     */
-    export function SetVariable(variable: Variable, value: Any): void;
-
-    /**
      * Unloads a music package that is already loaded.
      * This is almost never necessary. In official Battlefield modes, music is always loaded at the start, and it is never unloaded mid-match.
      * @param musicPackage - The music package to unload.
      */
     export function UnloadMusic(musicPackage: MusicPackages): void;
+
+    /**
+     * Sets the value of a Variable.
+     * @param variable - The variable to set the value of.
+     * @param value - The value to set the variable to.
+     */
+    export function SetVariable(variable: Variable, value: Any): void;
 
     /**
      * Sets a player to act independently. They will attempt to complete objectives, fire on enemy players, etc.
@@ -406,7 +406,7 @@ declare namespace mod {
      * @param gadget - The gadget to use.
      * @param targetPos - The target position to use the gadget on.
      */
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPos: Vector): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPos: Vector): void;
 
     /**
      * Gives a player the instruction to use a specific gadget on a target location or player.
@@ -415,7 +415,7 @@ declare namespace mod {
      * @param gadget - The gadget to use.
      * @param targetPlayer - The target player to use the gadget on.
      */
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPlayer: Player): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPlayer: Player): void;
 
     /**
      * Clears the player's gadget instructions.
@@ -439,61 +439,6 @@ declare namespace mod {
      * @param value - The value to store in the array.
      */
     export function SetVariableAtIndex(arrayVariable: Variable, arrayIndex: number, value: Any): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific team.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.GetTeam(1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param team - The team to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, team: Team): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific squad.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.GetSquad(1, 1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param squad - The squad to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, squad: Squad): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific player.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, somePlayer);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param player - The player to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, player: Player): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for everyone.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     */
-    export function PlaySound(objectId: number, amplitude: number): void;
 
     /**
      * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific team.
@@ -540,8 +485,7 @@ declare namespace mod {
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0);
+     * mod.PlaySound(sfx, 1.0);
      * @param sound - The sound object to play.
      * @param amplitude - The amplitude of the sound.
      */
@@ -550,7 +494,6 @@ declare namespace mod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific team.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The team filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -572,7 +515,6 @@ declare namespace mod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific squad.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The squad filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -594,7 +536,6 @@ declare namespace mod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific player.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The player filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -627,164 +568,41 @@ declare namespace mod {
      */
     export function PlaySound(sound: SFX, amplitude: number, location: Vector, attenuationRange: number): void;
 
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for everyone.
-     * Passing a 2D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     */
-    export function PlaySound(objectId: number, amplitude: number, location: Vector, attenuationRange: number): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific team.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The team filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, mod.GetTeam(1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param team - The team to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        team: Team
-    ): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific squad.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The squad filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, mod.GetSquad(1, 1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param squad - The squad to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        squad: Squad
-    ): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific player.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The player filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, somePlayer);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param player - The player to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        player: Player
-    ): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, player: Player): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, squad: Squad): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
-
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, player: Player): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, squad: Squad): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
 
     /**
-     * Stops a given sound for a specific team.
-     * @param objectId - The id of the sound object to stop.
-     * @param team - The team to stop the sound for.
-     */
-    export function StopSound(objectId: number, team: Team): void;
-
-    /**
-     * Stops a given sound for a specific squad.
-     * @param objectId - The id of the sound object to stop.
-     * @param squad - The squad to stop the sound for.
-     */
-    export function StopSound(objectId: number, squad: Squad): void;
-
-    /**
-     * Stops a given sound for a specific player.
-     * @param objectId - The id of the sound object to stop.
-     * @param player - The player to stop the sound for.
-     */
-    export function StopSound(objectId: number, player: Player): void;
-
-    /**
-     * Stops a given sound for everyone.
-     * @param objectId - The id of the sound object to stop.
-     */
-    export function StopSound(objectId: number): void;
-
-    /**
-     * Stops a given sound for a specific team.
+     * Stops a given sound for a specific team. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param team - The team to stop the sound for.
      */
     export function StopSound(sound: SFX, team: Team): void;
 
     /**
-     * Stops a given sound for a specific squad.
+     * Stops a given sound for a specific squad. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param squad - The squad to stop the sound for.
      */
     export function StopSound(sound: SFX, squad: Squad): void;
 
     /**
-     * Stops a given sound for a specific player.
+     * Stops a given sound for a specific player. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param player - The player to stop the sound for.
      */
     export function StopSound(sound: SFX, player: Player): void;
 
     /**
-     * Stops a given sound for everyone.
+     * Stops a given sound for everyone. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      */
     export function StopSound(sound: SFX): void;
@@ -800,9 +618,6 @@ declare namespace mod {
 
     // Sets CameraType for provided Player. CameraIndex optional.
     export function SetCameraTypeForPlayer(player: Player, cameraType: Cameras, cameraIndex: number): void;
-
-    // Enables or disables a player-specific screen effect.
-    export function EnableScreenEffect(player: Player, screenEffect: ScreenEffect, enable: boolean): void;
 
     // Enables or disables a player-specific screen effect.
     export function EnableScreenEffect(player: Player, screenEffect: ScreenEffects, enable: boolean): void;
@@ -986,7 +801,7 @@ declare namespace mod {
     // Switches players on TeamA and TeamB. Both teams must have the same Human and Bot count.
     export function SwitchTeams(teamA: Team, teamB: Team): void;
 
-    // Removes all existing loot from the world
+    // Removes all existing loot from the world.
     export function UnspawnAllLoot(): void;
 
     // Unspawn an Object spawned using SpawnObject.
@@ -1190,14 +1005,7 @@ declare namespace mod {
     // Puts the target player into the mandown state (unless mandown is disabled).
     export function ForceManDown(player: Player): void;
 
-    /**
-     * Instantly resupplies the target player using a provided `ResupplyType`.
-     * @param player - The player to resupply.
-     * @param resupplyType - The type of resupply to perform.
-     */
-    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
-
-    // Sets the max health of a target player from 0 to 1000.  The value will be multiplied by the max health multiplier of the that target.
+    // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;
 
     // Sets a player's movement speed multiplier.
@@ -2078,7 +1886,6 @@ declare namespace mod {
     // Forces the specified player into the target vehicle at the provided seat number.  If the provided seat is -1, that player will be forced into the first available seat.
     export function ForcePlayerToSeat(player: Player, vehicle: Vehicle, seatNumber: number): void;
 
-    //------------------------
     // Get argument of subroutine at given index.
     export function GetArgument(subroutineArgIndex: number): Any;
 
@@ -2133,18 +1940,6 @@ declare namespace mod {
 
     // Returns the VO object corresponding to the provided id.
     export function GetVO(number: number): VO;
-
-    // Returns the screen effect object corresponding to the provided id.
-    /**
-     * @deprecated The method should not be used
-     */
-    export function GetScreenEffect(arg0: PortalEnum): ScreenEffect;
-
-    // Returns the screen effect object corresponding to the provided id.
-    /**
-     * @deprecated The method should not be used
-     */
-    export function GetScreenEffect(number: number): ScreenEffect;
 
     // Returns the VFX object corresponding to the provided id.
     export function GetVFX(vfxNumber: number): VFX;
@@ -2318,7 +2113,6 @@ declare namespace mod {
 
     /**
      * Returns a string containing the concatenation of two strings.
-     * Note: This is currently broken and will not return anything valid.
      * @param string0 - The first string.
      * @param string1 - The second string.
      * @returns string The concatenated string.
@@ -2451,7 +2245,6 @@ declare namespace mod {
 
     /**
      * Returns the difference between two number values or two vector values.
-     * Note: This is currently broken and will return the first vector with components rounded up.
      * @param vector0 - The first vector.
      * @param vector1 - The second vector.
      * @returns Vector The difference between the two vectors.
@@ -2552,6 +2345,9 @@ declare namespace mod {
     // Returns the squad object corresponding to the provided player, or team/squad id.
     export function GetSquad(teamIdNumber: number, squadIdNumber: number): Squad;
 
+    // Returns a string of the name of the provided squad.
+    export function GetSquadName(arg0: Squad): string;
+
     /**
      * Returns the team object of the specified player.
      * @param player - The player to get the team of.
@@ -2569,6 +2365,9 @@ declare namespace mod {
 
     // Returns true if the provided player is valid.
     export function IsPlayerValid(player: Player): boolean;
+
+    // Returns a boolean checking to see if provided player is the leader of their squad.
+    export function IsSquadLeader(player: Player): boolean;
 
     // Creates and returns a new weapon package.
     export function CreateNewWeaponPackage(): WeaponPackage;

@@ -360,24 +360,6 @@ declare namespace documentedMod {
     }
 
     /**
-     * The ResupplyTypes enum.
-     */
-    export enum ResupplyTypes {
-        /**
-         * Ammo box gives full primary weapon and secondary weapon ammo.
-         */
-        AmmoBox,
-        /**
-         * Ammo crate gives 16 primary weapon ammo and 18 secondary weapon ammo.
-         */
-        AmmoCrate,
-        /**
-         * Supply bag does not seem to do anything.
-         */
-        SupplyBag,
-    }
-
-    /**
      * The SoldierStateBool enum.
      */
     export enum SoldierStateBool {

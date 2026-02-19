@@ -77,11 +77,6 @@ declare namespace mod {
     const SFXSymbol: unique symbol;
     export type SFX = { _opaque: typeof SFXSymbol };
 
-    // export type ScreenEffect = never;
-    // export type ScreenEffect = Any;
-    const ScreenEffectSymbol: unique symbol;
-    export type ScreenEffect = { _opaque: typeof ScreenEffectSymbol };
-
     // export type Sector = never;
     // export type Sector = Any;
     const SectorSymbol: unique symbol;
@@ -182,7 +177,6 @@ declare namespace mod {
         | MCOM
         | Player
         | RingOfFire
-        | ScreenEffect
         | Sector
         | SFX
         | SpatialObject

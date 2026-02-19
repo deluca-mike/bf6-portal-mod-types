@@ -33,8 +33,6 @@
 declare namespace mod {
     export const stringkeys: Any;
 
-    //------------------------
-
     export function Wait(n: number): Promise<void>;
 
     // Loads a music package to then be triggered with the PlayMusic action.
@@ -64,11 +62,11 @@ declare namespace mod {
     // Updates any parameters that a music package might have.
     export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
 
-    // Sets the value of a Variable.
-    export function SetVariable(variable: Variable, value: Any): void;
-
     // Unloads a music package that is already loaded.
     export function UnloadMusic(musicPackage: MusicPackages): void;
+
+    // Sets the value of a Variable.
+    export function SetVariable(variable: Variable, value: Any): void;
 
     // Sets a player to act independently. They will attempt to complete objectives, fire on enemy players, etc. (Only works for AI players)
     export function AIBattlefieldBehavior(player: Player): void;
@@ -171,10 +169,10 @@ declare namespace mod {
     export function AISetTarget(player: Player): void;
 
     // Gives a player the instruction to use a specific gadget on a target location or player. (Only works for AI players)
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPos: Vector): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPos: Vector): void;
 
     // Gives a player the instruction to use a specific gadget on a target location or player. (Only works for AI players)
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPlayer: Player): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPlayer: Player): void;
 
     // Clears the player's gadget instructions. (Only works for AI players)
     export function AIStopUsingGadget(player: Player): void;
@@ -184,18 +182,6 @@ declare namespace mod {
 
     // Finds or initializes an Array on a provided Variable, and stores a provided value in that Array at the specified index.
     export function SetVariableAtIndex(arrayVariable: Variable, arrayIndex: number, value: Any): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(objectId: number, amplitude: number, team: Team): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(objectId: number, amplitude: number, squad: Squad): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(objectId: number, amplitude: number, player: Player): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(objectId: number, amplitude: number): void;
 
     // Plays a sound using runtime spawner tech.
     export function PlaySound(sound: SFX, amplitude: number, team: Team): void;
@@ -239,71 +225,17 @@ declare namespace mod {
     // Plays a sound using runtime spawner tech.
     export function PlaySound(sound: SFX, amplitude: number, location: Vector, attenuationRange: number): void;
 
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(objectId: number, amplitude: number, location: Vector, attenuationRange: number): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        team: Team
-    ): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        squad: Squad
-    ): void;
-
-    // Plays a sound using runtime spawner tech.
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        player: Player
-    ): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, player: Player): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, squad: Squad): void;
-
-    // Plays a voice-over event clip.
-    export function PlayVO(objectId: number, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
-
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, player: Player): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, squad: Squad): void;
 
-    // Plays a voice-over event clip.
+    // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
-
-    // Stops a given sound.
-    export function StopSound(objectId: number, team: Team): void;
-
-    // Stops a given sound.
-    export function StopSound(objectId: number, squad: Squad): void;
-
-    // Stops a given sound.
-    export function StopSound(objectId: number, player: Player): void;
-
-    // Stops a given sound.
-    export function StopSound(objectId: number): void;
 
     // Stops a given sound.
     export function StopSound(sound: SFX, team: Team): void;
@@ -328,9 +260,6 @@ declare namespace mod {
 
     // Sets CameraType for provided Player. CameraIndex optional.
     export function SetCameraTypeForPlayer(player: Player, cameraType: Cameras, cameraIndex: number): void;
-
-    // Enables or disables a player-specific screen effect.
-    export function EnableScreenEffect(player: Player, screenEffect: ScreenEffect, enable: boolean): void;
 
     // Enables or disables a player-specific screen effect.
     export function EnableScreenEffect(player: Player, screenEffect: ScreenEffects, enable: boolean): void;
@@ -488,7 +417,7 @@ declare namespace mod {
     // Switches players on TeamA and TeamB. Both teams must have the same Human and Bot count.
     export function SwitchTeams(teamA: Team, teamB: Team): void;
 
-    // Removes all existing loot from the world
+    // Removes all existing loot from the world.
     export function UnspawnAllLoot(): void;
 
     // Unspawn an Object spawned using SpawnObject.
@@ -658,10 +587,7 @@ declare namespace mod {
     // Puts the target player into the mandown state (unless mandown is disabled).
     export function ForceManDown(player: Player): void;
 
-    // Resupplies the target player using a provided ResupplyType.
-    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
-
-    // Sets the max health of a target player from 0 to 1000.  The value will be multiplied by the max health multiplier of the that target.
+    // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;
 
     // Sets a player's movement speed multiplier.
@@ -1531,7 +1457,6 @@ declare namespace mod {
     // Forces the specified player into the target vehicle at the provided seat number.  If the provided seat is -1, that player will be forced into the first available seat.
     export function ForcePlayerToSeat(player: Player, vehicle: Vehicle, seatNumber: number): void;
 
-    //------------------------
     // Get argument of subroutine at given index.
     export function GetArgument(subroutineArgIndex: number): Any;
 
@@ -1582,18 +1507,6 @@ declare namespace mod {
 
     // Returns the VO object corresponding to the provided id.
     export function GetVO(number: number): VO;
-
-    // Returns the screen effect object corresponding to the provided id.
-    /**
-     * @deprecated The method should not be used
-     */
-    export function GetScreenEffect(arg0: PortalEnum): ScreenEffect;
-
-    // Returns the screen effect object corresponding to the provided id.
-    /**
-     * @deprecated The method should not be used
-     */
-    export function GetScreenEffect(number: number): ScreenEffect;
 
     // Returns the VFX object corresponding to the provided id.
     export function GetVFX(vfxNumber: number): VFX;
@@ -1927,6 +1840,9 @@ declare namespace mod {
     // Returns the squad object corresponding to the provided player, or team/squad id.
     export function GetSquad(teamIdNumber: number, squadIdNumber: number): Squad;
 
+    // Returns a string of the name of the provided squad.
+    export function GetSquadName(arg0: Squad): string;
+
     // Returns the team value of the specified player OR the corresponding team of the provided number.
     export function GetTeam(player: Player): Team;
 
@@ -1935,6 +1851,9 @@ declare namespace mod {
 
     // Returns true if the provided player is valid.
     export function IsPlayerValid(player: Player): boolean;
+
+    // Returns a boolean checking to see if provided player is the leader of their squad.
+    export function IsSquadLeader(player: Player): boolean;
 
     // Creates and returns a new weapon package.
     export function CreateNewWeaponPackage(): WeaponPackage;

@@ -149,16 +149,6 @@ declare namespace mod {
      */
     export type SFX = { _opaque: typeof SFXSymbol };
 
-    // export type ScreenEffect = never;
-    // export type ScreenEffect = Any;
-    const ScreenEffectSymbol: unique symbol;
-    /**
-     * The ScreenEffect opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
-     * TODO: Determine if it is deprecated.
-     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_ANY.SOME_SCREEN_EFFECT, ...args) as mod.ScreenEffect`.
-     */
-    export type ScreenEffect = { _opaque: typeof ScreenEffectSymbol };
-
     // export type Sector = never;
     // export type Sector = Any;
     const SectorSymbol: unique symbol;
@@ -219,7 +209,6 @@ declare namespace mod {
      * The Transform opaque type. Can be created with `mod.CreateTransform`.
      * It defines a transformation (position and rotation) in 3D space that can be applied to a `mod.Object`.
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if its id can be retrieved with `mod.GetObjId`.
      */
     export type Transform = { _opaque: typeof TransformSymbol };
 
@@ -229,7 +218,6 @@ declare namespace mod {
     /**
      * The UIWidget opaque type.
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if its id can be retrieved with `mod.GetObjId`.
      */
     export type UIWidget = { _opaque: typeof UIWidgetSymbol };
 
@@ -259,7 +247,6 @@ declare namespace mod {
      * If you are writing an experience in pure TypeScript, you will not need to use this type. However, this is the only way
      * to store and retrieve values within the Block Editor, so it can be used to pass values between TypeScript and Blocks.
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if its id can be retrieved with `mod.GetObjId`.
      */
     export type Variable = { _opaque: typeof VariableSymbol };
 
@@ -305,7 +292,6 @@ declare namespace mod {
     const WeaponPackageSymbol: unique symbol;
     /**
      * The WeaponPackage opaque type. Can only be compared with `mod.Equals`.
-     * TODO: Determine if it can be retrieved with `mod.GetObjId`.
      * Can only be created with `mod.CreateWeaponPackage`.
      */
     export type WeaponPackage = { _opaque: typeof WeaponPackageSymbol };
@@ -318,7 +304,6 @@ declare namespace mod {
      * This seems to be the weapon involved in a `mod.OnPlayerDamaged`, `mod.OnPlayerDied`, and `mod.OnPlayerEarnedKill` event,
      * but it is unclear how to check it to determine the actual weapon involved.
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be retrieved with `mod.GetObjId`.
      */
     export type WeaponUnlock = { _opaque: typeof WeaponUnlockSymbol };
 
@@ -345,7 +330,6 @@ declare namespace mod {
         | MCOM
         | Player
         | RingOfFire
-        | ScreenEffect
         | Sector
         | SFX
         | SpatialObject

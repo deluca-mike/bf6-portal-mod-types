@@ -379,7 +379,7 @@ declare namespace documentedMod {
      * @param gadget - The gadget to use.
      * @param targetPos - The target position to use the gadget on.
      */
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPos: Vector): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPos: Vector): void;
 
     /**
      * Gives a player the instruction to use a specific gadget on a target location or player.
@@ -388,7 +388,7 @@ declare namespace documentedMod {
      * @param gadget - The gadget to use.
      * @param targetPlayer - The target player to use the gadget on.
      */
-    export function AIStartUsingGadget(player: Player, gadget: OpenGadgets, targetPlayer: Player): void;
+    export function AIStartUsingGadget(player: Player, gadget: Gadgets, targetPlayer: Player): void;
 
     /**
      * Clears the player's gadget instructions.
@@ -412,61 +412,6 @@ declare namespace documentedMod {
      * @param value - The value to store in the array.
      */
     export function SetVariableAtIndex(arrayVariable: Variable, arrayIndex: number, value: Any): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific team.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.GetTeam(1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param team - The team to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, team: Team): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific squad.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.GetSquad(1, 1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param squad - The squad to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, squad: Squad): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific player.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, somePlayer);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param player - The player to play the sound for.
-     */
-    export function PlaySound(objectId: number, amplitude: number, player: Player): void;
-
-    /**
-     * Plays a 2D sound that was spawned via `mod.SpawnObject`, for everyone.
-     * Passing a 3D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     */
-    export function PlaySound(objectId: number, amplitude: number): void;
 
     /**
      * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific team.
@@ -513,8 +458,7 @@ declare namespace documentedMod {
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0);
+     * mod.PlaySound(sfx, 1.0);
      * @param sound - The sound object to play.
      * @param amplitude - The amplitude of the sound.
      */
@@ -523,7 +467,6 @@ declare namespace documentedMod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific team.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The team filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -545,7 +488,6 @@ declare namespace documentedMod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific squad.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The squad filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -567,7 +509,6 @@ declare namespace documentedMod {
     /**
      * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific player.
      * Passing a 2D sound to this function will fail silently.
-     * Note: The player filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
      * @example
      * // Spawned position and rotation for an SFX has no effect.
      * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
@@ -601,139 +542,28 @@ declare namespace documentedMod {
     export function PlaySound(sound: SFX, amplitude: number, location: Vector, attenuationRange: number): void;
 
     /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for everyone.
-     * Passing a 2D sound to this function will fail silently.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     */
-    export function PlaySound(objectId: number, amplitude: number, location: Vector, attenuationRange: number): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific team.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The team filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, mod.GetTeam(1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param team - The team to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        team: Team
-    ): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific squad.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The squad filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, mod.GetSquad(1, 1));
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param squad - The squad to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        squad: Squad
-    ): void;
-
-    /**
-     * Plays a 3D sound that was spawned via `mod.SpawnObject`, at a location, for a specific player.
-     * Passing a 2D sound to this function will fail silently.
-     * Note: The player filter currently does not work. Just use the `mod.PlaySound` function that does not take a team, squad, or player.
-     * @example
-     * // Spawned position and rotation for an SFX has no effect.
-     * const sfx = mod.SpawnObject(RuntimeSpawn_Common.SFX_Gadgets_C4_Activate_OneShot2D, mod.CreateVector(0, 0, 0), mod.CreateVector(0, 0, 0)) as mod.SFX;
-     * const sfxId = mod.GetObjId(sfx);
-     * mod.PlaySound(sfxId, 1.0, mod.CreateVector(100, -100, 200), 2.0, somePlayer);
-     * @param objectId - The id of the sound object to play.
-     * @param amplitude - The amplitude of the sound.
-     * @param location - The location to play the sound at.
-     * @param attenuationRange - The attenuation range of the sound.
-     * @param player - The player to play the sound for.
-     */
-    export function PlaySound(
-        objectId: number,
-        amplitude: number,
-        location: Vector,
-        attenuationRange: number,
-        player: Player
-    ): void;
-
-    /**
-     * Stops a given sound for a specific team.
-     * @param objectId - The id of the sound object to stop.
-     * @param team - The team to stop the sound for.
-     */
-    export function StopSound(objectId: number, team: Team): void;
-
-    /**
-     * Stops a given sound for a specific squad.
-     * @param objectId - The id of the sound object to stop.
-     * @param squad - The squad to stop the sound for.
-     */
-    export function StopSound(objectId: number, squad: Squad): void;
-
-    /**
-     * Stops a given sound for a specific player.
-     * @param objectId - The id of the sound object to stop.
-     * @param player - The player to stop the sound for.
-     */
-    export function StopSound(objectId: number, player: Player): void;
-
-    /**
-     * Stops a given sound for everyone.
-     * @param objectId - The id of the sound object to stop.
-     */
-    export function StopSound(objectId: number): void;
-
-    /**
-     * Stops a given sound for a specific team.
+     * Stops a given sound for a specific team. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param team - The team to stop the sound for.
      */
     export function StopSound(sound: SFX, team: Team): void;
 
     /**
-     * Stops a given sound for a specific squad.
+     * Stops a given sound for a specific squad. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param squad - The squad to stop the sound for.
      */
     export function StopSound(sound: SFX, squad: Squad): void;
 
     /**
-     * Stops a given sound for a specific player.
+     * Stops a given sound for a specific player. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param player - The player to stop the sound for.
      */
     export function StopSound(sound: SFX, player: Player): void;
 
     /**
-     * Stops a given sound for everyone.
+     * Stops a given sound for everyone. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      */
     export function StopSound(sound: SFX): void;
@@ -839,13 +669,6 @@ declare namespace documentedMod {
     ): void;
 
     /**
-     * Instantly resupplies the target player using a provided `ResupplyType`.
-     * @param player - The player to resupply.
-     * @param resupplyType - The type of resupply to perform.
-     */
-    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
-
-    /**
      * Displays a notification-type Message on the top-right of the screen for 6 seconds, for all players.
      * @param message - The message to display.
      */
@@ -910,7 +733,6 @@ declare namespace documentedMod {
 
     /**
      * Returns a string containing the concatenation of two strings.
-     * Note: This is currently broken and will not return anything valid.
      * @param string0 - The first string.
      * @param string1 - The second string.
      * @returns string The concatenated string.
@@ -929,7 +751,6 @@ declare namespace documentedMod {
 
     /**
      * Returns the difference between two number values or two vector values.
-     * Note: This is currently broken and will return the first vector with components rounded up.
      * @param vector0 - The first vector.
      * @param vector1 - The second vector.
      * @returns Vector The difference between the two vectors.

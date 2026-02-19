@@ -49,5 +49,11 @@ declare namespace documentedMod {
             eventUIWidget: mod.UIWidget,
             eventUIButtonEvent: mod.UIButtonEvent
         ): void;
+
+        /**
+         * This will trigger when any player leaves the game.
+         * @param eventNumber - The id of the player that left the game.
+         */
+        export function OnPlayerLeaveGame(eventNumber: number): void;
     }
 }
