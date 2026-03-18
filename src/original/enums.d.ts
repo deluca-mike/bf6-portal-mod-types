@@ -1,4 +1,19 @@
 declare namespace mod {
+    export enum AiInput {
+        Crouch,
+        FireWeapon,
+        Interact,
+        Jump,
+        Prone,
+        Reload,
+        SelectCharacterGadget,
+        SelectOpenGadget,
+        SelectPrimary,
+        SelectSecondary,
+        SelectThrowable,
+        Sprint,
+        Strafe,
+    }
     export enum AmmoTypes {
         AR_Carbine_Ammo,
         Armor_Plate,
@@ -14,6 +29,7 @@ declare namespace mod {
     }
     export enum Cameras {
         FirstPerson,
+        Fixed,
         Free,
         ThirdPerson,
     }
@@ -102,6 +118,7 @@ declare namespace mod {
         Badlands,
         Battery,
         Capstone,
+        Contaminated,
         Dumbo,
         Eastwood,
         Firestorm,
@@ -320,6 +337,7 @@ declare namespace mod {
         DamageType,
         DeathType,
         EmplacementSpawner,
+        Enum_AiInput,
         Enum_AmmoTypes,
         Enum_Cameras,
         Enum_CustomNotificationSlots,
@@ -341,6 +359,7 @@ declare namespace mod {
         Enum_RuntimeSpawn_Battery,
         Enum_RuntimeSpawn_Capstone,
         Enum_RuntimeSpawn_Common,
+        Enum_RuntimeSpawn_Contaminated,
         Enum_RuntimeSpawn_Dumbo,
         Enum_RuntimeSpawn_Eastwood,
         Enum_RuntimeSpawn_FireStorm,
@@ -378,6 +397,7 @@ declare namespace mod {
         Enum_WeaponAttachments,
         Enum_Weapons,
         Enum_WorldIconImages,
+        FixedCamera,
         HQ,
         InteractPoint,
         LootMissionObjectManager,
@@ -459,6 +479,7 @@ declare namespace mod {
     export enum VehicleList {
         Abrams,
         AH64,
+        AH6M,
         Cheetah,
         CV90,
         Eurocopter,

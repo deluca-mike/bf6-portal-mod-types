@@ -27,7 +27,6 @@ declare namespace mod {
      * - SortedArray
      * - ValueInArray
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be converted or used as a normal array.
      */
     export type Array = { _opaque: typeof ArraySymbol };
 
@@ -44,9 +43,8 @@ declare namespace mod {
     // export type DamageType = Any;
     const DamageTypeSymbol: unique symbol;
     /**
-     * The DamageType opaque type.
-     * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be compared with `EventDamageTypeCompare`.
+     * The DamageType opaque type. Compare to the `mod.PlayerDamageTypes` enum value with `mod.EventDamageTypeCompare`.
+     * TODO: Determine if two `DamageType` values can be compared with `mod.Equals`.
      */
     export type DamageType = { _opaque: typeof DamageTypeSymbol };
 
@@ -54,9 +52,8 @@ declare namespace mod {
     // export type DeathType = Any;
     const DeathTypeSymbol: unique symbol;
     /**
-     * The DeathType opaque type.
-     * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be compared with `EventDeathTypeCompare`.
+     * The DeathType opaque type. Compare to the `mod.PlayerDeathTypes` enum value with `mod.EventDeathTypeCompare`.
+     * TODO: Determine if two `DeathType` values can be compared with `mod.Equals`.
      */
     export type DeathType = { _opaque: typeof DeathTypeSymbol };
 
@@ -68,6 +65,11 @@ declare namespace mod {
      * Cannot be spawned at runtime.
      */
     export type EmplacementSpawner = { _opaque: typeof EmplacementSpawnerSymbol };
+
+    // export type FixedCamera = never;
+    // export type FixedCamera = Any;
+    const FixedCameraSymbol: unique symbol;
+    export type FixedCamera = { _opaque: typeof FixedCameraSymbol };
 
     // export type HQ = never;
     // export type HQ = Any;
@@ -145,7 +147,7 @@ declare namespace mod {
     const SFXSymbol: unique symbol;
     /**
      * The SFX opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
-     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_ANY.SOME_SFX, ...args) as mod.SFX`.
+     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.SOME_SFX, ...args) as mod.SFX`.
      */
     export type SFX = { _opaque: typeof SFXSymbol };
 
@@ -235,7 +237,7 @@ declare namespace mod {
     const VOSymbol: unique symbol;
     /**
      * The VO opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
-     * TODO: Determine how to get a VO.
+     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.SFX_VOModule_OneShot2D, ...args) as mod.VO`.
      */
     export type VO = { _opaque: typeof VOSymbol };
 
@@ -300,10 +302,9 @@ declare namespace mod {
     // export type WeaponUnlock = Any;
     const WeaponUnlockSymbol: unique symbol;
     /**
-     * The WeaponUnlock opaque type.
-     * This seems to be the weapon involved in a `mod.OnPlayerDamaged`, `mod.OnPlayerDied`, and `mod.OnPlayerEarnedKill` event,
-     * but it is unclear how to check it to determine the actual weapon involved.
-     * TODO: Determine if it can be compared with `mod.Equals`.
+     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with hidden function
+     * `(mod as any).EventWeaponCompare(weaponUnlock: mod.WeaponUnlock, weapon: mod.Weapons)`.
+     * TODO: Determine if two `WeaponUnlock` values can be compared with `mod.Equals`.
      */
     export type WeaponUnlock = { _opaque: typeof WeaponUnlockSymbol };
 
@@ -324,6 +325,7 @@ declare namespace mod {
         | AreaTrigger
         | CapturePoint
         | EmplacementSpawner
+        | FixedCamera
         | HQ
         | InteractPoint
         | LootSpawner

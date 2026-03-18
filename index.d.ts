@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.1.3.0
+// Version: 1.2.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +11,7 @@
 /// <reference path="./runtime-spawn-enums/battery.d.ts" />
 /// <reference path="./runtime-spawn-enums/capstone.d.ts" />
 /// <reference path="./runtime-spawn-enums/common.d.ts" />
+/// <reference path="./runtime-spawn-enums/contaminated.d.ts" />
 /// <reference path="./runtime-spawn-enums/dumbo.d.ts" />
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
@@ -39,122 +40,6 @@ declare namespace mod {
      * @returns A promise that resolves when the delay is complete.
      */
     export function Wait(n: number): Promise<void>;
-
-    /**
-     * Loads a music package to then be triggered with the `mod.PlayMusic` action.
-     * Music packages must first be loaded (such as loading in all Battle Royale music using `mod.LoadMusic(mod.MusicPackages.BR)`).
-     * It is advised to do this as early as possible to allow a few seconds of time for the music to load in.
-     * Typically, you'd load it in during `OnGameModeStarted()`.
-     * The way a music package is laid out, is that certain music events are designed to seamlessly transition into the next event.
-     * @example
-     * export async function OnGameModeStarted() {
-     *     mod.LoadMusic(mod.MusicPackages.Core);
-     *     mod.SetMusicParam(mod.MusicParams.Core_Amplitude, 1.3);
-     * }
-     *
-     * function SomeFunctionInYourExperience(winningTeam: Team, losingTeam: Team) {
-     *     mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1, winningTeam);
-     *     mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 0, losingTeam);
-     *     mod.PlayMusic(mod.MusicEvents.Core_EndOfRound_Loop);
-     * }
-     * @param musicPackage - The music package to load.
-     */
-    export function LoadMusic(musicPackage: MusicPackages): void;
-
-    /**
-     * Plays a music event for all players.
-     * You can play any music event that is part of the loaded music packages.
-     * You do not need to stop an event before playing another event in the same package.
-     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
-     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
-     * @param musicEvent - The music event to play.
-     */
-    export function PlayMusic(musicEvent: MusicEvents): void;
-
-    /**
-     * Plays a music event for a specific team.
-     * You do not need to stop an event before playing another event in the same package.
-     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
-     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
-     * @param musicEvent - The music event to play.
-     * @param team - The team to play the music event for.
-     */
-    export function PlayMusic(musicEvent: MusicEvents, team: Team): void;
-
-    /**
-     * Plays a music event for a specific squad.
-     * You do not need to stop an event before playing another event in the same package.
-     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
-     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
-     * @param musicEvent - The music event to play.
-     * @param squad - The squad to play the music event for.
-     */
-    export function PlayMusic(musicEvent: MusicEvents, squad: Squad): void;
-
-    /**
-     * Plays a music event for a specific player.
-     * You do not need to stop an event before playing another event in the same package.
-     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
-     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
-     * @param musicEvent - The music event to play.
-     * @param player - The player to play the music event for.
-     */
-    export function PlayMusic(musicEvent: MusicEvents, player: Player): void;
-
-    /**
-     * Updates any parameters that a music package might have.
-     * @example
-     * // This ensures that all core music will play their "winning" variants, if they have one.
-     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
-     * @param musicParam - The music parameter to update.
-     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
-     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
-     */
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number): void;
-
-    /**
-     * Updates any parameters that a music package might have, for a specific team.
-     * @example
-     * // This ensures that all core music will play their "winning" variants, if they have one.
-     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
-     * @param musicParam - The music parameter to update.
-     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
-     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
-     * @param team - The team to update the parameter for.
-     */
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, team: Team): void;
-
-    /**
-     * Updates any parameters that a music package might have, for a specific squad.
-     * @example
-     * // This ensures that all core music will play their "winning" variants, if they have one.
-     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
-     * @param musicParam - The music parameter to update.
-     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
-     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
-     * @param squad - The squad to update the parameter for.
-     */
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, squad: Squad): void;
-
-    /**
-     * Updates any parameters that a music package might have, for a specific player.
-     * @example
-     * // This ensures that all core music will play their "winning" variants, if they have one.
-     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
-     * @param musicParam - The music parameter to update.
-     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
-     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
-     * @param player - The player to update the parameter for.
-     */
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
-
-    /**
-     * Unloads a music package that is already loaded.
-     * This is almost never necessary. In official Battlefield modes, music is always loaded at the start, and it is never unloaded mid-match.
-     * @param musicPackage - The music package to unload.
-     */
-    export function UnloadMusic(musicPackage: MusicPackages): void;
-
     /**
      * Sets the value of a Variable.
      * @param variable - The variable to set the value of.
@@ -229,6 +114,9 @@ declare namespace mod {
      * @param waypointPath - The waypoint path to patrol.
      */
     export function AIWaypointIdleBehavior(player: Player, waypointPath: WaypointPath): void;
+
+    // Trigger AI bots input for the duration. Up to 3 simultaneous inputs (3 channels)
+    export function SetAiInput(player: Player, input: AiInput, duration: number): void;
 
     /**
      * Use this on an AI Spawner to control whether AI soldiers spawned will leave the game after they are killed.
@@ -441,6 +329,67 @@ declare namespace mod {
     export function SetVariableAtIndex(arrayVariable: Variable, arrayIndex: number, value: Any): void;
 
     /**
+     * Loads a music package to then be triggered with the `mod.PlayMusic` action.
+     * Music packages must first be loaded (such as loading in all Battle Royale music using `mod.LoadMusic(mod.MusicPackages.BR)`).
+     * It is advised to do this as early as possible to allow a few seconds of time for the music to load in.
+     * Typically, you'd load it in during `OnGameModeStarted()`.
+     * The way a music package is laid out, is that certain music events are designed to seamlessly transition into the next event.
+     * @example
+     * export async function OnGameModeStarted() {
+     *     mod.LoadMusic(mod.MusicPackages.Core);
+     *     mod.SetMusicParam(mod.MusicParams.Core_Amplitude, 1.3);
+     * }
+     *
+     * function SomeFunctionInYourExperience(winningTeam: Team, losingTeam: Team) {
+     *     mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1, winningTeam);
+     *     mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 0, losingTeam);
+     *     mod.PlayMusic(mod.MusicEvents.Core_EndOfRound_Loop);
+     * }
+     * @param musicPackage - The music package to load.
+     */
+    export function LoadMusic(musicPackage: MusicPackages): void;
+
+    /**
+     * Plays a music event for all players.
+     * You can play any music event that is part of the loaded music packages.
+     * You do not need to stop an event before playing another event in the same package.
+     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
+     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
+     * @param musicEvent - The music event to play.
+     */
+    export function PlayMusic(musicEvent: MusicEvents): void;
+
+    /**
+     * Plays a music event for a specific team.
+     * You do not need to stop an event before playing another event in the same package.
+     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
+     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
+     * @param musicEvent - The music event to play.
+     * @param team - The team to play the music event for.
+     */
+    export function PlayMusic(musicEvent: MusicEvents, team: Team): void;
+
+    /**
+     * Plays a music event for a specific squad.
+     * You do not need to stop an event before playing another event in the same package.
+     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
+     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
+     * @param musicEvent - The music event to play.
+     * @param squad - The squad to play the music event for.
+     */
+    export function PlayMusic(musicEvent: MusicEvents, squad: Squad): void;
+
+    /**
+     * Plays a music event for a specific player.
+     * You do not need to stop an event before playing another event in the same package.
+     * You can stop or pause music specifically for everyone or any team, squad, or player, even if it was previously playing for a larger audience,
+     * by playing events like `mod.MusicEvents.Core_Stop` or `mod.MusicEvents.Gauntlet_Pause`, as long as its for the same music package.
+     * @param musicEvent - The music event to play.
+     * @param player - The player to play the music event for.
+     */
+    export function PlayMusic(musicEvent: MusicEvents, player: Player): void;
+
+    /**
      * Plays a 2D sound that was spawned via `mod.SpawnObject`, for a specific team.
      * Passing a 3D sound to this function will fail silently.
      * @example
@@ -581,6 +530,65 @@ declare namespace mod {
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
 
     /**
+     * Updates any parameters that a music package might have.
+     * @example
+     * // This ensures that all core music will play their "winning" variants, if they have one.
+     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
+     * @param musicParam - The music parameter to update.
+     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
+     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
+     */
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number): void;
+
+    /**
+     * Updates any parameters that a music package might have, for a specific team.
+     * @example
+     * // This ensures that all core music will play their "winning" variants, if they have one.
+     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
+     * @param musicParam - The music parameter to update.
+     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
+     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
+     * @param team - The team to update the parameter for.
+     */
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, team: Team): void;
+
+    /**
+     * Updates any parameters that a music package might have, for a specific squad.
+     * @example
+     * // This ensures that all core music will play their "winning" variants, if they have one.
+     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
+     * @param musicParam - The music parameter to update.
+     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
+     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
+     * @param squad - The squad to update the parameter for.
+     */
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, squad: Squad): void;
+
+    /**
+     * Updates any parameters that a music package might have, for a specific player.
+     * @example
+     * // This ensures that all core music will play their "winning" variants, if they have one.
+     * mod.SetMusicParam(mod.MusicParams.Core_IsWinning, 1);
+     * @param musicParam - The music parameter to update.
+     * @param paramValue - The value to set the parameter to. Even if the music parameter’s name suggests that it’s a
+     *                     boolean, you must still input a number value such as 0 or 1 (instead of false or true).
+     * @param player - The player to update the parameter for.
+     */
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, team: Team): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, squad: Squad): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, player: Player): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number): void;
+
+    /**
      * Stops a given sound for a specific team. A short delay is needed between stopping a sound and playing it again.
      * @param sound - The sound object to stop.
      * @param team - The team to stop the sound for.
@@ -606,6 +614,13 @@ declare namespace mod {
      * @param sound - The sound object to stop.
      */
     export function StopSound(sound: SFX): void;
+
+    /**
+     * Unloads a music package that is already loaded.
+     * This is almost never necessary. In official Battlefield modes, music is always loaded at the start, and it is never unloaded mid-match.
+     * @param musicPackage - The music package to unload.
+     */
+    export function UnloadMusic(musicPackage: MusicPackages): void;
 
     // Sets CameraType for all players. CameraIndex optional.
     export function SetCameraTypeForAll(cameraType: Cameras): void;
@@ -664,7 +679,7 @@ declare namespace mod {
     // Sets the delay after destruction before an emplacement automatically respawn, if the feature is activated.
     export function SetEmplacementSpawnerRespawnTime(emplacementSpawner: EmplacementSpawner, respawnTime: number): void;
 
-    // Sets the distance its enplacement spawner for an emplacement to consider itself abandoned.
+    // Sets the distance its emplacement spawner for an emplacement to consider itself abandoned.
     export function SetEmplacementSpawnerSpawnerRadius(
         emplacementSpawner: EmplacementSpawner,
         keepAliveSpawnerRadius: number
@@ -838,7 +853,7 @@ declare namespace mod {
     export function SetSoldierEffect(player: Player, soldierEffects: SoldierEffects, isEnabled: boolean): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, duration: number, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(
@@ -849,19 +864,22 @@ declare namespace mod {
     ): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(targetPlayer: Player, spotterPlayer: Player, duration: number): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number): void;
+    export function SpotTarget(targetPlayer: Player, duration: number): void;
 
     // Gradually modifies the value of a Variable at a specified rate (value/second) until it reaches the provided limit.
     export function ChaseVariableAtRate(variable: Variable, limit: number, deltaPerSecond: number): void;
 
     // Gradually modifies the value of a Variable over time (in seconds). The variable's value will reach the limit at the end of the interval.
     export function ChaseVariableOverTime(variable: Variable, limit: number, durationSeconds: number): void;
+
+    // Calls a javascript action function.
+    export function JsAction(actionName: string, actionArg0: Any, actionArg1: Any): void;
 
     // Stops an in-progress tracking of a Variable from the ChaseVariableOverTime or ChaseVariableAtRate blocks, leaving it at its current value.
     export function StopChasingVariable(variable: Variable): void;
@@ -875,7 +893,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controling a capture point.
+    // Change the team controlling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
@@ -1941,6 +1959,8 @@ declare namespace mod {
     // Returns the VO object corresponding to the provided id.
     export function GetVO(number: number): VO;
 
+    export function GetFixedCamera(number: number): FixedCamera;
+
     // Returns the VFX object corresponding to the provided id.
     export function GetVFX(vfxNumber: number): VFX;
 
@@ -2086,6 +2106,9 @@ declare namespace mod {
 
     // Returns true if the provided value is equal to the specified type.
     export function IsType(value: Any, type: Types): boolean;
+
+    // Calls a javascript value function.
+    export function JsValue(valueName: string, valueArg0: Any, valueArg1: Any): Any;
 
     // Returns a boolean indicating if the 1st provided value is less than the 2nd provided value.
     export function LessThan(left: number, right: number): boolean;
@@ -2422,6 +2445,12 @@ declare namespace mod {
 
     // Returns the transform vector of the provided object.
     export function GetObjectTransform(object: mod.Object): Transform;
+
+    // Returns the position of a Transform as a Vector
+    export function GetTransformPosition(transform: Transform): Vector;
+
+    // Returns the rotation of a Transform as a Vector
+    export function GetTransformRotation(transform: Transform): Vector;
 
     // Returns the leftward directional vector of (-1, 0, 0).
     export function LeftVector(): Vector;

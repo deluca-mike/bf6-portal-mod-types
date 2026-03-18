@@ -32,6 +32,11 @@ declare namespace mod {
     const EmplacementSpawnerSymbol: unique symbol;
     export type EmplacementSpawner = { _opaque: typeof EmplacementSpawnerSymbol };
 
+    // export type FixedCamera = never;
+    // export type FixedCamera = Any;
+    const FixedCameraSymbol: unique symbol;
+    export type FixedCamera = { _opaque: typeof FixedCameraSymbol };
+
     // export type HQ = never;
     // export type HQ = Any;
     const HQSymbol: unique symbol;
@@ -171,6 +176,7 @@ declare namespace mod {
         | AreaTrigger
         | CapturePoint
         | EmplacementSpawner
+        | FixedCamera
         | HQ
         | InteractPoint
         | LootSpawner

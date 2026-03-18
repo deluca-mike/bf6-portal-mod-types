@@ -19,7 +19,6 @@ declare namespace documentedMod {
      * - SortedArray
      * - ValueInArray
      * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be converted or used as a normal array.
      */
     export type Array = {};
 
@@ -30,16 +29,14 @@ declare namespace documentedMod {
     export type CapturePoint = {};
 
     /**
-     * The DamageType opaque type.
-     * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be compared with `EventDamageTypeCompare`.
+     * The DamageType opaque type. Compare to the `mod.PlayerDamageTypes` enum value with `mod.EventDamageTypeCompare`.
+     * TODO: Determine if two `DamageType` values can be compared with `mod.Equals`.
      */
     export type DamageType = {};
 
     /**
-     * The DeathType opaque type.
-     * TODO: Determine if it can be compared with `mod.Equals`.
-     * TODO: Determine if it can be compared with `EventDeathTypeCompare`.
+     * The DeathType opaque type. Compare to the `mod.PlayerDeathTypes` enum value with `mod.EventDeathTypeCompare`.
+     * TODO: Determine if two `DeathType` values can be compared with `mod.Equals`.
      */
     export type DeathType = {};
 
@@ -98,7 +95,7 @@ declare namespace documentedMod {
 
     /**
      * The SFX opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
-     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_ANY.SOME_SFX, ...args) as mod.SFX`.
+     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.SOME_SFX, ...args) as mod.SFX`.
      */
     export type SFX = {};
 
@@ -158,7 +155,7 @@ declare namespace documentedMod {
 
     /**
      * The VO opaque type. Can only be compared with `mod.Equals`, or by retrieving its id with `mod.GetObjId`.
-     * TODO: Determine how to get a VO.
+     * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.SFX_VOModule_OneShot2D, ...args) as mod.VO`.
      */
     export type VO = {};
 
@@ -202,10 +199,9 @@ declare namespace documentedMod {
     export type WeaponPackage = {};
 
     /**
-     * The WeaponUnlock opaque type.
-     * This seems to be the weapon involved in a `mod.OnPlayerDamaged`, `mod.OnPlayerDied`, and `mod.OnPlayerEarnedKill` event,
-     * but it is unclear how to check it to determine the actual weapon involved.
-     * TODO: Determine if it can be compared with `mod.Equals`.
+     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with hidden function
+     * `(mod as any).EventWeaponCompare(weaponUnlock: mod.WeaponUnlock, weapon: mod.Weapons)`.
+     * TODO: Determine if two `WeaponUnlock` values can be compared with `mod.Equals`.
      */
     export type WeaponUnlock = {};
 

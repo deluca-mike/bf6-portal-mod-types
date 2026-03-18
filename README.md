@@ -59,8 +59,8 @@ improvements).
 | ---------------------------- | ------------ |
 | `a.b.c.d` (template)         | `b.c.x`      |
 | `1.1.3.0` (past)             | `1.3.x`      |
-| `1.2.1.0` (current)          | `2.1.x`      |
-| `1.2.2.0` (future example)   | `2.2.x`      |
+| `1.2.2.0` (current)          | `2.2.x`      |
+| `1.2.3.0` (future example)   | `2.3.x`      |
 
 - **Minor** version changes (e.g. `1.3.0` → `1.4.0`) align with a new official SDK release and may add or change APIs.
 - **Patch** versions (e.g. `1.3.0` → `1.3.1`) keep the same underlying SDK version and only add or improve documentation
