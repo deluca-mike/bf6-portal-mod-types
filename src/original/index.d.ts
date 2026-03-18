@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.1.3.0
+// Version: 1.2.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +11,7 @@
 /// <reference path="./runtime-spawn-enums/battery.d.ts" />
 /// <reference path="./runtime-spawn-enums/capstone.d.ts" />
 /// <reference path="./runtime-spawn-enums/common.d.ts" />
+/// <reference path="./runtime-spawn-enums/contaminated.d.ts" />
 /// <reference path="./runtime-spawn-enums/dumbo.d.ts" />
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
@@ -34,37 +35,6 @@ declare namespace mod {
     export const stringkeys: Any;
 
     export function Wait(n: number): Promise<void>;
-
-    // Loads a music package to then be triggered with the PlayMusic action.
-    export function LoadMusic(musicPackage: MusicPackages): void;
-
-    // Triggers a music event.
-    export function PlayMusic(musicEvent: MusicEvents): void;
-
-    // Triggers a music event.
-    export function PlayMusic(musicEvent: MusicEvents, team: Team): void;
-
-    // Triggers a music event.
-    export function PlayMusic(musicEvent: MusicEvents, squad: Squad): void;
-
-    // Triggers a music event.
-    export function PlayMusic(musicEvent: MusicEvents, player: Player): void;
-
-    // Updates any parameters that a music package might have.
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number): void;
-
-    // Updates any parameters that a music package might have.
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, team: Team): void;
-
-    // Updates any parameters that a music package might have.
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, squad: Squad): void;
-
-    // Updates any parameters that a music package might have.
-    export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
-
-    // Unloads a music package that is already loaded.
-    export function UnloadMusic(musicPackage: MusicPackages): void;
-
     // Sets the value of a Variable.
     export function SetVariable(variable: Variable, value: Any): void;
 
@@ -96,6 +66,9 @@ declare namespace mod {
 
     // Sets a player to patrol a waypoint. (Only works for AI players)
     export function AIWaypointIdleBehavior(player: Player, waypointPath: WaypointPath): void;
+
+    // Trigger AI bots input for the duration. Up to 3 simultaneous inputs (3 channels)
+    export function SetAiInput(player: Player, input: AiInput, duration: number): void;
 
     // Use this on a spawner to determine if AI soldiers spawned will leave the game after they are killed.
     export function AISetUnspawnOnDead(spawner: Spawner, enableUnspawnOnDead: boolean): void;
@@ -177,11 +150,26 @@ declare namespace mod {
     // Clears the player's gadget instructions. (Only works for AI players)
     export function AIStopUsingGadget(player: Player): void;
 
-    // Sets the damage multiplier from AI players to actualy players.
+    // Sets the damage multiplier from AI players to actual players.
     export function SetAIToHumanDamageModifier(damageMultiplier: number): void;
 
     // Finds or initializes an Array on a provided Variable, and stores a provided value in that Array at the specified index.
     export function SetVariableAtIndex(arrayVariable: Variable, arrayIndex: number, value: Any): void;
+
+    // Loads a music package to then be triggered with the PlayMusic action.
+    export function LoadMusic(musicPackage: MusicPackages): void;
+
+    // Triggers a music event.
+    export function PlayMusic(musicEvent: MusicEvents): void;
+
+    // Triggers a music event.
+    export function PlayMusic(musicEvent: MusicEvents, team: Team): void;
+
+    // Triggers a music event.
+    export function PlayMusic(musicEvent: MusicEvents, squad: Squad): void;
+
+    // Triggers a music event.
+    export function PlayMusic(musicEvent: MusicEvents, player: Player): void;
 
     // Plays a sound using runtime spawner tech.
     export function PlaySound(sound: SFX, amplitude: number, team: Team): void;
@@ -237,6 +225,30 @@ declare namespace mod {
     // Plays a voice-over event clip. VO flags Hotel and India only support a few select VO events.
     export function PlayVO(voiceOver: VO, event: VoiceOverEvents2D, flag: VoiceOverFlags, team: Team): void;
 
+    // Updates any parameters that a music package might have.
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number): void;
+
+    // Updates any parameters that a music package might have.
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, team: Team): void;
+
+    // Updates any parameters that a music package might have.
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, squad: Squad): void;
+
+    // Updates any parameters that a music package might have.
+    export function SetMusicParam(musicParam: MusicParams, paramValue: number, player: Player): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, team: Team): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, squad: Squad): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number, player: Player): void;
+
+    // Sets the amplitude of a given sound.
+    export function SetSoundAmplitude(sound: SFX, amplitude: number): void;
+
     // Stops a given sound.
     export function StopSound(sound: SFX, team: Team): void;
 
@@ -248,6 +260,9 @@ declare namespace mod {
 
     // Stops a given sound.
     export function StopSound(sound: SFX): void;
+
+    // Unloads a music package that is already loaded.
+    export function UnloadMusic(musicPackage: MusicPackages): void;
 
     // Sets CameraType for all players. CameraIndex optional.
     export function SetCameraTypeForAll(cameraType: Cameras): void;
@@ -306,7 +321,7 @@ declare namespace mod {
     // Sets the delay after destruction before an emplacement automatically respawn, if the feature is activated.
     export function SetEmplacementSpawnerRespawnTime(emplacementSpawner: EmplacementSpawner, respawnTime: number): void;
 
-    // Sets the distance its enplacement spawner for an emplacement to consider itself abandoned.
+    // Sets the distance its emplacement spawner for an emplacement to consider itself abandoned.
     export function SetEmplacementSpawnerSpawnerRadius(
         emplacementSpawner: EmplacementSpawner,
         keepAliveSpawnerRadius: number
@@ -393,10 +408,10 @@ declare namespace mod {
     // Enables or disables a spatial object.
     export function EnableSpatialObject(spatialObject: SpatialObject, enable: boolean): void;
 
-    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(player: Player, start: Vector, stop: Vector): void;
 
-    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(start: Vector, stop: Vector): void;
 
     // Sets the target player's team.
@@ -454,7 +469,7 @@ declare namespace mod {
     export function SetSoldierEffect(player: Player, soldierEffects: SoldierEffects, isEnabled: boolean): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, duration: number, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(
@@ -465,19 +480,22 @@ declare namespace mod {
     ): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(targetPlayer: Player, spotterPlayer: Player, duration: number): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number): void;
+    export function SpotTarget(targetPlayer: Player, duration: number): void;
 
     // Gradually modifies the value of a Variable at a specified rate (value/second) until it reaches the provided limit.
     export function ChaseVariableAtRate(variable: Variable, limit: number, deltaPerSecond: number): void;
 
     // Gradually modifies the value of a Variable over time (in seconds). The variable's value will reach the limit at the end of the interval.
     export function ChaseVariableOverTime(variable: Variable, limit: number, durationSeconds: number): void;
+
+    // Calls a javascript action function.
+    export function JsAction(actionName: string, actionArg0: Any, actionArg1: Any): void;
 
     // Stops an in-progress tracking of a Variable from the ChaseVariableOverTime or ChaseVariableAtRate blocks, leaving it at its current value.
     export function StopChasingVariable(variable: Variable): void;
@@ -491,13 +509,13 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controling a capture point.
+    // Change the team controlling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
     export function SetMaxCaptureMultiplier(capturePoint: CapturePoint, multiplier: number): void;
 
-    // Enables or disables a headquater.
+    // Enables or disables a headquarters.
     export function EnableHQ(hq: HQ, enable: boolean): void;
 
     // Enables or disables the provided objective.
@@ -1508,6 +1526,8 @@ declare namespace mod {
     // Returns the VO object corresponding to the provided id.
     export function GetVO(number: number): VO;
 
+    export function GetFixedCamera(number: number): FixedCamera;
+
     // Returns the VFX object corresponding to the provided id.
     export function GetVFX(vfxNumber: number): VFX;
 
@@ -1635,6 +1655,9 @@ declare namespace mod {
 
     // Returns true if the provided value is equal to the specified type.
     export function IsType(value: Any, type: Types): boolean;
+
+    // Calls a javascript value function.
+    export function JsValue(valueName: string, valueArg0: Any, valueArg1: Any): Any;
 
     // Returns a boolean indicating if the 1st provided value is less than the 2nd provided value.
     export function LessThan(left: number, right: number): boolean;
@@ -1908,6 +1931,12 @@ declare namespace mod {
 
     // Returns the transform vector of the provided object.
     export function GetObjectTransform(object: mod.Object): Transform;
+
+    // Returns the position of a Transform as a Vector
+    export function GetTransformPosition(transform: Transform): Vector;
+
+    // Returns the rotation of a Transform as a Vector
+    export function GetTransformRotation(transform: Transform): Vector;
 
     // Returns the leftward directional vector of (-1, 0, 0).
     export function LeftVector(): Vector;
