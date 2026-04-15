@@ -199,8 +199,7 @@ declare namespace documentedMod {
     export type WeaponPackage = {};
 
     /**
-     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with hidden function
-     * `(mod as any).EventWeaponCompare(weaponUnlock: mod.WeaponUnlock, weapon: mod.Weapons)`.
+     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with `mod.EventWeaponCompare`.
      * TODO: Determine if two `WeaponUnlock` values can be compared with `mod.Equals`.
      */
     export type WeaponUnlock = {};

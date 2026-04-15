@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.2.2.0
+// Version: 1.2.3.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -21,9 +21,11 @@
 /// <reference path="./runtime-spawn-enums/granite-military-storage.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-residential-north.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-tech-center.d.ts" />
+/// <reference path="./runtime-spawn-enums/granite-underground.d.ts" />
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
 /// <reference path="./runtime-spawn-enums/sand.d.ts" />
+/// <reference path="./runtime-spawn-enums/subsurface.d.ts" />
 /// <reference path="./runtime-spawn-enums/tungsten.d.ts" />
 
 /// <reference path="./types.d.ts" />
@@ -40,6 +42,7 @@ declare namespace mod {
      * @returns A promise that resolves when the delay is complete.
      */
     export function Wait(n: number): Promise<void>;
+
     /**
      * Sets the value of a Variable.
      * @param variable - The variable to set the value of.
@@ -634,6 +637,21 @@ declare namespace mod {
     // Sets CameraType for provided Player. CameraIndex optional.
     export function SetCameraTypeForPlayer(player: Player, cameraType: Cameras, cameraIndex: number): void;
 
+    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
+    export function SetSpectatingFiltersForAll(
+        group: SpectatingGroup,
+        ownSquadOnly: boolean,
+        ownTeamOnly: boolean
+    ): void;
+
+    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
+    export function SetSpectatingFiltersForPlayer(
+        player: Player,
+        group: SpectatingGroup,
+        ownSquadOnly: boolean,
+        ownTeamOnly: boolean
+    ): void;
+
     // Enables or disables a player-specific screen effect.
     export function EnableScreenEffect(player: Player, screenEffect: ScreenEffects, enable: boolean): void;
 
@@ -766,6 +784,9 @@ declare namespace mod {
     // Sets the duration the RingOfFire remains stable before Shrinking again.
     export function SetRingOfFireStableTime(ringOfFireId: RingOfFire, ringOfFireStableTime: number): void;
 
+    // Balances Team1 and Team2 while maintaining squad compositions, requires matching team and squad capacities.
+    export function AutoBalanceTeams(): void;
+
     // Using this command prevents anyone from joining this server. There is no way to undo this at the time.
     export function DisablePlayerJoin(): void;
 
@@ -800,6 +821,14 @@ declare namespace mod {
 
     // Sets the target player's team.
     export function SetTeam(player: Player, team: Team): void;
+
+    // Enables or Disables any effect from a designated VL7Cloud object.
+    export function SetVL7CloudEffects(
+        vl7Cloud: VL7Cloud,
+        screenEffect: boolean,
+        soldierEffect: boolean,
+        visualEffect: boolean
+    ): void;
 
     // Spawns a weapon or gadget at a LootSpawner.
     export function SpawnLoot(lootSpawner: LootSpawner, ammo: AmmoTypes): void;
@@ -893,7 +922,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controlling a capture point.
+    // Change the team controling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
@@ -915,6 +944,9 @@ declare namespace mod {
 
     // Determines the time needed by MCOM.
     export function SetMCOMFuseTime(mCOM: MCOM, fuseTime: number): void;
+
+    // Sets the ownership of the MCOM, swapping teams will flip who can plant and defuse. Only allows for Neutral, Team1 and Team2.
+    export function SetMCOMOwner(mcom: MCOM, team: Team): void;
 
     // Force a specific to deploy.
     export function DeployPlayer(player: Player): void;
@@ -1022,6 +1054,13 @@ declare namespace mod {
 
     // Puts the target player into the mandown state (unless mandown is disabled).
     export function ForceManDown(player: Player): void;
+
+    /**
+     * Instantly resupplies the target player using a provided `ResupplyType`.
+     * @param player - The player to resupply.
+     * @param resupplyType - The type of resupply to perform.
+     */
+    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
 
     // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;
@@ -1850,8 +1889,20 @@ declare namespace mod {
     // Cause a vehicle spawner to spawn one vehicle of the type it is currently set to.
     export function ForceVehicleSpawnerSpawn(vehicleSpawner: VehicleSpawner): void;
 
+    // Sets whether all vehicles are allowed in the Surrounding Area
+    export function SetAllVehiclesAllowedInSurroundingArea(allowed: boolean): void;
+
     // Sets a multiplier on the normal map value of how high vehicles can go before their engines stop applying an upwards force.
     export function SetMaxVehicleHeightLimitScale(heightScale: number): void;
+
+    // Sets whether a vehicle is allowed in the Surrounding Area
+    export function SetVehicleAllowedInSurroundingArea(vehicle: VehicleList, allowed: boolean): void;
+
+    // Sets whether a vehicle category is allowed in the Surrounding Area
+    export function SetVehicleCategoryAllowedInSurroundingArea(
+        vehicleCategory: VehicleCategories,
+        allowed: boolean
+    ): void;
 
     // Enables or disables the feature to destroy vehicles left outside of the combat area.
     export function SetVehicleSpawnerAbandonVehiclesOutOfCombatArea(
@@ -1959,6 +2010,7 @@ declare namespace mod {
     // Returns the VO object corresponding to the provided id.
     export function GetVO(number: number): VO;
 
+    // Returns a Fixed Camera.
     export function GetFixedCamera(number: number): FixedCamera;
 
     // Returns the VFX object corresponding to the provided id.
@@ -2012,6 +2064,9 @@ declare namespace mod {
     // Returns the spawner object corresponding to the provided id.
     export function GetSpawner(number: number): Spawner;
 
+    // Returns the VL7Cloud object corresponding to the provided id.
+    export function GetVL7Cloud(vl7CloudId: number): VL7Cloud;
+
     // Returns the vehicle spawner object corresponding to the provided id.
     export function GetVehicleSpawner(number: number): VehicleSpawner;
 
@@ -2027,23 +2082,26 @@ declare namespace mod {
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
-            | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Abbasid
             | RuntimeSpawn_Aftermath
             | RuntimeSpawn_Badlands
             | RuntimeSpawn_Battery
             | RuntimeSpawn_Capstone
+            | RuntimeSpawn_Contaminated
             | RuntimeSpawn_Dumbo
             | RuntimeSpawn_Eastwood
             | RuntimeSpawn_FireStorm
             | RuntimeSpawn_Limestone
             | RuntimeSpawn_Outskirts
+            | RuntimeSpawn_Subsurface
             | RuntimeSpawn_Tungsten
             | RuntimeSpawn_Granite_Downtown
             | RuntimeSpawn_Granite_Marina
             | RuntimeSpawn_Granite_MilitaryRnD
             | RuntimeSpawn_Granite_MilitaryStorage
+            | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Granite_TechCenter
+            | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand,
         position: Vector,
         rotation: Vector,
@@ -2054,23 +2112,26 @@ declare namespace mod {
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
-            | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Abbasid
             | RuntimeSpawn_Aftermath
             | RuntimeSpawn_Badlands
             | RuntimeSpawn_Battery
             | RuntimeSpawn_Capstone
+            | RuntimeSpawn_Contaminated
             | RuntimeSpawn_Dumbo
             | RuntimeSpawn_Eastwood
             | RuntimeSpawn_FireStorm
             | RuntimeSpawn_Limestone
             | RuntimeSpawn_Outskirts
+            | RuntimeSpawn_Subsurface
             | RuntimeSpawn_Tungsten
             | RuntimeSpawn_Granite_Downtown
             | RuntimeSpawn_Granite_Marina
             | RuntimeSpawn_Granite_MilitaryRnD
             | RuntimeSpawn_Granite_MilitaryStorage
+            | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Granite_TechCenter
+            | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand,
         position: Vector,
         rotation: Vector
@@ -2400,6 +2461,12 @@ declare namespace mod {
 
     // Returns a boolean indicating if the victim died by the provided death type.
     export function EventDeathTypeCompare(deathType: DeathType, playerDeathTypes: PlayerDeathTypes): boolean;
+
+    // Returns a boolean indicating if the given weapon unlock is equivalent to the provided ability.
+    export function EventWeaponCompare(eventWeapon: WeaponUnlock, weapon: Weapons): boolean;
+
+    // Returns a boolean indicating if the given weapon unlock is equivalent to the provided ability.
+    export function EventWeaponCompare(eventWeapon: WeaponUnlock, gadget: Gadgets): boolean;
 
     // Returns the target player loaded ammo of the provided inventory slots.
     export function GetInventoryAmmo(player: Player, inventorySlots: InventorySlots): number;

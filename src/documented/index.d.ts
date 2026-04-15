@@ -669,6 +669,13 @@ declare namespace documentedMod {
     ): void;
 
     /**
+     * Instantly resupplies the target player using a provided `ResupplyType`.
+     * @param player - The player to resupply.
+     * @param resupplyType - The type of resupply to perform.
+     */
+    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
+
+    /**
      * Displays a notification-type Message on the top-right of the screen for 6 seconds, for all players.
      * @param message - The message to display.
      */

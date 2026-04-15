@@ -50,7 +50,7 @@ is no runtime code.
 
 ## Version semantics
 
-The official BF6 Portal SDK uses a **four-part** version (e.g. `1.1.3.0`) for the `mod` namespace and does not follow
+The official BF6 Portal SDK uses a **four-part** version (e.g. `1.2.3.0`) for the `mod` namespace and does not follow
 semver. This package maps that to **three-part semver** by dropping the first segment, and replacing the last segment
 with an internal increment to track patch changes to the package (i.e. for added documentation or usability
 improvements).
@@ -59,8 +59,8 @@ improvements).
 | ---------------------------- | ------------ |
 | `a.b.c.d` (template)         | `b.c.x`      |
 | `1.1.3.0` (past)             | `1.3.x`      |
-| `1.2.2.0` (current)          | `2.2.x`      |
-| `1.2.3.0` (future example)   | `2.3.x`      |
+| `1.2.3.0` (current)          | `2.3.x`      |
+| `1.2.4.0` (future example)   | `2.4.x`      |
 
 - **Minor** version changes (e.g. `1.3.0` → `1.4.0`) align with a new official SDK release and may add or change APIs.
 - **Patch** versions (e.g. `1.3.0` → `1.3.1`) keep the same underlying SDK version and only add or improve documentation
