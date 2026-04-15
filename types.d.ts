@@ -232,6 +232,11 @@ declare namespace mod {
      */
     export type VFX = { _opaque: typeof VFXSymbol };
 
+    // export type VL7Cloud = never;
+    // export type VL7Cloud = Any;
+    const VL7CloudSymbol: unique symbol;
+    export type VL7Cloud = { _opaque: typeof VL7CloudSymbol };
+
     // export type VO = never;
     // export type VO = Any;
     const VOSymbol: unique symbol;
@@ -302,8 +307,7 @@ declare namespace mod {
     // export type WeaponUnlock = Any;
     const WeaponUnlockSymbol: unique symbol;
     /**
-     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with hidden function
-     * `(mod as any).EventWeaponCompare(weaponUnlock: mod.WeaponUnlock, weapon: mod.Weapons)`.
+     * The WeaponUnlock opaque type. Compare to the `mod.Weapons` enum value with `mod.EventWeaponCompare`.
      * TODO: Determine if two `WeaponUnlock` values can be compared with `mod.Equals`.
      */
     export type WeaponUnlock = { _opaque: typeof WeaponUnlockSymbol };
@@ -341,6 +345,7 @@ declare namespace mod {
         | Vehicle
         | VehicleSpawner
         | VFX
+        | VL7Cloud
         | VO
         | WaypointPath
         | WorldIcon;

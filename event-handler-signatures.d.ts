@@ -147,6 +147,9 @@ declare namespace mod {
             eventSeat: mod.Object
         ): void;
 
+        // This will trigger when a Player enters a VL7Cloud volume.
+        export function OnPlayerEnterVL7Cloud(eventPlayer: mod.Player, eventVL7Cloud: mod.VL7Cloud): void;
+
         /**
          * This will trigger when a Player exits an AreaTrigger.
          * Note: The AreaTrigger has to be placed in Godot scene, assigned an ObjId and a CollisionPolygon3D(volume).
@@ -172,6 +175,9 @@ declare namespace mod {
             eventVehicle: mod.Vehicle,
             eventSeat: mod.Object
         ): void;
+
+        // This will trigger when a Player exits a VL7Cloud volume.
+        export function OnPlayerExitVL7Cloud(eventPlayer: mod.Player, eventVL7Cloud: mod.VL7Cloud): void;
 
         // This will trigger when a Player interacts with InteractPoint.
         export function OnPlayerInteract(eventPlayer: mod.Player, eventInteractPoint: mod.InteractPoint): void;
@@ -204,6 +210,21 @@ declare namespace mod {
 
         // This will trigger when the Player dies and returns to the deploy screen.
         export function OnPlayerUndeploy(eventPlayer: mod.Player): void;
+
+        // This will trigger when a Player presses the Zoom button.
+        export function OnPortalGadgetAimStart(eventPlayer: mod.Player): void;
+
+        // This will trigger when a Player releases the Zoom button.
+        export function OnPortalGadgetAimStop(eventPlayer: mod.Player): void;
+
+        // This will trigger when a Player presses the Fire button.
+        export function OnPortalGadgetFireStart(eventPlayer: mod.Player): void;
+
+        // This will trigger when a Player releases the Fire button.
+        export function OnPortalGadgetFireStop(eventPlayer: mod.Player): void;
+
+        // This will trigger when a Player presses the Tactical Device button.
+        export function OnPortalGadgetLaserToggle(eventPlayer: mod.Player, eventBoolean: boolean): void;
 
         // This will trigger when a Raycast hits a target.
         export function OnRayCastHit(eventPlayer: mod.Player, eventPoint: mod.Vector, eventNormal: mod.Vector): void;

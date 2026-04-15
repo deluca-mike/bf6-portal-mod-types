@@ -75,6 +75,8 @@ declare namespace mod {
         Launcher_Smoke_Grenade,
         Launcher_Thermobaric_Grenade,
         Launcher_Unguided_Rocket,
+        Mask_Gas,
+        Mask_NVG,
         Melee_Combat_Knife,
         Melee_Hunting_Knife,
         Melee_Ice_Axe,
@@ -87,6 +89,7 @@ declare namespace mod {
         Misc_Demolition_Charge,
         Misc_Incendiary_Round_Shotgun,
         Misc_Laser_Designator,
+        Misc_PortalGadget,
         Misc_Sniper_Decoy,
         Misc_Supply_Pouch,
         Misc_Tracer_Dart,
@@ -128,9 +131,11 @@ declare namespace mod {
         Granite_MilitaryRnD,
         Granite_MilitaryStorage,
         Granite_TechCampus,
+        Granite_Underground,
         Limestone,
         Outskirts,
         Sand,
+        Subsurface,
         Tungsten,
     }
     export enum MoveSpeed {
@@ -250,6 +255,11 @@ declare namespace mod {
         Sprint,
         Zoom,
     }
+    export enum ResupplyTypes {
+        AmmoBox,
+        AmmoCrate,
+        SupplyBag,
+    }
     export enum ScoreboardType {
         CustomFFA,
         CustomTwoTeams,
@@ -260,6 +270,7 @@ declare namespace mod {
     export enum ScreenEffects {
         Saturated,
         Stealth,
+        VL7,
     }
     export enum SoldierClass {
         Assault,
@@ -270,6 +281,7 @@ declare namespace mod {
     export enum SoldierEffects {
         FreezeStatusEffect,
         HeatStatusEffect,
+        VL7Effect,
     }
     export enum SoldierStateBool {
         IsAISoldier,
@@ -313,6 +325,11 @@ declare namespace mod {
         Deploy,
         Spectating,
     }
+    export enum SpectatingGroup {
+        All,
+        Squad,
+        Team,
+    }
     export enum SpotStatus {
         SpotInBoth,
         SpotInMinimap,
@@ -353,6 +370,7 @@ declare namespace mod {
         Enum_PlayerDeathTypes,
         Enum_PlayerFilterTypes,
         Enum_RestrictedInputs,
+        Enum_ResupplyTypes,
         Enum_RuntimeSpawn_Abbasid,
         Enum_RuntimeSpawn_Aftermath,
         Enum_RuntimeSpawn_Badlands,
@@ -369,9 +387,11 @@ declare namespace mod {
         Enum_RuntimeSpawn_Granite_MilitaryStorage,
         Enum_RuntimeSpawn_Granite_ResidentialNorth,
         Enum_RuntimeSpawn_Granite_TechCenter,
+        Enum_RuntimeSpawn_Granite_Underground,
         Enum_RuntimeSpawn_Limestone,
         Enum_RuntimeSpawn_Outskirts,
         Enum_RuntimeSpawn_Sand,
+        Enum_RuntimeSpawn_Subsurface,
         Enum_RuntimeSpawn_Tungsten,
         Enum_ScoreboardType,
         Enum_ScreenEffects,
@@ -381,6 +401,7 @@ declare namespace mod {
         Enum_SoldierStateNumber,
         Enum_SoldierStateVector,
         Enum_SpawnModes,
+        Enum_SpectatingGroup,
         Enum_SpotStatus,
         Enum_Stance,
         Enum_StationaryEmplacements,
@@ -390,6 +411,7 @@ declare namespace mod {
         Enum_UIButtonEvent,
         Enum_UIDepth,
         Enum_UIImageType,
+        Enum_VehicleCategories,
         Enum_VehicleList,
         Enum_VehicleStateVector,
         Enum_VoiceOverEvents2D,
@@ -426,6 +448,7 @@ declare namespace mod {
         Vehicle,
         VehicleSpawner,
         VFX,
+        VL7Cloud,
         VO,
         WaypointPath,
         WeaponPackage,
@@ -476,12 +499,24 @@ declare namespace mod {
         SpawnBeacon,
         TEMP_PortalIcon,
     }
+    export enum VehicleCategories {
+        Air_All,
+        Air_Heli,
+        Air_Plane,
+        Ground_All,
+        Ground_Combat,
+        Ground_Transport,
+        Naval_All,
+    }
     export enum VehicleList {
         Abrams,
         AH64,
         AH6M,
+        AH6M_Pax,
         Cheetah,
         CV90,
+        DirtBike,
+        DirtBike_Pax,
         Eurocopter,
         F16,
         F22,
