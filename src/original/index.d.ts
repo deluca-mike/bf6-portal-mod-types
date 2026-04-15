@@ -153,7 +153,7 @@ declare namespace mod {
     // Clears the player's gadget instructions. (Only works for AI players)
     export function AIStopUsingGadget(player: Player): void;
 
-    // Sets the damage multiplier from AI players to actually players.
+    // Sets the damage multiplier from AI players to actual players.
     export function SetAIToHumanDamageModifier(damageMultiplier: number): void;
 
     // Finds or initializes an Array on a provided Variable, and stores a provided value in that Array at the specified index.
@@ -538,7 +538,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controling a capture point.
+    // Change the team controlling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.

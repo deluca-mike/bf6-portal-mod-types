@@ -922,7 +922,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controling a capture point.
+    // Change the team controlling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
