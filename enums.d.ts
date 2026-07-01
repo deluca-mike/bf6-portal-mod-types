@@ -1,4 +1,33 @@
 declare namespace mod {
+    export type Object =
+        | AreaTrigger
+        | Bomb
+        | CapturePoint
+        | EmplacementSpawner
+        | FixedCamera
+        | HQ
+        | InteractPoint
+        | LootSpawner
+        | MapSpecificFeature
+        | MCOM
+        | Player
+        | RingOfFire
+        | Sector
+        | SFX
+        | SpatialObject
+        | Spawner
+        | SpawnPoint
+        | Team
+        | Vehicle
+        | VehicleSpawner
+        | VFX
+        | VL7Cloud
+        | VO
+        | WaypointPath
+        | WorldIcon;
+    //------------------------
+    export const stringkeys: Any;
+    export const strings: Any;
     export enum AiInput {
         Crouch,
         FireWeapon,
@@ -26,6 +55,18 @@ declare namespace mod {
         CeramicArmor,
         NoArmor,
         SoftArmor,
+    }
+    export enum BombState {
+        Carried,
+        Defusing,
+        Dropped,
+        Inactive,
+        ObjectiveCompleted,
+        Planted,
+        Planting,
+        Resetting,
+        Spawned,
+        Unspawned,
     }
     export enum Cameras {
         FirstPerson,
@@ -110,6 +151,26 @@ declare namespace mod {
         Throwable_Stun_Grenade,
         Throwable_Throwing_Knife,
     }
+    export enum GameModeTicker {
+        None,
+        Ticker_Conquest,
+    }
+    export enum GolmudTrainMoveCommands {
+        MoveEast,
+        MoveWest,
+        Stop,
+    }
+    export enum GolmudTrainStopReason {
+        ReachedEastTerminal,
+        ReachedWestTerminal,
+        StoppedInTransit,
+    }
+    export enum GolmudTrainVariants {
+        MovingTrain,
+        None,
+        StaticTrain_Breakthrough,
+        StaticTrain_Rush,
+    }
     export enum InventorySlots {
         Callins,
         ClassGadget,
@@ -121,6 +182,10 @@ declare namespace mod {
         SecondaryWeapon,
         Throwable,
     }
+    export enum MCOMArmType {
+        Bomb,
+        Default,
+    }
     export enum Maps {
         Abbasid,
         Aftermath,
@@ -131,6 +196,7 @@ declare namespace mod {
         Dumbo,
         Eastwood,
         Firestorm,
+        GolmudRailway,
         Granite_ClubHouse,
         Granite_MainStreet,
         Granite_Marina,
@@ -140,6 +206,7 @@ declare namespace mod {
         Granite_Underground,
         Limestone,
         Outskirts,
+        Plaza,
         Sand,
         Subsurface,
         Tungsten,
@@ -289,6 +356,10 @@ declare namespace mod {
         AmmoCrate,
         SupplyBag,
     }
+    export enum ScoreCriteria {
+        HighestProgress,
+        LowestProgress,
+    }
     export enum ScoreboardType {
         CustomFFA,
         CustomTwoTeams,
@@ -297,6 +368,7 @@ declare namespace mod {
         Off,
     }
     export enum ScreenEffects {
+        Night,
         Saturated,
         Stealth,
         VL7,
@@ -316,6 +388,7 @@ declare namespace mod {
      * The SoldierStateBool enum.
      */
     export enum SoldierStateBool {
+        HasBomb,
         IsAISoldier,
         IsAlive,
         IsBeingRevived,
@@ -381,6 +454,7 @@ declare namespace mod {
     export enum Types {
         AreaTrigger,
         Array,
+        Bomb,
         Boolean,
         CapturePoint,
         DamageType,
@@ -388,12 +462,18 @@ declare namespace mod {
         EmplacementSpawner,
         Enum_AiInput,
         Enum_AmmoTypes,
+        Enum_BombState,
         Enum_Cameras,
         Enum_CustomNotificationSlots,
         Enum_Factions,
         Enum_Gadgets,
+        Enum_GameModeTicker,
+        Enum_GolmudTrainMoveCommands,
+        Enum_GolmudTrainStopReason,
+        Enum_GolmudTrainVariants,
         Enum_InventorySlots,
         Enum_Maps,
+        Enum_MCOMArmType,
         Enum_MoveSpeed,
         Enum_MusicEvents,
         Enum_MusicPackages,
@@ -413,6 +493,7 @@ declare namespace mod {
         Enum_RuntimeSpawn_Dumbo,
         Enum_RuntimeSpawn_Eastwood,
         Enum_RuntimeSpawn_FireStorm,
+        Enum_RuntimeSpawn_GolmudRailway,
         Enum_RuntimeSpawn_Granite_Downtown,
         Enum_RuntimeSpawn_Granite_Marina,
         Enum_RuntimeSpawn_Granite_MilitaryRnD,
@@ -422,10 +503,12 @@ declare namespace mod {
         Enum_RuntimeSpawn_Granite_Underground,
         Enum_RuntimeSpawn_Limestone,
         Enum_RuntimeSpawn_Outskirts,
+        Enum_RuntimeSpawn_Plaza,
         Enum_RuntimeSpawn_Sand,
         Enum_RuntimeSpawn_Subsurface,
         Enum_RuntimeSpawn_Tungsten,
         Enum_ScoreboardType,
+        Enum_ScoreCriteria,
         Enum_ScreenEffects,
         Enum_SoldierClass,
         Enum_SoldierEffects,
@@ -456,6 +539,7 @@ declare namespace mod {
         InteractPoint,
         LootMissionObjectManager,
         LootSpawner,
+        MapSpecificFeature,
         MCOM,
         Message,
         Number,
@@ -546,6 +630,7 @@ declare namespace mod {
         AH6M,
         AH6M_Pax,
         Cheetah,
+        Couch,
         CV90,
         DirtBike,
         DirtBike_Pax,

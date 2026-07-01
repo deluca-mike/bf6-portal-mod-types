@@ -35,11 +35,8 @@
 
 declare namespace mod {
     export const stringkeys: Any;
-
     export const strings: Any;
-
     export function Wait(n: number): Promise<void>;
-
     // Sets the value of a Variable.
     export function SetVariable(variable: Variable, value: Any): void;
 
@@ -155,7 +152,7 @@ declare namespace mod {
     // Clears the player's gadget instructions. (Only works for AI players)
     export function AIStopUsingGadget(player: Player): void;
 
-    // Sets the damage multiplier from AI players to actual players.
+    // Sets the damage multiplier from AI players to actualy players.
     export function SetAIToHumanDamageModifier(damageMultiplier: number): void;
 
     // Finds or initializes an Array on a provided Variable, and stores a provided value in that Array at the specified index.
@@ -281,6 +278,12 @@ declare namespace mod {
     // Sets CameraType for provided Player. CameraIndex optional.
     export function SetCameraTypeForPlayer(player: Player, cameraType: Cameras, cameraIndex: number): void;
 
+    // Set whether collision is enabled for the Free Camera. (Default true)
+    export function SetFreeCameraCollisionForAll(enabled: boolean): void;
+
+    // Set whether collision is enabled for the Free Camera. (Default true)
+    export function SetFreeCameraCollisionForPlayer(player: Player, enabled: boolean): void;
+
     // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
     export function SetSpectatingFiltersForAll(
         group: SpectatingGroup,
@@ -294,6 +297,21 @@ declare namespace mod {
         group: SpectatingGroup,
         ownSquadOnly: boolean,
         ownTeamOnly: boolean
+    ): void;
+
+    // Set the FollowDistance, FollowHeight, and ShoulderOffset for the Third Person Camera. (Default 2.5, 0.2, 0.6)
+    export function SetThirdPersonCameraPositionForAll(
+        followDistance: number,
+        followHeight: number,
+        shoulderOffset: number
+    ): void;
+
+    // Set the FollowDistance, FollowHeight, and ShoulderOffset for the Third Person Camera. (Default 2.5, 0.2, 0.6)
+    export function SetThirdPersonCameraPositionForPlayer(
+        player: Player,
+        followDistance: number,
+        followHeight: number,
+        shoulderOffset: number
     ): void;
 
     // Enables or disables a player-specific screen effect.
@@ -341,7 +359,7 @@ declare namespace mod {
     // Sets the delay after destruction before an emplacement automatically respawn, if the feature is activated.
     export function SetEmplacementSpawnerRespawnTime(emplacementSpawner: EmplacementSpawner, respawnTime: number): void;
 
-    // Sets the distance its emplacement spawner for an emplacement to consider itself abandoned.
+    // Sets the distance its enplacement spawner for an emplacement to consider itself abandoned.
     export function SetEmplacementSpawnerSpawnerRadius(
         emplacementSpawner: EmplacementSpawner,
         keepAliveSpawnerRadius: number
@@ -358,6 +376,9 @@ declare namespace mod {
         emplacementSpawner: EmplacementSpawner,
         emplacementType: StationaryEmplacements
     ): void;
+
+    // Sends Portal Log to the admin client of the current session when hosting via "Host" (Dedicated Server). For "Host Locally," Portal Log is always available locally, so this will do nothing. Writes to PortalLog.txt on the admin's client. If admin doesn't exist, this will do nothing. Quota applies for valid log sends per session.
+    export function SendPortalLogToAdmin(): void;
 
     // Force spawns all players in the deploy screen.
     export function DeployAllPlayers(): void;
@@ -395,6 +416,12 @@ declare namespace mod {
     // Enables of disables friendly fire.
     export function SetFriendlyFire(enableFriendlyFire: boolean): void;
 
+    // Sets the type of criteria used to check the score for winning teams.
+    export function SetGameModeCriteria(criteria: ScoreCriteria): void;
+
+    // Sets the Initial Score for teams.
+    export function SetGameModeInitialScore(team: Team, initialscore: number): void;
+
     // Sets the gamemode score of the provided Player or Team.
     export function SetGameModeScore(team: Team, newScore: number): void;
 
@@ -408,13 +435,33 @@ declare namespace mod {
     export function SetGameModeTimeLimit(newTimeLimit: number): void;
 
     // Sets a HQ to a specific Team.
-    export function SetHQTeam(hq: HQ, teamID: Team): void;
+    export function SetHQTeam(hq: HQ, team: Team): void;
 
     // Sets the damage dealt by the RingOfFire to players caught.
     export function SetRingOfFireDamageAmount(ringOfFireId: RingOfFire, ringOfFireDamageAmount: number): void;
 
     // Sets the duration the RingOfFire remains stable before Shrinking again.
     export function SetRingOfFireStableTime(ringOfFireId: RingOfFire, ringOfFireStableTime: number): void;
+
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    export function ApplyAreaImpulseAndDamage(
+        center: Vector,
+        radius: number,
+        impulseStrength: number,
+        damageAmount: number
+    ): void;
+
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    export function ApplyAreaImpulseAndDamage(
+        center: Vector,
+        radius: number,
+        impulseStrength: number,
+        damageAmount: number,
+        impulseDirection: Vector
+    ): void;
+
+    // Apply impulse  with given world position, direction and magnitude
+    export function ApplyImpulse(vehicle: Vehicle, worldPosition: Vector, direction: Vector, magnitude: number): void;
 
     // Balances Team1 and Team2 while maintaining squad compositions, requires matching team and squad capacities.
     export function AutoBalanceTeams(): void;
@@ -428,13 +475,13 @@ declare namespace mod {
     // Enables or disables an interact point.
     export function EnableInteractPoint(interactPoint: InteractPoint, enable: boolean): void;
 
-    // Enables or disables a spatial object.
-    export function EnableSpatialObject(spatialObject: SpatialObject, enable: boolean): void;
+    // Sends a move instruction to the Golmud Railway train.
+    export function GolmudTrainSendMoveCommand(moveCommand: GolmudTrainMoveCommands): void;
 
-    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(player: Player, start: Vector, stop: Vector): void;
 
-    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(start: Vector, stop: Vector): void;
 
     // Sets the target player's team.
@@ -500,7 +547,7 @@ declare namespace mod {
     export function SetSoldierEffect(player: Player, soldierEffects: SoldierEffects, isEnabled: boolean): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetPlayer: Player, duration: number, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetplayer: Player, duration: number, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(
@@ -511,13 +558,13 @@ declare namespace mod {
     ): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetPlayer: Player, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetplayer: Player, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(targetPlayer: Player, spotterPlayer: Player, duration: number): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetPlayer: Player, duration: number): void;
+    export function SpotTarget(targetplayer: Player, duration: number): void;
 
     // Gradually modifies the value of a Variable at a specified rate (value/second) until it reaches the provided limit.
     export function ChaseVariableAtRate(variable: Variable, limit: number, deltaPerSecond: number): void;
@@ -540,7 +587,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controlling a capture point.
+    // Change the team controling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
@@ -551,6 +598,33 @@ declare namespace mod {
 
     // Enables or disables the provided objective.
     export function EnableGameModeObjective(objective: CapturePoint | HQ | Sector | MCOM, enable: boolean): void;
+
+    // Forces the bomb drop to be dropped from its carrier.
+    export function ForceBombDrop(bomb: Bomb): void;
+
+    // Force resets the bomb to its initial location.
+    export function ForceBombReset(bomb: Bomb): void;
+
+    // Forces the bomb to spawn at the original location.
+    export function ForceBombSpawn(bomb: Bomb): void;
+
+    // Forces the bomb to unspawn.
+    export function ForceBombUnspawn(bomb: Bomb): void;
+
+    // Gives the Bomb to the chosen Player.
+    export function GiveBombToPlayer(player: Player, bomb: Bomb): void;
+
+    // Sets the fuse time for when the bomb is dropped to the ground before it blows up.
+    export function SetBombDropFuseTime(bomb: Bomb, dropfusetime: number): void;
+
+    // Changes the Team that can pick-up the bomb.
+    export function SetBombTeam(bomb: Bomb, team: Team): void;
+
+    // Sets the world Icon global visibility, if set to enabled all teams can see the bomb carrier Icon, if set to disabled only the attacking team can.
+    export function SetBombWorldIconGlobalVisibility(bomb: Bomb, Enabled: boolean): void;
+
+    // Sets the MCOM arm type, if set to default anyone on the opposing team can arm it, otherwise only the bomb carrier can.
+    export function SetMCOMArmType(mcom: MCOM, mcomarmtype: MCOMArmType): void;
 
     // Determines the time needed by MCOM.
     export function SetMCOMFuseTime(mCOM: MCOM, fuseTime: number): void;
@@ -640,7 +714,7 @@ declare namespace mod {
     export function ForceManDown(player: Player): void;
 
     // Resupplies the target player using a provided ResupplyType.
-    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
+    export function Resupply(player: Player, ressuplyType: ResupplyTypes): void;
 
     // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;
@@ -707,6 +781,9 @@ declare namespace mod {
 
     // Stops the Over Time movement for the provided Object if one is active
     export function StopActiveMovementForObject(object: mod.Object): void;
+
+    // Sets the type of HUD ticker to use.
+    export function SetHUDTicker(ticker: GameModeTicker): void;
 
     // Attaches a new UI Icon Widget to an object.
     export function AddUIIcon(
@@ -1524,6 +1601,8 @@ declare namespace mod {
     // Forces the specified player into the target vehicle at the provided seat number.  If the provided seat is -1, that player will be forced into the first available seat.
     export function ForcePlayerToSeat(player: Player, vehicle: Vehicle, seatNumber: number): void;
 
+    //------------------------
+
     // Get argument of subroutine at given index.
     export function GetArgument(subroutineArgIndex: number): Any;
 
@@ -1614,6 +1693,9 @@ declare namespace mod {
     // Returns the emplacement spawner object corresponding to the provided id.
     export function GetEmplacementSpawner(number: number): EmplacementSpawner;
 
+    // Returns the World Position of the Golmud Moving Train. (Only on Golmud Railway map)
+    export function GetGolmudTrainLocation(): Vector;
+
     // Returns the interact point object corresponding to the provided id.
     export function GetInteractPoint(interactPointNumber: number): InteractPoint;
 
@@ -1662,7 +1744,9 @@ declare namespace mod {
             | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Granite_TechCenter
             | RuntimeSpawn_Granite_Underground
-            | RuntimeSpawn_Sand,
+            | RuntimeSpawn_Sand
+            | RuntimeSpawn_GolmudRailway
+            | RuntimeSpawn_Plaza,
         position: Vector,
         rotation: Vector,
         scale: Vector
@@ -1692,10 +1776,18 @@ declare namespace mod {
             | RuntimeSpawn_Granite_ResidentialNorth
             | RuntimeSpawn_Granite_TechCenter
             | RuntimeSpawn_Granite_Underground
-            | RuntimeSpawn_Sand,
+            | RuntimeSpawn_Sand
+            | RuntimeSpawn_GolmudRailway
+            | RuntimeSpawn_Plaza,
         position: Vector,
         rotation: Vector
     ): Any;
+
+    // Returns whether a value is undefined, such as when a function cannot return a valid value.
+    export function IsUndefined(value: Any): boolean;
+
+    // Returns whether a value is defined and if object reference is valid for object values.
+    export function IsValid(value: Any): boolean;
 
     // Returns a boolean value based on whether both of the provided inputs return true.
     export function And(boolean0: boolean, boolean1: boolean): boolean;
@@ -1889,11 +1981,20 @@ declare namespace mod {
     // Returns the HQ object corresponding to the provided id.
     export function GetHQ(number: number): HQ;
 
+    // Returns the Bomb object corresponding to the provided id.
+    export function GetBomb(number: number): Bomb;
+
     // Returns the MCOM object corresponding to the provided id.
     export function GetMCOM(number: number): MCOM;
 
     // Returns the sector object corresponding to the provided id.
     export function GetSector(number: number): Sector;
+
+    // Return the average  Portal processing frame time
+    export function GetPortalAverageFrameTime(): number;
+
+    // Return average Server side frame time
+    export function GetServerAverageFrameTime(): number;
 
     // Returns an array of all players within a game.
     export function AllPlayers(): Array;

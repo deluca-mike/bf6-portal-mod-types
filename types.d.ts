@@ -30,6 +30,11 @@ declare namespace mod {
      */
     export type Array = { _opaque: typeof ArraySymbol };
 
+    // export type Bomb = never;
+    // export type Bomb = Any;
+    const BombSymbol: unique symbol;
+    export type Bomb = { _opaque: typeof BombSymbol };
+
     // export type CapturePoint = never;
     // export type CapturePoint = Any;
     const CapturePointSymbol: unique symbol;
@@ -106,6 +111,11 @@ declare namespace mod {
      * Can be spawned at runtime with `mod.SpawnObject(RuntimeSpawn_Common.MCOM, ...args) as mod.MCOM`.
      */
     export type MCOM = { _opaque: typeof MCOMSymbol };
+
+    // export type MapSpecificFeature = never;
+    // export type MapSpecificFeature = Any;
+    const MapSpecificFeatureSymbol: unique symbol;
+    export type MapSpecificFeature = { _opaque: typeof MapSpecificFeatureSymbol };
 
     // export type Message = never;
     // export type Message = Any;
@@ -327,12 +337,14 @@ declare namespace mod {
      */
     export type Object =
         | AreaTrigger
+        | Bomb
         | CapturePoint
         | EmplacementSpawner
         | FixedCamera
         | HQ
         | InteractPoint
         | LootSpawner
+        | MapSpecificFeature
         | MCOM
         | Player
         | RingOfFire

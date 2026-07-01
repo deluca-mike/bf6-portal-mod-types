@@ -4,40 +4,117 @@
 
 declare namespace mod {
     namespace EventHandlerSignatures {
+        /**
+         * This will trigger per server tick
+         */
         export function OngoingGlobal(): void;
 
+        /**
+         * This will trigger per server tick for each AreaTrigger.
+         * @param eventAreaTrigger - The AreaTrigger that is being processed.
+         */
         export function OngoingAreaTrigger(eventAreaTrigger: mod.AreaTrigger): void;
 
+        /**
+         * This will trigger per server tick for each Bomb.
+         * @param eventBomb - The Bomb that is being processed.
+         */
+        export function OngoingBomb(eventBomb: mod.Bomb): void;
+
+        /**
+         * This will trigger per server tick for each CapturePoint.
+         * @param eventCapturePoint - The CapturePoint that is being processed.
+         */
         export function OngoingCapturePoint(eventCapturePoint: mod.CapturePoint): void;
 
+        /**
+         * This will trigger per server tick for each EmplacementSpawner.
+         * @param eventEmplacementSpawner - The EmplacementSpawner that is being processed.
+         */
         export function OngoingEmplacementSpawner(eventEmplacementSpawner: mod.EmplacementSpawner): void;
 
+        /**
+         * This will trigger per server tick for each HQ.
+         * @param eventHQ - The HQ that is being processed.
+         */
         export function OngoingHQ(eventHQ: mod.HQ): void;
 
+        /**
+         * This will trigger per server tick for each InteractPoint.
+         * @param eventInteractPoint - The InteractPoint that is being processed.
+         */
         export function OngoingInteractPoint(eventInteractPoint: mod.InteractPoint): void;
 
+        /**
+         * This will trigger per server tick for each LootSpawner.
+         * @param eventLootSpawner - The LootSpawner that is being processed.
+         */
         export function OngoingLootSpawner(eventLootSpawner: mod.LootSpawner): void;
 
+        /**
+         * This will trigger per server tick for each MCOM.
+         * @param eventMCOM - The MCOM that is being processed.
+         */
         export function OngoingMCOM(eventMCOM: mod.MCOM): void;
 
+        /**
+         * This will trigger per server tick for each Player.
+         * @param eventPlayer - The Player that is being processed.
+         */
         export function OngoingPlayer(eventPlayer: mod.Player): void;
 
+        /**
+         * This will trigger per server tick for each RingOfFire.
+         * @param eventRingOfFire - The RingOfFire that is being processed.
+         */
         export function OngoingRingOfFire(eventRingOfFire: mod.RingOfFire): void;
 
+        /**
+         * This will trigger per server tick for each Sector.
+         * @param eventSector - The Sector that is being processed.
+         */
         export function OngoingSector(eventSector: mod.Sector): void;
 
+        /**
+         * This will trigger per server tick for each Spawner.
+         * @param eventSpawner - The Spawner that is being processed.
+         */
         export function OngoingSpawner(eventSpawner: mod.Spawner): void;
 
+        /**
+         * This will trigger per server tick for each SpawnPoint.
+         * @param eventSpawnPoint - The SpawnPoint that is being processed.
+         */
         export function OngoingSpawnPoint(eventSpawnPoint: mod.SpawnPoint): void;
 
+        /**
+         * This will trigger per server tick for each Team.
+         * @param eventTeam - The Team that is being processed.
+         */
         export function OngoingTeam(eventTeam: mod.Team): void;
 
+        /**
+         * This will trigger per server tick for each Vehicle.
+         * @param eventVehicle - The Vehicle that is being processed.
+         */
         export function OngoingVehicle(eventVehicle: mod.Vehicle): void;
 
+        /**
+         * This will trigger per server tick for each VehicleSpawner.
+         * @param eventVehicleSpawner - The VehicleSpawner that is being processed.
+         */
         export function OngoingVehicleSpawner(eventVehicleSpawner: mod.VehicleSpawner): void;
 
+        /**
+         * This will trigger per server tick for each WaypointPath.
+         * @param eventWaypointPath - The WaypointPath that is being processed.
+         */
         export function OngoingWaypointPath(eventWaypointPath: mod.WaypointPath): void;
 
+        /**
+         * This will trigger per server tick for each WorldIcon.
+         * @param eventWorldIcon - The WorldIcon that is being processed.
+         */
         export function OngoingWorldIcon(eventWorldIcon: mod.WorldIcon): void;
 
         // This will trigger when an AI Soldier stops trying to reach a destination.
@@ -64,6 +141,15 @@ declare namespace mod {
         // This will trigger when an AI Soldier finishes following a waypoint.
         export function OnAIWaypointIdleSucceeded(eventPlayer: mod.Player): void;
 
+        // This will trigger when a player drops the bomb.
+        export function OnBombDropped(eventBomb: mod.Bomb, eventPlayer: mod.Player): void;
+
+        // This will trigger when a player picks up a bomb.
+        export function OnBombPickedUp(eventBomb: mod.Bomb, eventPlayer: mod.Player): void;
+
+        // This will trigger when a bomb changes state.
+        export function OnBombStateChanged(eventBomb: mod.Bomb, eventBombState: mod.BombState): void;
+
         // This will trigger when a team takes control of a CapturePoint.
         export function OnCapturePointCaptured(eventCapturePoint: mod.CapturePoint): void;
 
@@ -78,6 +164,9 @@ declare namespace mod {
 
         // This will trigger at the start of the gamemode.
         export function OnGameModeStarted(): void;
+
+        // This will trigger when the Golmud train stops.
+        export function OnGolmudTrainStopped(eventGolmudTrainStopReason: mod.GolmudTrainStopReason): void;
 
         // This will trigger when a Player is forced into the mandown state.
         export function OnMandown(eventPlayer: mod.Player, eventOtherPlayer: mod.Player): void;

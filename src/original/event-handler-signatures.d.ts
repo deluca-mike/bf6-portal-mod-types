@@ -8,6 +8,8 @@ declare namespace mod {
 
         export function OngoingAreaTrigger(eventAreaTrigger: mod.AreaTrigger): void;
 
+        export function OngoingBomb(eventBomb: mod.Bomb): void;
+
         export function OngoingCapturePoint(eventCapturePoint: mod.CapturePoint): void;
 
         export function OngoingEmplacementSpawner(eventEmplacementSpawner: mod.EmplacementSpawner): void;
@@ -64,6 +66,15 @@ declare namespace mod {
         // This will trigger when an AI Soldier finishes following a waypoint.
         export function OnAIWaypointIdleSucceeded(eventPlayer: mod.Player): void;
 
+        // This will trigger when a player drops the bomb.
+        export function OnBombDropped(eventBomb: mod.Bomb, eventPlayer: mod.Player): void;
+
+        // This will trigger when a player picks up a bomb.
+        export function OnBombPickedUp(eventBomb: mod.Bomb, eventPlayer: mod.Player): void;
+
+        // This will trigger when a bomb changes state.
+        export function OnBombStateChanged(eventBomb: mod.Bomb, eventBombState: mod.BombState): void;
+
         // This will trigger when a team takes control of a CapturePoint.
         export function OnCapturePointCaptured(eventCapturePoint: mod.CapturePoint): void;
 
@@ -78,6 +89,9 @@ declare namespace mod {
 
         // This will trigger at the start of the gamemode.
         export function OnGameModeStarted(): void;
+
+        // This will trigger when the Golmud train stops.
+        export function OnGolmudTrainStopped(eventGolmudTrainStopReason: mod.GolmudTrainStopReason): void;
 
         // This will trigger when a Player is forced into the mandown state.
         export function OnMandown(eventPlayer: mod.Player, eventOtherPlayer: mod.Player): void;

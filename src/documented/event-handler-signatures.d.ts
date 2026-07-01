@@ -55,5 +55,118 @@ declare namespace documentedMod {
          * @param eventNumber - The id of the player that left the game.
          */
         export function OnPlayerLeaveGame(eventNumber: number): void;
+
+        /**
+         * This will trigger per server tick
+         */
+        export function OngoingGlobal(): void;
+
+        /**
+         * This will trigger per server tick for each AreaTrigger.
+         * @param eventAreaTrigger - The AreaTrigger that is being processed.
+         */
+        export function OngoingAreaTrigger(eventAreaTrigger: mod.AreaTrigger): void;
+
+        /**
+         * This will trigger per server tick for each Bomb.
+         * @param eventBomb - The Bomb that is being processed.
+         */
+        export function OngoingBomb(eventBomb: mod.Bomb): void;
+
+        /**
+         * This will trigger per server tick for each CapturePoint.
+         * @param eventCapturePoint - The CapturePoint that is being processed.
+         */
+        export function OngoingCapturePoint(eventCapturePoint: mod.CapturePoint): void;
+
+        /**
+         * This will trigger per server tick for each EmplacementSpawner.
+         * @param eventEmplacementSpawner - The EmplacementSpawner that is being processed.
+         */
+        export function OngoingEmplacementSpawner(eventEmplacementSpawner: mod.EmplacementSpawner): void;
+
+        /**
+         * This will trigger per server tick for each HQ.
+         * @param eventHQ - The HQ that is being processed.
+         */
+        export function OngoingHQ(eventHQ: mod.HQ): void;
+
+        /**
+         * This will trigger per server tick for each InteractPoint.
+         * @param eventInteractPoint - The InteractPoint that is being processed.
+         */
+        export function OngoingInteractPoint(eventInteractPoint: mod.InteractPoint): void;
+
+        /**
+         * This will trigger per server tick for each LootSpawner.
+         * @param eventLootSpawner - The LootSpawner that is being processed.
+         */
+        export function OngoingLootSpawner(eventLootSpawner: mod.LootSpawner): void;
+
+        /**
+         * This will trigger per server tick for each MCOM.
+         * @param eventMCOM - The MCOM that is being processed.
+         */
+        export function OngoingMCOM(eventMCOM: mod.MCOM): void;
+
+        /**
+         * This will trigger per server tick for each Player.
+         * @param eventPlayer - The Player that is being processed.
+         */
+        export function OngoingPlayer(eventPlayer: mod.Player): void;
+
+        /**
+         * This will trigger per server tick for each RingOfFire.
+         * @param eventRingOfFire - The RingOfFire that is being processed.
+         */
+        export function OngoingRingOfFire(eventRingOfFire: mod.RingOfFire): void;
+
+        /**
+         * This will trigger per server tick for each Sector.
+         * @param eventSector - The Sector that is being processed.
+         */
+        export function OngoingSector(eventSector: mod.Sector): void;
+
+        /**
+         * This will trigger per server tick for each Spawner.
+         * @param eventSpawner - The Spawner that is being processed.
+         */
+        export function OngoingSpawner(eventSpawner: mod.Spawner): void;
+
+        /**
+         * This will trigger per server tick for each SpawnPoint.
+         * @param eventSpawnPoint - The SpawnPoint that is being processed.
+         */
+        export function OngoingSpawnPoint(eventSpawnPoint: mod.SpawnPoint): void;
+
+        /**
+         * This will trigger per server tick for each Team.
+         * @param eventTeam - The Team that is being processed.
+         */
+        export function OngoingTeam(eventTeam: mod.Team): void;
+
+        /**
+         * This will trigger per server tick for each Vehicle.
+         * @param eventVehicle - The Vehicle that is being processed.
+         */
+        export function OngoingVehicle(eventVehicle: mod.Vehicle): void;
+
+        /**
+         * This will trigger per server tick for each VehicleSpawner.
+         * @param eventVehicleSpawner - The VehicleSpawner that is being processed.
+         */
+        export function OngoingVehicleSpawner(eventVehicleSpawner: mod.VehicleSpawner): void;
+
+        /**
+         * This will trigger per server tick for each WaypointPath.
+         * @param eventWaypointPath - The WaypointPath that is being processed.
+         */
+        export function OngoingWaypointPath(eventWaypointPath: mod.WaypointPath): void;
+
+        /**
+         * This will trigger per server tick for each WorldIcon.
+         * @param eventWorldIcon - The WorldIcon that is being processed.
+         */
+        export function OngoingWorldIcon(eventWorldIcon: mod.WorldIcon): void;
     }
 }
