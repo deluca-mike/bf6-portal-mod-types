@@ -39,11 +39,13 @@ declare namespace mod {
      * used with the `mod.Message` function to construct a message object that displays the referenced string.
      */
     export const stringkeys: Any;
+
     /**
      * A dictionary of strings. Values are the actual strings in the `strings.json` file, and can only be used in code
      * to compare or log to the console. They cannot be used with the `mod.Message` function.
      */
     export const strings: Any;
+
     /**
      * Adds a synchronous/awaitable execution delay in seconds.
      * @param n - The number of seconds to wait (can be fractional).
@@ -1144,7 +1146,7 @@ declare namespace mod {
      * @param player - The player to resupply.
      * @param resupplyType - The type of resupply to perform.
      */
-    export function Resupply(player: Player, ressuplyType: ResupplyTypes): void;
+    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
 
     // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;

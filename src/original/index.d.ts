@@ -716,7 +716,7 @@ declare namespace mod {
     export function ForceManDown(player: Player): void;
 
     // Resupplies the target player using a provided ResupplyType.
-    export function Resupply(player: Player, ressuplyType: ResupplyTypes): void;
+    export function Resupply(player: Player, resupplyType: ResupplyTypes): void;
 
     // Sets the max health of a target player from 1 to 500.  The value will be multiplied by the target's max health multiplier.
     export function SetPlayerMaxHealth(player: Player, maxHealth: number): void;
