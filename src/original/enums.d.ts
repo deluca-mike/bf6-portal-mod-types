@@ -1,6 +1,4 @@
 declare namespace mod {
-    export const stringkeys: Any;
-    export const strings: Any;
     export enum AiInput {
         Crouch,
         FireWeapon,
