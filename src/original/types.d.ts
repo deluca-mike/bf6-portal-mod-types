@@ -1,7 +1,9 @@
 declare namespace mod {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export type Any = any;
+
     export type SoldierKits = Any;
+
     // export type AreaTrigger = never;
     // export type AreaTrigger = Any;
     const AreaTriggerSymbol: unique symbol;

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.3.2.0
+// Version: 1.3.3.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +25,7 @@
 /// <reference path="./runtime-spawn-enums/granite-underground.d.ts" />
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
+/// <reference path="./runtime-spawn-enums/plaza.d.ts" />
 /// <reference path="./runtime-spawn-enums/sand.d.ts" />
 /// <reference path="./runtime-spawn-enums/subsurface.d.ts" />
 /// <reference path="./runtime-spawn-enums/tungsten.d.ts" />
@@ -362,7 +363,7 @@ declare namespace mod {
     // Sets the delay after destruction before an emplacement automatically respawn, if the feature is activated.
     export function SetEmplacementSpawnerRespawnTime(emplacementSpawner: EmplacementSpawner, respawnTime: number): void;
 
-    // Sets the distance its enplacement spawner for an emplacement to consider itself abandoned.
+    // Sets the distance its emplacement spawner for an emplacement to consider itself abandoned.
     export function SetEmplacementSpawnerSpawnerRadius(
         emplacementSpawner: EmplacementSpawner,
         keepAliveSpawnerRadius: number
@@ -423,7 +424,7 @@ declare namespace mod {
     export function SetGameModeCriteria(criteria: ScoreCriteria): void;
 
     // Sets the Initial Score for teams.
-    export function SetGameModeInitialScore(team: Team, initialscore: number): void;
+    export function SetGameModeInitialScore(team: Team, initialScore: number): void;
 
     // Sets the gamemode score of the provided Player or Team.
     export function SetGameModeScore(team: Team, newScore: number): void;
@@ -481,10 +482,10 @@ declare namespace mod {
     // Sends a move instruction to the Golmud Railway train.
     export function GolmudTrainSendMoveCommand(moveCommand: GolmudTrainMoveCommands): void;
 
-    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(player: Player, start: Vector, stop: Vector): void;
 
-    // Request the system to evaluate if a straight line between two points is interupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
+    // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(start: Vector, stop: Vector): void;
 
     // Sets the target player's team.
@@ -618,7 +619,7 @@ declare namespace mod {
     export function GiveBombToPlayer(player: Player, bomb: Bomb): void;
 
     // Sets the fuse time for when the bomb is dropped to the ground before it blows up.
-    export function SetBombDropFuseTime(bomb: Bomb, dropfusetime: number): void;
+    export function SetBombDropFuseTime(bomb: Bomb, dropFuseTime: number): void;
 
     // Changes the Team that can pick-up the bomb.
     export function SetBombTeam(bomb: Bomb, team: Team): void;
@@ -627,7 +628,7 @@ declare namespace mod {
     export function SetBombWorldIconGlobalVisibility(bomb: Bomb, Enabled: boolean): void;
 
     // Sets the MCOM arm type, if set to default anyone on the opposing team can arm it, otherwise only the bomb carrier can.
-    export function SetMCOMArmType(mcom: MCOM, mcomarmtype: MCOMArmType): void;
+    export function SetMCOMArmType(mcom: MCOM, mcomArmType: MCOMArmType): void;
 
     // Determines the time needed by MCOM.
     export function SetMCOMFuseTime(mCOM: MCOM, fuseTime: number): void;
