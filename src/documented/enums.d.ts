@@ -277,6 +277,33 @@ declare namespace documentedMod {
          * Looping track.
          */
         Gauntlet_WonOperation_Loop,
+        /**
+         * Clears the queue of tracks. This is the only way to do so. Note, playing a track does not clear it out of the
+         * queue, as you may want to loop your queued tracks.
+         */
+        Radio_ClearQueue,
+        /**
+         * Skips to the next track in the queue. What will happen at the end of your queue depends on
+         * `mod.MusicParams.Radio_ContinueQueueOnTrackEnd` and `mod.MusicParams.Radio_LoopQueuedTracks`.
+         */
+        Radio_NextQueuedTrack,
+        /**
+         * Starts playing the queued tracks in the currently selected station. If the queue is empty, nothing will play.
+         * Controlled by the following states (via `mod.SetMusicParam()`):
+         *   - `mod.MusicParams.Radio_Channel`: You must select one channel and queue up tracks within it.
+         *                                      Channels are listed in the `MusicParams` section.
+         *   - `mod.MusicParams.Radio_Biome`: If you choose the biome channel
+         *                                    (`mod.SetMusicParam(mod.MusicParams.Radio_Channel, 4)`), you have several
+         *                                    biomes to choose from, detailed in the `MusicParams` section.
+         *   - `mod.MusicParams.Radio_QueueTrackNumber`: You must queue which songs you'd like to hear. Number of
+         *                                               available tracks is detailed in the `MusicParams` section.
+         */
+        Radio_Play,
+        /**
+         * Stops playing the queued track. Playing again will restart the same song from the beginning (i.e. this is not
+         * a pause function).
+         */
+        Radio_Stop,
     }
 
     /**
@@ -295,6 +322,10 @@ declare namespace documentedMod {
          * The Gauntlet music package.
          */
         Gauntlet,
+        /**
+         * The Radio music package.
+         */
+        Radio,
     }
 
     /**
@@ -357,6 +388,69 @@ declare namespace documentedMod {
          * mindful of not blasting people's ears out.
          */
         Gauntlet_Amplitude,
+        /**
+         * Loudness of Radio music events, represented as a multiplier. 0 is silent, 1 is the full default volume.
+         * This parameter is clamped from 0 to 3, so if you wanted, you can play the music at triple volume. Please be
+         * mindful of not blasting people's ears out.
+         */
+        Radio_Amplitude,
+        /**
+         * If `Radio_Channel` is set to channel 4, this is used to select which biome's radio station to queue tracks
+         * from. The tracks may not necessarily be from the country or region listed in the biome name, but rather are
+         * simply the tracks you hear in radios in maps set in these biomes.
+         * You have access to the following biomes:
+         *   - 0: Gibraltar
+         *   - 1: Tajikistan
+         *   - 2: Egypt
+         *   - 3: US - West Coast
+         *   - 4: US - East Coast
+         *   - 5: Bulgaria
+         *   - 6: Turkmenistan
+         */
+        Radio_Biome,
+        /**
+         * Sets the channel from which you will be queueing tracks. There may be tracks whose genres don't fit the labels
+         * below. You have access to the following channels (the BF Pro channel is not available through the Portal music
+         * system):
+         *   - 0: Hip Hop
+         *   - 1: Rock
+         *   - 2: BF Themes
+         *   - 3: Reggaeton
+         *   - 4: Biome-specific (selected via `Radio_Biome`)
+         *   - 5: Classical
+         *   - 6: Pop
+         */
+        Radio_Channel,
+        /**
+         * If 1, when the current song is done, the next queued song will start. If 0, the radio will auto-stop. Playing the
+         * radio again after a song ends will play the next queued song.
+         */
+        Radio_ContinueQueueOnTrackEnd,
+        /**
+         * If 1, when the last queued song is done, the song at the start of the queue will start. If 0, the radio will
+         * auto-stop. Playing the radio again after a queued list ends will go back and play the first queued song.
+         */
+        Radio_LoopQueuedTracks,
+        /**
+         * Select which track to add next in the queue. The queue is empty by default, and no track will play until you
+         * queue up tracks. Here are the track lengths of each station (a station that has 17 tracks are indexed 0
+         * through 16):
+         *   - Channel 0: 17 tracks
+         *   - Channel 1: 18 tracks
+         *   - Channel 2: 10 tracks
+         *   - Channel 3: 2 tracks
+         *   - Channel 4: Biome-specific:
+         *     - Biome 0: 18 tracks
+         *     - Biome 1: 16 tracks
+         *     - Biome 2: 16 tracks
+         *     - Biome 3: 19 tracks
+         *     - Biome 4: 18 tracks
+         *     - Biome 5: 2 tracks
+         *     - Biome 6: 18 tracks
+         *   - Channel 5: 32 tracks
+         *   - Channel 6: 15 tracks
+         */
+        Radio_QueueTrackNumber,
     }
 
     /**
