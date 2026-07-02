@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.3.1.0
+// Version: 1.3.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -15,6 +15,7 @@
 /// <reference path="./runtime-spawn-enums/dumbo.d.ts" />
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
+/// <reference path="./runtime-spawn-enums/golmud-railway.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-downtown.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-marina.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-military-rnd.d.ts" />
@@ -1222,7 +1223,7 @@ declare namespace mod {
         parentObject: mod.Object,
         image: WorldIconImages,
         verticalOffset: number,
-        iconColour: Vector,
+        iconColor: Vector,
         iconText: Message,
         visibility: Player | Team
     ): void;
@@ -1232,7 +1233,7 @@ declare namespace mod {
         parentObject: mod.Object,
         image: WorldIconImages,
         verticalOffset: number,
-        iconColour: Vector,
+        iconColor: Vector,
         iconText: Message
     ): void;
 

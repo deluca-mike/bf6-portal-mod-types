@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.3.1.0
+// Version: 1.3.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -15,6 +15,7 @@
 /// <reference path="./runtime-spawn-enums/dumbo.d.ts" />
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
+/// <reference path="./runtime-spawn-enums/golmud-railway.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-downtown.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-marina.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-military-rnd.d.ts" />
@@ -154,7 +155,7 @@ declare namespace mod {
     // Clears the player's gadget instructions. (Only works for AI players)
     export function AIStopUsingGadget(player: Player): void;
 
-    // Sets the damage multiplier from AI players to actualy players.
+    // Sets the damage multiplier from AI players to actually players.
     export function SetAIToHumanDamageModifier(damageMultiplier: number): void;
 
     // Finds or initializes an Array on a provided Variable, and stores a provided value in that Array at the specified index.
@@ -595,7 +596,7 @@ declare namespace mod {
     // Sets the capture time multiplier for target capture point to the provided number.
     export function SetMaxCaptureMultiplier(capturePoint: CapturePoint, multiplier: number): void;
 
-    // Enables or disables a headquater.
+    // Enables or disables a headquarter.
     export function EnableHQ(hq: HQ, enable: boolean): void;
 
     // Enables or disables the provided objective.
@@ -792,7 +793,7 @@ declare namespace mod {
         parentObject: mod.Object,
         image: WorldIconImages,
         verticalOffset: number,
-        iconColour: Vector,
+        iconColor: Vector,
         iconText: Message,
         visibility: Player | Team
     ): void;
@@ -802,7 +803,7 @@ declare namespace mod {
         parentObject: mod.Object,
         image: WorldIconImages,
         verticalOffset: number,
-        iconColour: Vector,
+        iconColor: Vector,
         iconText: Message
     ): void;
 

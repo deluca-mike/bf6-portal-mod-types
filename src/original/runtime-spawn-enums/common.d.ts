@@ -492,6 +492,7 @@ declare namespace mod {
         PlayerCustomization_Headgear_02_A,
         PlayerCustomization_Headgear_02_B,
         PlayerSpawner,
+        Portal_NAF_BarrierStoneBlock_01_H_PortalPlatform,
         RingOfFire,
         SandBags_01_256x120,
         SandBags_01_256x180,
