@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.3.2.0
+// Version: 1.3.3.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +25,7 @@
 /// <reference path="./runtime-spawn-enums/granite-underground.d.ts" />
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
+/// <reference path="./runtime-spawn-enums/plaza.d.ts" />
 /// <reference path="./runtime-spawn-enums/sand.d.ts" />
 /// <reference path="./runtime-spawn-enums/subsurface.d.ts" />
 /// <reference path="./runtime-spawn-enums/tungsten.d.ts" />
@@ -648,6 +649,12 @@ declare namespace mod {
     // Sets CameraType for provided Player. CameraIndex optional.
     export function SetCameraTypeForPlayer(player: Player, cameraType: Cameras, cameraIndex: number): void;
 
+    // Set whether collision is enabled for the Free Camera. (Default true)
+    export function SetFreeCameraCollisionForAll(enabled: boolean): void;
+
+    // Set whether collision is enabled for the Free Camera. (Default true)
+    export function SetFreeCameraCollisionForPlayer(player: Player, enabled: boolean): void;
+
     // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
     export function SetSpectatingFiltersForAll(
         group: SpectatingGroup,
@@ -661,6 +668,21 @@ declare namespace mod {
         group: SpectatingGroup,
         ownSquadOnly: boolean,
         ownTeamOnly: boolean
+    ): void;
+
+    // Set the FollowDistance, FollowHeight, and ShoulderOffset for the Third Person Camera. (Default 2.5, 0.2, 0.6)
+    export function SetThirdPersonCameraPositionForAll(
+        followDistance: number,
+        followHeight: number,
+        shoulderOffset: number
+    ): void;
+
+    // Set the FollowDistance, FollowHeight, and ShoulderOffset for the Third Person Camera. (Default 2.5, 0.2, 0.6)
+    export function SetThirdPersonCameraPositionForPlayer(
+        player: Player,
+        followDistance: number,
+        followHeight: number,
+        shoulderOffset: number
     ): void;
 
     // Enables or disables a player-specific screen effect.
@@ -777,6 +799,12 @@ declare namespace mod {
     // Enables of disables friendly fire.
     export function SetFriendlyFire(enableFriendlyFire: boolean): void;
 
+    // Sets the type of criteria used to check the score for winning teams.
+    export function SetGameModeCriteria(criteria: ScoreCriteria): void;
+
+    // Sets the Initial Score for teams.
+    export function SetGameModeInitialScore(team: Team, initialScore: number): void;
+
     // Sets the gamemode score of the provided Player or Team.
     export function SetGameModeScore(team: Team, newScore: number): void;
 
@@ -797,6 +825,26 @@ declare namespace mod {
 
     // Sets the duration the RingOfFire remains stable before Shrinking again.
     export function SetRingOfFireStableTime(ringOfFireId: RingOfFire, ringOfFireStableTime: number): void;
+
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    export function ApplyAreaImpulseAndDamage(
+        center: Vector,
+        radius: number,
+        impulseStrength: number,
+        damageAmount: number
+    ): void;
+
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    export function ApplyAreaImpulseAndDamage(
+        center: Vector,
+        radius: number,
+        impulseStrength: number,
+        damageAmount: number,
+        impulseDirection: Vector
+    ): void;
+
+    // Apply impulse  with given world position, direction and magnitude
+    export function ApplyImpulse(vehicle: Vehicle, worldPosition: Vector, direction: Vector, magnitude: number): void;
 
     // Balances Team1 and Team2 while maintaining squad compositions, requires matching team and squad capacities.
     export function AutoBalanceTeams(): void;
@@ -955,6 +1003,33 @@ declare namespace mod {
      * @param enable - Whether to enable or disable the objective.
      */
     export function EnableGameModeObjective(objective: CapturePoint | HQ | Sector | MCOM, enable: boolean): void;
+
+    // Forces the bomb drop to be dropped from its carrier.
+    export function ForceBombDrop(bomb: Bomb): void;
+
+    // Force resets the bomb to its initial location.
+    export function ForceBombReset(bomb: Bomb): void;
+
+    // Forces the bomb to spawn at the original location.
+    export function ForceBombSpawn(bomb: Bomb): void;
+
+    // Forces the bomb to unspawn.
+    export function ForceBombUnspawn(bomb: Bomb): void;
+
+    // Gives the Bomb to the chosen Player.
+    export function GiveBombToPlayer(player: Player, bomb: Bomb): void;
+
+    // Sets the fuse time for when the bomb is dropped to the ground before it blows up.
+    export function SetBombDropFuseTime(bomb: Bomb, dropFuseTime: number): void;
+
+    // Changes the Team that can pick-up the bomb.
+    export function SetBombTeam(bomb: Bomb, team: Team): void;
+
+    // Sets the world Icon global visibility, if set to enabled all teams can see the bomb carrier Icon, if set to disabled only the attacking team can.
+    export function SetBombWorldIconGlobalVisibility(bomb: Bomb, Enabled: boolean): void;
+
+    // Sets the MCOM arm type, if set to default anyone on the opposing team can arm it, otherwise only the bomb carrier can.
+    export function SetMCOMArmType(mcom: MCOM, mcomArmType: MCOMArmType): void;
 
     // Determines the time needed by MCOM.
     export function SetMCOMFuseTime(mCOM: MCOM, fuseTime: number): void;
@@ -1141,6 +1216,9 @@ declare namespace mod {
 
     // Stops the Over Time movement for the provided Object if one is active
     export function StopActiveMovementForObject(object: mod.Object): void;
+
+    // Sets the type of HUD ticker to use.
+    export function SetHUDTicker(ticker: GameModeTicker): void;
 
     // Attaches a new UI Icon Widget to an object.
     export function AddUIIcon(
@@ -2120,7 +2198,8 @@ declare namespace mod {
             | RuntimeSpawn_Granite_TechCenter
             | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand
-            | RuntimeSpawn_GolmudRailway,
+            | RuntimeSpawn_GolmudRailway
+            | RuntimeSpawn_Plaza,
         position: Vector,
         rotation: Vector,
         scale: Vector
@@ -2151,10 +2230,17 @@ declare namespace mod {
             | RuntimeSpawn_Granite_TechCenter
             | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand
-            | RuntimeSpawn_GolmudRailway,
+            | RuntimeSpawn_GolmudRailway
+            | RuntimeSpawn_Plaza,
         position: Vector,
         rotation: Vector
     ): Any;
+
+    // Returns whether a value is undefined, such as when a function cannot return a valid value.
+    export function IsUndefined(value: Any): boolean;
+
+    // Returns whether a value is defined and if object reference is valid for object values.
+    export function IsValid(value: Any): boolean;
 
     /**
      * Returns a boolean value based on whether both of the provided inputs return true.
@@ -2393,11 +2479,20 @@ declare namespace mod {
      */
     export function GetHQ(number: number): HQ;
 
+    // Returns the Bomb object corresponding to the provided id.
+    export function GetBomb(number: number): Bomb;
+
     // Returns the MCOM object corresponding to the provided id.
     export function GetMCOM(number: number): MCOM;
 
     // Returns the sector object corresponding to the provided id.
     export function GetSector(number: number): Sector;
+
+    // Return the average  Portal processing frame time
+    export function GetPortalAverageFrameTime(): number;
+
+    // Return average Server side frame time
+    export function GetServerAverageFrameTime(): number;
 
     // Returns an array of all players within a game.
     export function AllPlayers(): Array;

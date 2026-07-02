@@ -1,7 +1,9 @@
 declare namespace mod {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export type Any = any;
+
     export type SoldierKits = Any;
+
     // export type AreaTrigger = never;
     // export type AreaTrigger = Any;
     const AreaTriggerSymbol: unique symbol;
@@ -11,6 +13,11 @@ declare namespace mod {
     // export type Array = Any;
     const ArraySymbol: unique symbol;
     export type Array = { _opaque: typeof ArraySymbol };
+
+    // export type Bomb = never;
+    // export type Bomb = Any;
+    const BombSymbol: unique symbol;
+    export type Bomb = { _opaque: typeof BombSymbol };
 
     // export type CapturePoint = never;
     // export type CapturePoint = Any;
@@ -184,6 +191,7 @@ declare namespace mod {
 
     export type Object =
         | AreaTrigger
+        | Bomb
         | CapturePoint
         | EmplacementSpawner
         | FixedCamera

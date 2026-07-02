@@ -60,6 +60,6 @@ export default [
         },
     },
     {
-        ignores: ['node_modules/**'],
+        ignores: ['node_modules/**', 'src/common.js', 'docs/**', 'src/verify-build.js', 'src/merge-docs.js'],
     },
 ];
