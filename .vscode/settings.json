@@ -1,4 +1,4 @@
 {
-    "cSpell.ignorePaths": ["./index.d.ts", "./src/original.d.ts"],
+    "cSpell.ignorePaths": ["./index.d.ts", "./src/original/**/*.d.ts"],
     "cSpell.words": ["deployables", "Golmud", "mandown", "MCOM"]
 }

@@ -12,6 +12,11 @@ declare namespace mod {
     const ArraySymbol: unique symbol;
     export type Array = { _opaque: typeof ArraySymbol };
 
+    // export type Bomb = never;
+    // export type Bomb = Any;
+    const BombSymbol: unique symbol;
+    export type Bomb = { _opaque: typeof BombSymbol };
+
     // export type CapturePoint = never;
     // export type CapturePoint = Any;
     const CapturePointSymbol: unique symbol;
@@ -184,6 +189,7 @@ declare namespace mod {
 
     export type Object =
         | AreaTrigger
+        | Bomb
         | CapturePoint
         | EmplacementSpawner
         | FixedCamera

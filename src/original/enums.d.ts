@@ -27,6 +27,18 @@ declare namespace mod {
         NoArmor,
         SoftArmor,
     }
+    export enum BombState {
+        Carried,
+        Defusing,
+        Dropped,
+        Inactive,
+        ObjectiveCompleted,
+        Planted,
+        Planting,
+        Resetting,
+        Spawned,
+        Unspawned,
+    }
     export enum Cameras {
         FirstPerson,
         Fixed,
@@ -107,6 +119,10 @@ declare namespace mod {
         Throwable_Stun_Grenade,
         Throwable_Throwing_Knife,
     }
+    export enum GameModeTicker {
+        None,
+        Ticker_Conquest,
+    }
     export enum GolmudTrainMoveCommands {
         MoveEast,
         MoveWest,
@@ -134,6 +150,10 @@ declare namespace mod {
         SecondaryWeapon,
         Throwable,
     }
+    export enum MCOMArmType {
+        Bomb,
+        Default,
+    }
     export enum Maps {
         Abbasid,
         Aftermath,
@@ -154,6 +174,7 @@ declare namespace mod {
         Granite_Underground,
         Limestone,
         Outskirts,
+        Plaza,
         Sand,
         Subsurface,
         Tungsten,
@@ -291,6 +312,10 @@ declare namespace mod {
         AmmoCrate,
         SupplyBag,
     }
+    export enum ScoreCriteria {
+        HighestProgress,
+        LowestProgress,
+    }
     export enum ScoreboardType {
         CustomFFA,
         CustomTwoTeams,
@@ -316,6 +341,7 @@ declare namespace mod {
         VL7Effect,
     }
     export enum SoldierStateBool {
+        HasBomb,
         IsAISoldier,
         IsAlive,
         IsBeingRevived,
@@ -381,6 +407,7 @@ declare namespace mod {
     export enum Types {
         AreaTrigger,
         Array,
+        Bomb,
         Boolean,
         CapturePoint,
         DamageType,
@@ -388,15 +415,18 @@ declare namespace mod {
         EmplacementSpawner,
         Enum_AiInput,
         Enum_AmmoTypes,
+        Enum_BombState,
         Enum_Cameras,
         Enum_CustomNotificationSlots,
         Enum_Factions,
         Enum_Gadgets,
+        Enum_GameModeTicker,
         Enum_GolmudTrainMoveCommands,
         Enum_GolmudTrainStopReason,
         Enum_GolmudTrainVariants,
         Enum_InventorySlots,
         Enum_Maps,
+        Enum_MCOMArmType,
         Enum_MoveSpeed,
         Enum_MusicEvents,
         Enum_MusicPackages,
@@ -426,10 +456,12 @@ declare namespace mod {
         Enum_RuntimeSpawn_Granite_Underground,
         Enum_RuntimeSpawn_Limestone,
         Enum_RuntimeSpawn_Outskirts,
+        Enum_RuntimeSpawn_Plaza,
         Enum_RuntimeSpawn_Sand,
         Enum_RuntimeSpawn_Subsurface,
         Enum_RuntimeSpawn_Tungsten,
         Enum_ScoreboardType,
+        Enum_ScoreCriteria,
         Enum_ScreenEffects,
         Enum_SoldierClass,
         Enum_SoldierEffects,
