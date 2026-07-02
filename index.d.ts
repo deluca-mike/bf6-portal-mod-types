@@ -941,7 +941,7 @@ declare namespace mod {
     export function SetSoldierEffect(player: Player, soldierEffects: SoldierEffects, isEnabled: boolean): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, duration: number, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(
@@ -952,13 +952,13 @@ declare namespace mod {
     ): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, spotStatus: SpotStatus): void;
+    export function SpotTarget(targetPlayer: Player, spotStatus: SpotStatus): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
     export function SpotTarget(targetPlayer: Player, spotterPlayer: Player, duration: number): void;
 
     // Spots a target Player for all players for a specified duration of time (in seconds).
-    export function SpotTarget(targetplayer: Player, duration: number): void;
+    export function SpotTarget(targetPlayer: Player, duration: number): void;
 
     // Gradually modifies the value of a Variable at a specified rate (value/second) until it reaches the provided limit.
     export function ChaseVariableAtRate(variable: Variable, limit: number, deltaPerSecond: number): void;
@@ -981,7 +981,7 @@ declare namespace mod {
     // Sets the neutralization time for target capture point  to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
-    // Change the team controling a capture point.
+    // Change the team controlling a capture point.
     export function SetCapturePointOwner(capturePoint: CapturePoint, team: Team): void;
 
     // Sets the capture time multiplier for target capture point to the provided number.
@@ -2043,8 +2043,6 @@ declare namespace mod {
 
     // Forces the specified player into the target vehicle at the provided seat number.  If the provided seat is -1, that player will be forced into the first available seat.
     export function ForcePlayerToSeat(player: Player, vehicle: Vehicle, seatNumber: number): void;
-
-    //------------------------
 
     // Get argument of subroutine at given index.
     export function GetArgument(subroutineArgIndex: number): Any;
