@@ -1,31 +1,4 @@
 declare namespace mod {
-    export type Object =
-        | AreaTrigger
-        | Bomb
-        | CapturePoint
-        | EmplacementSpawner
-        | FixedCamera
-        | HQ
-        | InteractPoint
-        | LootSpawner
-        | MapSpecificFeature
-        | MCOM
-        | Player
-        | RingOfFire
-        | Sector
-        | SFX
-        | SpatialObject
-        | Spawner
-        | SpawnPoint
-        | Team
-        | Vehicle
-        | VehicleSpawner
-        | VFX
-        | VL7Cloud
-        | VO
-        | WaypointPath
-        | WorldIcon;
-    //------------------------
     export const stringkeys: Any;
     export const strings: Any;
     export enum AiInput {
