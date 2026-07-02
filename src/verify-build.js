@@ -96,51 +96,61 @@ function compareNamespace(sourceParent, targetParentList) {
             // If source has no docs, we don't care what the output has.
             const sourceDocs = sourceNode.getJsDocs();
 
-            if (sourceDocs.length === 0) continue;
+            if (sourceDocs.length > 0) {
+                stats.total++;
 
-            stats.total++;
+                // Find matching node in output
+                let targetNode;
 
-            // Find matching node in output
-            let targetNode;
+                if (isSignatureNode(sourceNode)) {
+                    const sig = getSignatureId(sourceNode);
+                    targetNode = targetNodes?.find((t) => isSignatureNode(t) && getSignatureId(t) === sig);
+                } else {
+                    targetNode = targetNodes?.[0];
+                }
 
-            if (isSignatureNode(sourceNode)) {
-                const sig = getSignatureId(sourceNode);
-                targetNode = targetNodes?.find((t) => isSignatureNode(t) && getSignatureId(t) === sig);
-            } else {
-                targetNode = targetNodes?.[0];
-            }
-
-            if (!targetNode) {
-                console.error(`   ERR: Output missing declaration for '${name}'`);
-                stats.failures++;
-                continue;
-            }
-
-            // Verify Docs match
-            const outputDocs = targetNode.getJsDocs();
-            if (outputDocs.length === 0) {
-                console.error(`   ERR: Output missing docs for '${name}'`);
-                stats.failures++;
-            } else {
-                // strict check: does the output contain the text from the source?
-                const srcText = sourceDocs[0].getComment(); // string or undefined
-                const outText = outputDocs[0].getComment();
-
-                // Simple check: Ensure the output doc contains the main source text
-                // (We allow output to have extra formatting, but the core text must be there)
-                if (srcText && (!outText || !outText.includes(srcText.trim()))) {
-                    console.error(`   ERR: Doc mismatch for '${name}'`);
-                    // console.log("Expected:", srcText);
-                    // console.log("Actual:", outText);
+                if (!targetNode) {
+                    console.error(`   ERR: Output missing declaration for '${name}'`);
                     stats.failures++;
+                } else {
+                    // Verify Docs match
+                    const outputDocs = targetNode.getJsDocs();
+                    if (outputDocs.length === 0) {
+                        console.error(`   ERR: Output missing docs for '${name}'`);
+                        stats.failures++;
+                    } else {
+                        // strict check: does the output contain the text from the source?
+                        const srcText = sourceDocs[0].getComment(); // string or undefined
+                        const outText = outputDocs[0].getComment();
+
+                        // Simple check: Ensure the output doc contains the main source text
+                        // (We allow output to have extra formatting, but the core text must be there)
+                        if (srcText && (!outText || !outText.includes(srcText.trim()))) {
+                            console.error(`   ERR: Doc mismatch for '${name}'`);
+                            // console.log("Expected:", srcText);
+                            // console.log("Actual:", outText);
+                            stats.failures++;
+                        }
+                    }
                 }
             }
 
-            if (!isContainer(sourceNode) || !isContainer(targetNode)) continue;
+            if (!isContainer(sourceNode)) continue;
+
+            // For recursion, we need the target node. Even if docs were empty, we must find it.
+            let recursiveTargetNode = targetNodes?.[0];
+
+            if (isSignatureNode(sourceNode)) {
+                const sig = getSignatureId(sourceNode);
+                recursiveTargetNode = targetNodes?.find((t) => isSignatureNode(t) && getSignatureId(t) === sig);
+            }
+
+            if (!recursiveTargetNode || !isContainer(recursiveTargetNode)) continue;
 
             // Recurse (Container check)
             // Wrap single target node in array for recursive call to match 'targetParentList' signature
-            const subStats = compareNamespace(sourceNode, [targetNode]);
+            const subStats = compareNamespace(sourceNode, [recursiveTargetNode]);
+
             stats.total += subStats.total;
             stats.failures += subStats.failures;
         }

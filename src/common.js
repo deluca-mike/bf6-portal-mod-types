@@ -89,6 +89,7 @@ export function getNamedChildren(node) {
                 Node.isPropertySignature(child) ||
                 Node.isMethodSignature(child) ||
                 Node.isEnumDeclaration(child) ||
+                Node.isEnumMember(child) ||
                 Node.isTypeAliasDeclaration(child);
         }
 
@@ -115,5 +116,10 @@ export function isSignatureNode(node) {
 }
 
 export function isContainer(node) {
-    return Node.isClassDeclaration(node) || Node.isInterfaceDeclaration(node) || Node.isModuleDeclaration(node);
+    return (
+        Node.isClassDeclaration(node) ||
+        Node.isInterfaceDeclaration(node) ||
+        Node.isModuleDeclaration(node) ||
+        Node.isEnumDeclaration(node)
+    );
 }
