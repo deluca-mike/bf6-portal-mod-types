@@ -41,6 +41,7 @@ declare namespace mod {
     export const strings: Any;
 
     export function Wait(n: number): Promise<void>;
+
     // Sets the value of a Variable.
     export function SetVariable(variable: Variable, value: Any): void;
 

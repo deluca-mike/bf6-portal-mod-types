@@ -54,6 +54,7 @@ declare namespace mod {
      * @returns A promise that resolves when the delay is complete.
      */
     export function Wait(n: number): Promise<void>;
+
     /**
      * Sets the value of a Variable.
      * @param variable - The variable to set the value of.

@@ -57,7 +57,7 @@ declare namespace documentedMod {
         export function OnPlayerLeaveGame(eventNumber: number): void;
 
         /**
-         * This will trigger per server tick
+         * This will trigger per server tick.
          */
         export function OngoingGlobal(): void;
 

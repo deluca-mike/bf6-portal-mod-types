@@ -5,7 +5,7 @@
 declare namespace mod {
     namespace EventHandlerSignatures {
         /**
-         * This will trigger per server tick
+         * This will trigger per server tick.
          */
         export function OngoingGlobal(): void;
 
