@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.3.3.0
+// Version: 1.4.1.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -691,7 +691,7 @@ declare namespace mod {
     // Enables or disables a visual effect.
     export function EnableVFX(vfx: VFX, enable: boolean): void;
 
-    // Move a VFX to a new coordinate. May have become redundant with the creation of the universal MoveObject action.
+    // Move a VFX to a new coordinate.
     export function MoveVFX(vfxID: VFX, position: Vector, rotation: Vector): void;
 
     // Changes the color of a visual effect.
@@ -1161,14 +1161,60 @@ declare namespace mod {
     export function SkipManDown(player: Player, skipManDown: boolean): void;
 
     // Move the Object provided, Euler rotation optional
-    export function MoveObject(object: mod.Object, positionDelta: Vector): void;
+    export function MoveObject(
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
+        positionDelta: Vector
+    ): void;
 
     // Move the Object provided, Euler rotation optional
-    export function MoveObject(object: mod.Object, positionDelta: Vector, rotationDelta: Vector): void;
+    export function MoveObject(
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
+        positionDelta: Vector,
+        rotationDelta: Vector
+    ): void;
 
     // Moves the Object by the delta position and rotation over the time provided. Options to loop indefinitely and reverse
     export function MoveObjectOverTime(
-        object: mod.Object,
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
         positionDelta: Vector,
         rotationDelta: Vector,
         timeInSeconds: number,
@@ -1178,7 +1224,20 @@ declare namespace mod {
 
     // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used
     export function OrbitObjectOverTime(
-        object: mod.Object,
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
         orbitTransform: Transform,
         timeInSeconds: number,
         radius: number,
@@ -1189,7 +1248,20 @@ declare namespace mod {
 
     // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used
     export function OrbitObjectOverTime(
-        object: mod.Object,
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
         orbitTransform: Transform,
         timeInSeconds: number,
         radius: number,
@@ -1200,14 +1272,59 @@ declare namespace mod {
     ): void;
 
     // Rotate the Object provided using Euler angles
-    export function RotateObject(object: mod.Object, rotationDelta: Vector): void;
+    export function RotateObject(
+        arg0:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
+        rotationDelta: Vector
+    ): void;
 
     // Sets the transform of the Object provided
-    export function SetObjectTransform(object: mod.Object, transform: Transform): void;
+    export function SetObjectTransform(
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
+        transform: Transform
+    ): void;
 
     // Sets the transform of the Object provided over the time provided. Options to loop indefinitely and reverse
     export function SetObjectTransformOverTime(
-        object: mod.Object,
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon,
         transform: Transform,
         timeInSeconds: number,
         shouldLoop: boolean,
@@ -1215,7 +1332,22 @@ declare namespace mod {
     ): void;
 
     // Stops the Over Time movement for the provided Object if one is active
-    export function StopActiveMovementForObject(object: mod.Object): void;
+    export function StopActiveMovementForObject(
+        object:
+            | Bomb
+            | EmplacementSpawner
+            | FixedCamera
+            | InteractPoint
+            | LootSpawner
+            | MCOM
+            | SFX
+            | SpatialObject
+            | Spawner
+            | VehicleSpawner
+            | VL7Cloud
+            | VO
+            | WorldIcon
+    ): void;
 
     // Sets the type of HUD ticker to use.
     export function SetHUDTicker(ticker: GameModeTicker): void;
@@ -1263,7 +1395,11 @@ declare namespace mod {
     // Restricts a world icon to be visible only to a specific Player or Team.
     export function SetWorldIconOwner(worldIcon: WorldIcon, newPlayerOwner: Player): void;
 
-    // Changes the location of a world icon.
+    /**
+     * @deprecated The method should not be used. Please use SetObjectTransform instead. Changes the location of a world icon.
+     * @param worldIcon The WorldIcon to move.
+     * @param newPosition The new position of the world icon.
+     */
     export function SetWorldIconPosition(worldIcon: WorldIcon, newPosition: Vector): void;
 
     // Changes the text appearing above a world icon.
@@ -2059,8 +2195,8 @@ declare namespace mod {
     // Returns the variable specified by an object.
     export function ObjectVariable(ownerObject: mod.Object, variableIndex: number): Variable;
 
-    // Returns the waypoint path object corresponding to the provided id.
-    export function GetWaypointPath(waypointPathNumber: number): WaypointPath;
+    // Returns the WaypointPath corresponding to the provided id.
+    export function GetWaypointPath(objId: number): WaypointPath;
 
     // Returns a copy of an array with the provided value appended to the end.  Note: It is not possible for an array to contain arrays. Attempting to append an array to an array will concatenate them instead.
     export function AppendToArray(array: Array, value: Any): Array;
@@ -2097,19 +2233,19 @@ declare namespace mod {
      * @param number - The id of the SFX to get.
      * @returns SFX The SFX object.
      */
-    export function GetSFX(number: number): SFX;
+    export function GetSFX(objId: number): SFX;
 
-    // Returns the VO object corresponding to the provided id.
-    export function GetVO(number: number): VO;
+    // Returns the VO corresponding to the provided id.
+    export function GetVO(objId: number): VO;
 
-    // Returns a Fixed Camera.
-    export function GetFixedCamera(number: number): FixedCamera;
+    // Returns the FixedCamera corresponding to the provided id.
+    export function GetFixedCamera(objId: number): FixedCamera;
 
-    // Returns the VFX object corresponding to the provided id.
-    export function GetVFX(vfxNumber: number): VFX;
+    // Returns the VFX corresponding to the provided id.
+    export function GetVFX(objId: number): VFX;
 
-    // Returns the spawn point object corresponding to the provided id.
-    export function GetSpawnPoint(number: number): SpawnPoint;
+    // Returns the SpawnPoint corresponding to the provided id.
+    export function GetSpawnPoint(objId: number): SpawnPoint;
 
     // Returns the current gamemode score of the provided player or team.
     export function GetGameModeScore(player: Player): number;
@@ -2123,8 +2259,8 @@ declare namespace mod {
     // Returns the amount of time left (in seconds) in the current gamemode.
     export function GetMatchTimeRemaining(): number;
 
-    // Returns the ring of fire object corresponding to the provided id.
-    export function GetRingOfFire(number: number): RingOfFire;
+    // Returns the RingOfFire corresponding to the provided id.
+    export function GetRingOfFire(objId: number): RingOfFire;
 
     // Returns the time limit set for the gamemode (in seconds).
     export function GetRoundTime(): number;
@@ -2135,20 +2271,20 @@ declare namespace mod {
     // Returns true if the provided team is using soldiers from the specified faction.
     export function IsFaction(team: Team, factions: Factions): boolean;
 
-    // Returns the area trigger object corresponding to the provided id.
-    export function GetAreaTrigger(areaTriggerNumber: number): AreaTrigger;
+    // Returns the AreaTrigger corresponding to the provided id.
+    export function GetAreaTrigger(objId: number): AreaTrigger;
 
-    // Returns the emplacement spawner object corresponding to the provided id.
-    export function GetEmplacementSpawner(number: number): EmplacementSpawner;
+    // Returns the EmplacementSpawner corresponding to the provided id.
+    export function GetEmplacementSpawner(objId: number): EmplacementSpawner;
 
     // Returns the World Position of the Golmud Moving Train. (Only on Golmud Railway map)
     export function GetGolmudTrainLocation(): Vector;
 
-    // Returns the interact point object corresponding to the provided id.
-    export function GetInteractPoint(interactPointNumber: number): InteractPoint;
+    // Returns the InteractPoint corresponding to the provided id.
+    export function GetInteractPoint(objId: number): InteractPoint;
 
-    // Returns the loot spawner object corresponding to the provided id.
-    export function GetLootSpawner(number: number): LootSpawner;
+    // Returns the LootSpawner corresponding to the provided id.
+    export function GetLootSpawner(objId: number): LootSpawner;
 
     // Returns the id corresponding to the provided object.
     export function GetObjId(object: mod.Object): number;
@@ -2156,14 +2292,14 @@ declare namespace mod {
     // Returns the spatial object corresponding to the provided id.
     export function GetSpatialObject(spatialObjectNumber: number): SpatialObject;
 
-    // Returns the spawner object corresponding to the provided id.
-    export function GetSpawner(number: number): Spawner;
+    // Returns the Spawner corresponding to the provided id.
+    export function GetSpawner(objId: number): Spawner;
 
-    // Returns the VL7Cloud object corresponding to the provided id.
-    export function GetVL7Cloud(vl7CloudId: number): VL7Cloud;
+    // Returns the VL7Cloud corresponding to the provided id.
+    export function GetVL7Cloud(objId: number): VL7Cloud;
 
-    // Returns the vehicle spawner object corresponding to the provided id.
-    export function GetVehicleSpawner(number: number): VehicleSpawner;
+    // Returns the VehicleSpawner corresponding to the provided id.
+    export function GetVehicleSpawner(objId: number): VehicleSpawner;
 
     /**
      * Returns true if the provided map is the name of the current map.
@@ -2236,12 +2372,6 @@ declare namespace mod {
         rotation: Vector
     ): Any;
 
-    // Returns whether a value is undefined, such as when a function cannot return a valid value.
-    export function IsUndefined(value: Any): boolean;
-
-    // Returns whether a value is defined and if object reference is valid for object values.
-    export function IsValid(value: Any): boolean;
-
     /**
      * Returns a boolean value based on whether both of the provided inputs return true.
      * Note: This does not short-circuit. All inputs will be evaluated if they are derived from function calls.
@@ -2272,6 +2402,12 @@ declare namespace mod {
 
     // Returns true if the provided value is equal to the specified type.
     export function IsType(value: Any, type: Types): boolean;
+
+    // Returns whether a value is undefined, such as when a function cannot return a valid value.
+    export function IsUndefined(value: Any): boolean;
+
+    // Returns whether a value is defined and if object reference is valid for object values.
+    export function IsValid(value: Any): boolean;
 
     // Calls a javascript value function.
     export function JsValue(valueName: string, valueArg0: Any, valueArg1: Any): Any;
@@ -2454,7 +2590,7 @@ declare namespace mod {
      * @param id - The ObjId of the CapturePoint.
      * @returns CapturePoint The CapturePoint object.
      */
-    export function GetCapturePoint(id: number): CapturePoint;
+    export function GetCapturePoint(objId: number): CapturePoint;
 
     // Returns a number from zero to one corresponding to the capture progress of the provided capture point.
     export function GetCaptureProgress(capturePoint: CapturePoint): number;
@@ -2477,16 +2613,16 @@ declare namespace mod {
      * @param number - The ObjId of the HQ_PlayerSpawner.
      * @returns HQ The HQ object.
      */
-    export function GetHQ(number: number): HQ;
+    export function GetHQ(objId: number): HQ;
 
-    // Returns the Bomb object corresponding to the provided id.
-    export function GetBomb(number: number): Bomb;
+    // Returns the Bomb corresponding to the provided id.
+    export function GetBomb(objId: number): Bomb;
 
-    // Returns the MCOM object corresponding to the provided id.
-    export function GetMCOM(number: number): MCOM;
+    // Returns the MCOM corresponding to the provided id.
+    export function GetMCOM(objId: number): MCOM;
 
-    // Returns the sector object corresponding to the provided id.
-    export function GetSector(number: number): Sector;
+    // Returns the Sector corresponding to the provided id.
+    export function GetSector(objId: number): Sector;
 
     // Return the average  Portal processing frame time
     export function GetPortalAverageFrameTime(): number;
@@ -2530,6 +2666,9 @@ declare namespace mod {
      * @returns Player The farthest player.
      */
     export function FarthestPlayerFrom(vector: Vector, team: Team): Player;
+
+    // Returns the Player corresponding to the provided id.
+    export function GetPlayer(objId: number): Player;
 
     // Returns the total amount of deaths for the target player.
     export function GetPlayerDeaths(player: Player): number;
@@ -2666,8 +2805,8 @@ declare namespace mod {
     // Returns the 'Z' component of a provided vector.
     export function ZComponentOf(vector: Vector): number;
 
-    // Returns the world icon object corresponding to the provided id.
-    export function GetWorldIcon(worldIconNumber: number): WorldIcon;
+    // Returns the WorldIcon corresponding to the provided id.
+    export function GetWorldIcon(objId: number): WorldIcon;
 
     /**
      * Returns a constructed message object which can be used with event game mode message, notification message, highlighted game mode message, and custom notification message.
@@ -2840,6 +2979,9 @@ declare namespace mod {
     // Returns a boolean indicating if the target vehicle has the same name as the provided vehicle or if it is the same type as the provided vehicle type.
     export function CompareVehicleName(vehicle: Vehicle, vehicleList: VehicleList): boolean;
 
+    // Returns the Vehicle corresponding to the provided id.
+    export function GetVehicle(objId: number): Vehicle;
+
     // Returns the vehicle used by a player.
     export function GetVehicleFromPlayer(player: Player): Vehicle;
 
@@ -2864,7 +3006,7 @@ declare namespace mod {
     // Returns the player currently occupying the provided seat index number of the provided vehicle. Note: If no players are in the vehicle seat when this block is called, the returned player will be invalid.
     export function GetPlayerFromVehicleSeat(vehicle: Vehicle, number: number): Player;
 
-    // Returns the seat index number for the target player if they are in a vehicle, otherwise returns -1.
+    // Returns the seat index number for the target player if they are in a vehicle.
     export function GetPlayerVehicleSeat(player: Player): number;
 }
 
