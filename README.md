@@ -37,7 +37,7 @@ is no runtime code.
 
 ## Version semantics
 
-The official BF6 Portal SDK uses a **four-part** version (e.g. `1.3.3.0`) for the `mod` namespace and does not follow
+The official BF6 Portal SDK uses a **four-part** version (e.g. `1.4.1.0`) for the `mod` namespace and does not follow
 semver. This package maps that to **three-part semver** by dropping the first segment, and replacing the last segment
 with an internal increment to track patch changes to the package (i.e. for added documentation or usability
 improvements).
@@ -45,12 +45,12 @@ improvements).
 | Official SDK (mod namespace) | This package |
 | ---------------------------- | ------------ |
 | `a.b.c.d` (template)         | `b.c.x`      |
-| `1.3.2.0` (past)             | `3.2.x`      |
-| `1.3.3.0` (current)          | `3.3.x`      |
-| `1.3.4.0` (future example)   | `3.4.x`      |
+| `1.4.0.0` (past)             | `4.0.x`      |
+| `1.4.1.0` (current)          | `4.1.x`      |
+| `1.4.2.0` (future example)   | `4.2.x`      |
 
-- **Minor** version changes (e.g. `3.3.0` → `3.4.0`) align with a new official SDK release and may add or change APIs.
-- **Patch** versions (e.g. `3.3.0` → `3.3.1`) keep the same underlying SDK version and only add or improve documentation
+- **Minor** version changes (e.g. `4.1.0` → `4.2.0`) align with a new official SDK release and may add or change APIs.
+- **Patch** versions (e.g. `4.1.0` → `4.1.1`) keep the same underlying SDK version and only add or improve documentation
   and usability (no API surface change).
 
 When you upgrade patch versions, you can expect the same `mod` API with more or better JSDoc and no breaking changes.
