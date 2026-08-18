@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.4.1.0
+// Version: 1.4.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -23,6 +23,7 @@
 /// <reference path="./runtime-spawn-enums/granite-residential-north.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-tech-center.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-underground.d.ts" />
+/// <reference path="./runtime-spawn-enums/isolated.d.ts" />
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
 /// <reference path="./runtime-spawn-enums/plaza.d.ts" />
@@ -116,10 +117,10 @@ declare namespace mod {
     // Enables or disables shooting for AI. (Only works for AI players)
     export function AIEnableShooting(player: Player, enable: boolean): void;
 
-    // Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers (Only works for AI players)
+    // Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers. (Only works for AI players)
     export function AIEnableTargeting(player: Player): void;
 
-    // Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers (Only works for AI players)
+    // Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers. (Only works for AI players)
     export function AIEnableTargeting(player: Player, enable: boolean): void;
 
     // Forces an AI player to fire or activate whatever weapon or gadget they are holding in their hands for a length of time.
@@ -289,14 +290,14 @@ declare namespace mod {
     // Set whether collision is enabled for the Free Camera. (Default true)
     export function SetFreeCameraCollisionForPlayer(player: Player, enabled: boolean): void;
 
-    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
+    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated.
     export function SetSpectatingFiltersForAll(
         group: SpectatingGroup,
         ownSquadOnly: boolean,
         ownTeamOnly: boolean
     ): void;
 
-    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated
+    // Sets the spectating filters. SpectatingGroup sets the selectable players in the spectating UI. ownSquadOnly and ownTeamOnly limit whether a player can spectate other squads/teams after currently spectated one is eliminated.
     export function SetSpectatingFiltersForPlayer(
         player: Player,
         group: SpectatingGroup,
@@ -448,7 +449,7 @@ declare namespace mod {
     // Sets the duration the RingOfFire remains stable before Shrinking again.
     export function SetRingOfFireStableTime(ringOfFireId: RingOfFire, ringOfFireStableTime: number): void;
 
-    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection.
     export function ApplyAreaImpulseAndDamage(
         center: Vector,
         radius: number,
@@ -456,7 +457,7 @@ declare namespace mod {
         damageAmount: number
     ): void;
 
-    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection
+    // Apply impulse and damage to objects within set radius of given point. Impulse direction from center point, unless specified with ImpulseDirection.
     export function ApplyAreaImpulseAndDamage(
         center: Vector,
         radius: number,
@@ -465,7 +466,7 @@ declare namespace mod {
         impulseDirection: Vector
     ): void;
 
-    // Apply impulse  with given world position, direction and magnitude
+    // Apply impulse  with given world position, direction and magnitude.
     export function ApplyImpulse(vehicle: Vehicle, worldPosition: Vector, direction: Vector, magnitude: number): void;
 
     // Balances Team1 and Team2 while maintaining squad compositions, requires matching team and squad capacities.
@@ -521,13 +522,13 @@ declare namespace mod {
     // Unspawn an Object spawned using SpawnObject.
     export function UnspawnObject(obj: mod.Object): void;
 
-    // Deals a provided amount of damage to a target player. Can optionally specify damage giver..
+    // Deals a provided amount of damage to a target player. Can optionally specify damage giver.
     export function DealDamage(player: Player, damageAmount: number): void;
 
-    // Deals a provided amount of damage to a target player. Can optionally specify damage giver..
+    // Deals a provided amount of damage to a target player. Can optionally specify damage giver.
     export function DealDamage(player: Player, damageAmount: number, damageGiver: Player): void;
 
-    // Deals a provided amount of damage to a target player. Can optionally specify damage giver..
+    // Deals a provided amount of damage to a target player. Can optionally specify damage giver.
     export function DealDamage(vehicle: Vehicle, damageAmount: number): void;
 
     // Revives a target player who is in the mandown state.
@@ -626,7 +627,7 @@ declare namespace mod {
     export function SetBombTeam(bomb: Bomb, team: Team): void;
 
     // Sets the world Icon global visibility, if set to enabled all teams can see the bomb carrier Icon, if set to disabled only the attacking team can.
-    export function SetBombWorldIconGlobalVisibility(bomb: Bomb, Enabled: boolean): void;
+    export function SetBombWorldIconGlobalVisibility(bomb: Bomb, enabled: boolean): void;
 
     // Sets the MCOM arm type, if set to default anyone on the opposing team can arm it, otherwise only the bomb carrier can.
     export function SetMCOMArmType(mcom: MCOM, mcomArmType: MCOMArmType): void;
@@ -668,7 +669,7 @@ declare namespace mod {
         restrictInput: boolean
     ): void;
 
-    // Adds an Attachment to a Weapon Package created through CreateWeaponPackage. Will replace existing Attachments of the same type
+    // Adds an Attachment to a Weapon Package created through CreateWeaponPackage. Will replace existing Attachments of the same type.
     export function AddAttachmentToWeaponPackage(attachment: WeaponAttachments, weaponPackage: WeaponPackage): void;
 
     // Adds a Weapon or Gadget to a Soldier's loadout.
@@ -730,7 +731,7 @@ declare namespace mod {
     // Sets the target player to skip the mandown state and go directly to the deploy screen when killed.
     export function SkipManDown(player: Player, skipManDown: boolean): void;
 
-    // Move the Object provided, Euler rotation optional
+    // Move the Object provided, Euler rotation optional.
     export function MoveObject(
         object:
             | Bomb
@@ -749,7 +750,7 @@ declare namespace mod {
         positionDelta: Vector
     ): void;
 
-    // Move the Object provided, Euler rotation optional
+    // Move the Object provided, Euler rotation optional.
     export function MoveObject(
         object:
             | Bomb
@@ -769,7 +770,7 @@ declare namespace mod {
         rotationDelta: Vector
     ): void;
 
-    // Moves the Object by the delta position and rotation over the time provided. Options to loop indefinitely and reverse
+    // Moves the Object by the delta position and rotation over the time provided. Options to loop indefinitely and reverse.
     export function MoveObjectOverTime(
         object:
             | Bomb
@@ -792,7 +793,7 @@ declare namespace mod {
         shouldReverse: boolean
     ): void;
 
-    // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used
+    // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used.
     export function OrbitObjectOverTime(
         object:
             | Bomb
@@ -816,7 +817,7 @@ declare namespace mod {
         clockwise: boolean
     ): void;
 
-    // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used
+    // Orbits the Object around the provided transform over time. Optional orbitAxis otherwise transform's up vector is used.
     export function OrbitObjectOverTime(
         object:
             | Bomb
@@ -841,7 +842,7 @@ declare namespace mod {
         orbitAxis: Vector
     ): void;
 
-    // Rotate the Object provided using Euler angles
+    // Rotate the Object provided using Euler angles.
     export function RotateObject(
         arg0:
             | Bomb
@@ -860,7 +861,7 @@ declare namespace mod {
         rotationDelta: Vector
     ): void;
 
-    // Sets the transform of the Object provided
+    // Sets the transform of the Object provided.
     export function SetObjectTransform(
         object:
             | Bomb
@@ -879,7 +880,7 @@ declare namespace mod {
         transform: Transform
     ): void;
 
-    // Sets the transform of the Object provided over the time provided. Options to loop indefinitely and reverse
+    // Sets the transform of the Object provided over the time provided. Options to loop indefinitely and reverse.
     export function SetObjectTransformOverTime(
         object:
             | Bomb
@@ -901,7 +902,7 @@ declare namespace mod {
         shouldReverse: boolean
     ): void;
 
-    // Stops the Over Time movement for the provided Object if one is active
+    // Stops the Over Time movement for the provided Object if one is active.
     export function StopActiveMovementForObject(
         object:
             | Bomb
@@ -919,8 +920,14 @@ declare namespace mod {
             | WorldIcon
     ): void;
 
+    // Enables the HUD UI for all objectives (Capture Points and MCOMs).
+    export function SetAllObjectivesUIEnabled(enabled: boolean): void;
+
     // Sets the type of HUD ticker to use.
     export function SetHUDTicker(ticker: GameModeTicker): void;
+
+    // Enables the HUD UI for an objective (Capture Points and MCOMs).
+    export function SetObjectiveUIEnabled(objective: CapturePoint | HQ | Sector | MCOM, enabled: boolean): void;
 
     // Attaches a new UI Icon Widget to an object.
     export function AddUIIcon(
@@ -966,7 +973,7 @@ declare namespace mod {
     export function SetWorldIconOwner(worldIcon: WorldIcon, newPlayerOwner: Player): void;
 
     /**
-     * @deprecated The method should not be used. Please use SetObjectTransform instead. Changes the location of a world icon.
+     * @deprecated Please use SetObjectTransform instead. Changes the location of a world icon.
      * @param worldIcon The WorldIcon to move.
      * @param newPosition The new position of the world icon.
      */
@@ -1083,10 +1090,10 @@ declare namespace mod {
     // Sets the relative width of each column. Only works for custom scoreboards.
     export function SetScoreboardColumnWidths(column1Width: number): void;
 
-    // Sets the name that appears in the top-left corner of the scoreboard
+    // Sets the name that appears in the top-left corner of the scoreboard.
     export function SetScoreboardHeader(team1Name: Message, team2Name: Message): void;
 
-    // Sets the name that appears in the top-left corner of the scoreboard
+    // Sets the name that appears in the top-left corner of the scoreboard.
     export function SetScoreboardHeader(headerName: Message): void;
 
     // Sets the score in up to five distinct scores for the player. Only works for custom scoreboards.
@@ -1676,16 +1683,16 @@ declare namespace mod {
     // Cause a vehicle spawner to spawn one vehicle of the type it is currently set to.
     export function ForceVehicleSpawnerSpawn(vehicleSpawner: VehicleSpawner): void;
 
-    // Sets whether all vehicles are allowed in the Surrounding Area
+    // Sets whether all vehicles are allowed in the Surrounding Area.
     export function SetAllVehiclesAllowedInSurroundingArea(allowed: boolean): void;
 
     // Sets a multiplier on the normal map value of how high vehicles can go before their engines stop applying an upwards force.
     export function SetMaxVehicleHeightLimitScale(heightScale: number): void;
 
-    // Sets whether a vehicle is allowed in the Surrounding Area
+    // Sets whether a vehicle is allowed in the Surrounding Area.
     export function SetVehicleAllowedInSurroundingArea(vehicle: VehicleList, allowed: boolean): void;
 
-    // Sets whether a vehicle category is allowed in the Surrounding Area
+    // Sets whether a vehicle category is allowed in the Surrounding Area.
     export function SetVehicleCategoryAllowedInSurroundingArea(
         vehicleCategory: VehicleCategories,
         allowed: boolean
@@ -1859,7 +1866,7 @@ declare namespace mod {
     // Returns true if the provided map is the name of the current map.
     export function IsCurrentMap(maps: Maps): boolean;
 
-    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1
+    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1.
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
@@ -1885,13 +1892,14 @@ declare namespace mod {
             | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand
             | RuntimeSpawn_GolmudRailway
-            | RuntimeSpawn_Plaza,
+            | RuntimeSpawn_Plaza
+            | RuntimeSpawn_Isolated,
         position: Vector,
         rotation: Vector,
         scale: Vector
     ): Any;
 
-    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1
+    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1.
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
@@ -1917,7 +1925,8 @@ declare namespace mod {
             | RuntimeSpawn_Granite_Underground
             | RuntimeSpawn_Sand
             | RuntimeSpawn_GolmudRailway
-            | RuntimeSpawn_Plaza,
+            | RuntimeSpawn_Plaza
+            | RuntimeSpawn_Isolated,
         position: Vector,
         rotation: Vector
     ): Any;
@@ -2012,7 +2021,7 @@ declare namespace mod {
     // Returns the cosine value of a specified angle in radians.
     export function CosineFromRadians(number: number): number;
 
-    // Creates a Transform from Position and Rotation Vectors
+    // Creates a Transform from Position and Rotation Vectors.
     export function CreateTransform(position: Vector, rotation: Vector): Transform;
 
     // Returns a vector composed of three provided 'X' (left), 'Y' (up), and 'Z' (forward) values.
@@ -2060,7 +2069,7 @@ declare namespace mod {
     // Returns a unit-length normalization of a vector.
     export function Normalize(vector: Vector): Vector;
 
-    // Returns the constant value 3.14159
+    // Returns the constant value 3.14159.
     export function Pi(): number;
 
     // Returns a value in degrees from a specified value in radians.
@@ -2129,10 +2138,10 @@ declare namespace mod {
     // Returns the Sector corresponding to the provided id.
     export function GetSector(objId: number): Sector;
 
-    // Return the average  Portal processing frame time
+    // Return the average  Portal processing frame time.
     export function GetPortalAverageFrameTime(): number;
 
-    // Return average Server side frame time
+    // Return average Server side frame time.
     export function GetServerAverageFrameTime(): number;
 
     // Returns an array of all players within a game.
@@ -2240,10 +2249,10 @@ declare namespace mod {
     // Returns the transform vector of the provided object.
     export function GetObjectTransform(object: mod.Object): Transform;
 
-    // Returns the position of a Transform as a Vector
+    // Returns the position of a Transform as a Vector.
     export function GetTransformPosition(transform: Transform): Vector;
 
-    // Returns the rotation of a Transform as a Vector
+    // Returns the rotation of a Transform as a Vector.
     export function GetTransformRotation(transform: Transform): Vector;
 
     // Returns the leftward directional vector of (-1, 0, 0).
@@ -2432,7 +2441,7 @@ declare namespace mod {
     // Returns a boolean indicating if the target seat index number of target vehicle is a occupied by a player.
     export function IsVehicleSeatOccupied(vehicle: Vehicle, number: number): boolean;
 
-    // Returns a array of all players inside a provided vehicle
+    // Returns a array of all players inside a provided vehicle.
     export function GetAllPlayersInVehicle(vehicle: Vehicle): Array;
 
     // Returns the player currently occupying the provided seat index number of the provided vehicle. Note: If no players are in the vehicle seat when this block is called, the returned player will be invalid.
