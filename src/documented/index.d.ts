@@ -152,14 +152,14 @@ declare namespace documentedMod {
 
     /**
      * Sets a player to act independently. They will attempt to complete objectives, fire on enemy players, etc.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      */
     export function AIBattlefieldBehavior(player: Player): void;
 
     /**
      * Sets a player to defend an area around a location.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      * @param defendPosition - The position to defend.
      * @param minDistance - The minimum distance from the defend position.
@@ -174,14 +174,14 @@ declare namespace documentedMod {
 
     /**
      * Sets a player's current position as idle point.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      */
     export function AIIdleBehavior(player: Player): void;
 
     /**
      * Sets a player to move to a location with a line of sight to a specific position.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      * @param position - The position to move to.
      */
@@ -189,7 +189,7 @@ declare namespace documentedMod {
 
     /**
      * Sets a player a destination to move to.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      * @param position - The position to move to.
      */
@@ -197,14 +197,14 @@ declare namespace documentedMod {
 
     /**
      * Sets a player to use parachute.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      */
     export function AIParachuteBehavior(player: Player): void;
 
     /**
      * Sets a player to move to a valid position on navmesh near a location.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      * @param position - The position to move to.
      */
@@ -212,7 +212,7 @@ declare namespace documentedMod {
 
     /**
      * Sets a player to patrol a waypoint.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the behavior for.
      * @param waypointPath - The waypoint path to patrol.
      */
@@ -293,14 +293,14 @@ declare namespace documentedMod {
 
     /**
      * Enables or disables shooting for AI.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to enable shooting for.
      */
     export function AIEnableShooting(player: Player): void;
 
     /**
      * Enables or disables shooting for AI.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to enable shooting for.
      * @param enable - Whether to enable or disable shooting.
      */
@@ -308,14 +308,14 @@ declare namespace documentedMod {
 
     /**
      * Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to enable targeting for.
      */
     export function AIEnableTargeting(player: Player): void;
 
     /**
      * Enables or disables targeting for AI. An AI unable to target cannot shoot, but will also not notice other soldiers.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to enable targeting for.
      * @param enable - Whether to enable or disable targeting.
      */
@@ -323,7 +323,7 @@ declare namespace documentedMod {
 
     /**
      * Forces an AI player to fire or activate whatever weapon or gadget they are holding in their hands for a length of time.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to force fire.
      * @param fireDuration - The duration to force fire for.
      */
@@ -331,7 +331,7 @@ declare namespace documentedMod {
 
     /**
      * Tweak settings for a player's gadgets.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to tweak gadget settings for.
      * @param applyUsageCriteria - Whether to apply usage criteria.
      * @param applyCoolDownAfterUse - Whether to apply cool down after use.
@@ -346,7 +346,7 @@ declare namespace documentedMod {
 
     /**
      * Sets a player's focus point, possibly asking it to fire at it.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the focus point for.
      * @param point - The point to set the focus point to.
      * @param isTarget - Whether the point is a target.
@@ -355,7 +355,7 @@ declare namespace documentedMod {
 
     /**
      * Sets a player's move speed for MoveTo Behaviors.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the move speed for.
      * @param moveSpeed - The move speed to set.
      */
@@ -363,7 +363,7 @@ declare namespace documentedMod {
 
     /**
      * Sets a player's stance.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the stance for.
      * @param stance - The stance to set.
      */
@@ -371,7 +371,7 @@ declare namespace documentedMod {
 
     /**
      * Sets player's current target.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param aiPlayer - The AI player to set the target for.
      * @param targetPlayer - The target player to set.
      */
@@ -379,14 +379,14 @@ declare namespace documentedMod {
 
     /**
      * Sets player's current target.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to set the target for.
      */
     export function AISetTarget(player: Player): void;
 
     /**
      * Gives a player the instruction to use a specific gadget on a target location or player.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to give the instruction to.
      * @param gadget - The gadget to use.
      * @param targetPos - The target position to use the gadget on.
@@ -395,7 +395,7 @@ declare namespace documentedMod {
 
     /**
      * Gives a player the instruction to use a specific gadget on a target location or player.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to give the instruction to.
      * @param gadget - The gadget to use.
      * @param targetPlayer - The target player to use the gadget on.
@@ -404,7 +404,7 @@ declare namespace documentedMod {
 
     /**
      * Clears the player's gadget instructions.
-     * This only works for AI players and wil likely error and end the execution frame if used on a human player.
+     * This only works for AI players and will likely error and end the execution frame if used on a human player.
      * @param player - The player to clear the gadget instructions for.
      */
     export function AIStopUsingGadget(player: Player): void;
