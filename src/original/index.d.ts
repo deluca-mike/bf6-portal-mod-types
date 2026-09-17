@@ -1,10 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.4.2.0
+// Version: 1.4.3.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
 /* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="./runtime-spawn-enums/atoll.d.ts" />
 /// <reference path="./runtime-spawn-enums/abbasid.d.ts" />
 /// <reference path="./runtime-spawn-enums/aftermath.d.ts" />
 /// <reference path="./runtime-spawn-enums/badlands.d.ts" />
@@ -25,6 +26,7 @@
 /// <reference path="./runtime-spawn-enums/granite-underground.d.ts" />
 /// <reference path="./runtime-spawn-enums/isolated.d.ts" />
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
+/// <reference path="./runtime-spawn-enums/ocean.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
 /// <reference path="./runtime-spawn-enums/plaza.d.ts" />
 /// <reference path="./runtime-spawn-enums/sand.d.ts" />
@@ -428,14 +430,29 @@ declare namespace mod {
     // Sets the Initial Score for teams.
     export function SetGameModeInitialScore(team: Team, initialScore: number): void;
 
+    // Sets the Initial Score for teams.
+    export function SetGameModeInitialScore(team: Team, initialScore: number, gameStageType: GameStageType): void;
+
     // Sets the gamemode score of the provided Player or Team.
     export function SetGameModeScore(team: Team, newScore: number): void;
 
     // Sets the gamemode score of the provided Player or Team.
     export function SetGameModeScore(player: Player, newScore: number): void;
 
+    // Sets the gamemode score of the provided Player or Team.
+    export function SetGameModeScore(team: Team, newScore: number, gameStageType: GameStageType): void;
+
+    // Sets the gamemode score of the provided Player or Team.
+    export function SetGameModeScore(player: Player, newScore: number, gameStageType: GameStageType): void;
+
     // Sets the gamemode target score used to determine victory.
     export function SetGameModeTargetScore(newScore: number): void;
+
+    // Sets the gamemode target score used to determine victory.
+    export function SetGameModeTargetScore(team: Team, newScore: number): void;
+
+    // Sets the gamemode target score used to determine victory.
+    export function SetGameModeTargetScore(team: Team, newScore: number, gameStageType: GameStageType): void;
 
     // Sets the duration of the game in seconds.
     export function SetGameModeTimeLimit(newTimeLimit: number): void;
@@ -481,6 +498,9 @@ declare namespace mod {
     // Enables or disables an interact point.
     export function EnableInteractPoint(interactPoint: InteractPoint, enable: boolean): void;
 
+    // Enables the Water object.
+    export function EnableWater(enabled: boolean): void;
+
     // Sends a move instruction to the Golmud Railway train.
     export function GolmudTrainSendMoveCommand(moveCommand: GolmudTrainMoveCommands): void;
 
@@ -489,6 +509,16 @@ declare namespace mod {
 
     // Request the system to evaluate if a straight line between two points is interrupted or not. Use OnRayCastHit and OnRayCastMissed to read the result.
     export function RayCast(start: Vector, stop: Vector): void;
+
+    // Enables or disables different functionalities of a BlockingSphere object. This determines what happens to objects within its radius.
+    export function SetBlockingSphereBoolParam(
+        blockingSphere: BlockingSphere,
+        parameter: BlockingSphereBoolParam,
+        enabled: boolean
+    ): void;
+
+    // Sets the radius of a BlockingSphere. This determines the range of influence of all of its enabled functionalities.
+    export function SetBlockingSphereRadius(blockingSphere: BlockingSphere, newRadius: number): void;
 
     // Sets the target player's team.
     export function SetTeam(player: Player, team: Team): void;
@@ -500,6 +530,15 @@ declare namespace mod {
         soldierEffect: boolean,
         visualEffect: boolean
     ): void;
+
+    // Sets the Water beaufort Scale.
+    export function SetWaterBeaufortScale(beaufortScale: number): void;
+
+    // Sets the water height.
+    export function SetWaterLevel(waterLevel: number): void;
+
+    // Sets the Water wave amplitude.
+    export function SetWaterWaveAmplitude(waveAmplitude: number): void;
 
     // Spawns a weapon or gadget at a LootSpawner.
     export function SpawnLoot(lootSpawner: LootSpawner, ammo: AmmoTypes): void;
@@ -650,6 +689,9 @@ declare namespace mod {
     // Force Deploy a soldier from a specific spawn point.
     export function SpawnPlayerFromSpawnPoint(player: Player, spawnPoint: SpawnPoint): void;
 
+    // Sets the breathing time for the player.
+    export function SetPlayerBreathTime(player: Player, factor: number): void;
+
     // Sets damage taken factor on player (Will be rounded to the nearest 5%). The value will be clamped between 0 - 200%.
     export function SetPlayerIncomingDamageFactor(player: Player, amount: number): void;
 
@@ -746,7 +788,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         positionDelta: Vector
     ): void;
 
@@ -765,7 +809,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         positionDelta: Vector,
         rotationDelta: Vector
     ): void;
@@ -785,7 +831,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         positionDelta: Vector,
         rotationDelta: Vector,
         timeInSeconds: number,
@@ -808,7 +856,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         orbitTransform: Transform,
         timeInSeconds: number,
         radius: number,
@@ -832,7 +882,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         orbitTransform: Transform,
         timeInSeconds: number,
         radius: number,
@@ -857,7 +909,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         rotationDelta: Vector
     ): void;
 
@@ -876,7 +930,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         transform: Transform
     ): void;
 
@@ -895,7 +951,9 @@ declare namespace mod {
             | VehicleSpawner
             | VL7Cloud
             | VO
-            | WorldIcon,
+            | WorldIcon
+            | BlockingSphere
+            | Player,
         transform: Transform,
         timeInSeconds: number,
         shouldLoop: boolean,
@@ -918,6 +976,8 @@ declare namespace mod {
             | VL7Cloud
             | VO
             | WorldIcon
+            | BlockingSphere
+            | Player
     ): void;
 
     // Enables the HUD UI for all objectives (Capture Points and MCOMs).
@@ -973,9 +1033,10 @@ declare namespace mod {
     export function SetWorldIconOwner(worldIcon: WorldIcon, newPlayerOwner: Player): void;
 
     /**
-     * @deprecated Please use SetObjectTransform instead. Changes the location of a world icon.
-     * @param worldIcon The WorldIcon to move.
-     * @param newPosition The new position of the world icon.
+     * Changes the location of a world icon.
+     * @deprecated The method should not be used. Please use `SetObjectTransform` instead.
+     * @param worldIcon - The world icon to change the location of.
+     * @param newPosition - The new position of the world icon.
      */
     export function SetWorldIconPosition(worldIcon: WorldIcon, newPosition: Vector): void;
 
@@ -1836,6 +1897,18 @@ declare namespace mod {
     // Returns the AreaTrigger corresponding to the provided id.
     export function GetAreaTrigger(objId: number): AreaTrigger;
 
+    // Returns the BlockingSphere corresponding to the provided id.
+    export function GetBlockingSphere(objId: number): BlockingSphere;
+
+    // Returns the value of the target BlockingSphere boolean parameter.
+    export function GetBlockingSphereBoolParam(
+        blockingSphere: BlockingSphere,
+        boolParam: BlockingSphereBoolParam
+    ): boolean;
+
+    // Returns the radius of a BlockingSphere.
+    export function GetBlockingSphereRadius(blockingSphere: BlockingSphere): number;
+
     // Returns the EmplacementSpawner corresponding to the provided id.
     export function GetEmplacementSpawner(objId: number): EmplacementSpawner;
 
@@ -1863,10 +1936,22 @@ declare namespace mod {
     // Returns the VehicleSpawner corresponding to the provided id.
     export function GetVehicleSpawner(objId: number): VehicleSpawner;
 
+    // Returns the beaufort scale of the Water.
+    export function GetWaterBeaufortScale(): number;
+
+    // Returns the Water height.
+    export function GetWaterHeight(): number;
+
+    // Returns a boolean value based on if water is enabled.
+    export function GetWaterIsEnabled(): boolean;
+
+    // Returns the wave amplitude of the Water.
+    export function GetWaterWaveAmplitude(): number;
+
     // Returns true if the provided map is the name of the current map.
     export function IsCurrentMap(maps: Maps): boolean;
 
-    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1.
+    // Spawns an object at runtime. Returns an object if the object supports it, otherwise undefined.
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
@@ -1893,13 +1978,15 @@ declare namespace mod {
             | RuntimeSpawn_Sand
             | RuntimeSpawn_GolmudRailway
             | RuntimeSpawn_Plaza
-            | RuntimeSpawn_Isolated,
+            | RuntimeSpawn_Isolated
+            | RuntimeSpawn_Ocean
+            | RuntimeSpawn_Atoll,
         position: Vector,
         rotation: Vector,
         scale: Vector
     ): Any;
 
-    // Spawns an object at runtime. Returns an object id if the object supports it, otherwise -1.
+    // Spawns an object at runtime. Returns an object if the object supports it, otherwise undefined.
     export function SpawnObject(
         prefabEnum:
             | RuntimeSpawn_Common
@@ -1926,7 +2013,9 @@ declare namespace mod {
             | RuntimeSpawn_Sand
             | RuntimeSpawn_GolmudRailway
             | RuntimeSpawn_Plaza
-            | RuntimeSpawn_Isolated,
+            | RuntimeSpawn_Isolated
+            | RuntimeSpawn_Ocean
+            | RuntimeSpawn_Atoll,
         position: Vector,
         rotation: Vector
     ): Any;
@@ -2138,7 +2227,7 @@ declare namespace mod {
     // Returns the Sector corresponding to the provided id.
     export function GetSector(objId: number): Sector;
 
-    // Return the average  Portal processing frame time.
+    // Return the average Portal processing frame time.
     export function GetPortalAverageFrameTime(): number;
 
     // Return average Server side frame time.

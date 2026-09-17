@@ -841,6 +841,31 @@ declare namespace documentedMod {
     export function GetTeam(teamId: number): Team;
 
     /**
+     * Returns the value of the target player state.
+     * @param player - The player to get the soldier state of.
+     * @param soldierStateNumber - The soldier state number to get the value of.
+     * @returns number The value of the soldier state.
+     */
+    export function GetSoldierState(player: Player, soldierStateNumber: SoldierStateNumber): number;
+
+    /**
+     * Returns the value of the target player state.
+     * @param player - The player to get the soldier state of.
+     * @param soldierStateBool - The soldier state boolean to get the value of.
+     * @returns boolean The value of the soldier state.
+     */
+    export function GetSoldierState(player: Player, soldierStateBool: SoldierStateBool): boolean;
+
+    /**
+     * Returns the value of the target player state.
+     * Do not use this to get a player's position, as it is much less efficient that `mod.GetObjectPosition(player)`.
+     * @param player - The player to get the soldier state of.
+     * @param soldierStateVector - The soldier state vector to get the value of.
+     * @returns Vector The value of the soldier state.
+     */
+    export function GetSoldierState(player: Player, soldierStateVector: SoldierStateVector): Vector;
+
+    /**
      * Returns a constructed message object which can be used with event game mode message, notification message, highlighted game mode message, and custom notification message.
      * The message object is created by providing a number, player, or format string (which can take up to 3 format items).
      * All strings passed as arguments must be found in the `strings.json` which is injected as `mod.stringkeys`.
