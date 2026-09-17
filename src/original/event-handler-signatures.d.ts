@@ -8,6 +8,8 @@ declare namespace mod {
 
         export function OngoingAreaTrigger(eventAreaTrigger: mod.AreaTrigger): void;
 
+        export function OngoingBlockingSphere(eventBlockingSphere: mod.BlockingSphere): void;
+
         export function OngoingBomb(eventBomb: mod.Bomb): void;
 
         export function OngoingCapturePoint(eventCapturePoint: mod.CapturePoint): void;
@@ -135,11 +137,17 @@ declare namespace mod {
         // This will trigger when a Player earns a kill assist.
         export function OnPlayerEarnedKillAssist(eventPlayer: mod.Player, eventOtherPlayer: mod.Player): void;
 
+        // This will trigger when a player emerges from water.
+        export function OnPlayerEmerged(eventPlayer: mod.Player): void;
+
         // This will trigger when a Player enters an AreaTrigger.
         export function OnPlayerEnterAreaTrigger(eventPlayer: mod.Player, eventAreaTrigger: mod.AreaTrigger): void;
 
         // This will trigger when a Player enters a CapturePoint capturing area.
         export function OnPlayerEnterCapturePoint(eventPlayer: mod.Player, eventCapturePoint: mod.CapturePoint): void;
+
+        // This will trigger when a player enters water.
+        export function OnPlayerEnteredWater(eventPlayer: mod.Player): void;
 
         // This will trigger when a Player enters a Vehicle seat.
         export function OnPlayerEnterVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle): void;
@@ -159,6 +167,9 @@ declare namespace mod {
 
         // This will trigger when a Player exits a CapturePoint capturing area.
         export function OnPlayerExitCapturePoint(eventPlayer: mod.Player, eventCapturePoint: mod.CapturePoint): void;
+
+        // This will trigger when a player exits water.
+        export function OnPlayerExitedWater(eventPlayer: mod.Player): void;
 
         // This will trigger when a Player exits a Vehicle.
         export function OnPlayerExitVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle): void;
@@ -181,6 +192,9 @@ declare namespace mod {
 
         // This will trigger when any player leaves the game.
         export function OnPlayerLeaveGame(eventNumber: number): void;
+
+        // This will trigger when a player submerges in water.
+        export function OnPlayerSubmerged(eventPlayer: mod.Player): void;
 
         // This will trigger when a Player changes team.
         export function OnPlayerSwitchTeam(eventPlayer: mod.Player, eventTeam: mod.Team): void;

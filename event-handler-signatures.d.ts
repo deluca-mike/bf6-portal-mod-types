@@ -15,6 +15,8 @@ declare namespace mod {
          */
         export function OngoingAreaTrigger(eventAreaTrigger: mod.AreaTrigger): void;
 
+        export function OngoingBlockingSphere(eventBlockingSphere: mod.BlockingSphere): void;
+
         /**
          * This will trigger per server tick for each Bomb.
          * @param eventBomb - The Bomb that is being processed.
@@ -210,6 +212,9 @@ declare namespace mod {
         // This will trigger when a Player earns a kill assist.
         export function OnPlayerEarnedKillAssist(eventPlayer: mod.Player, eventOtherPlayer: mod.Player): void;
 
+        // This will trigger when a player emerges from water.
+        export function OnPlayerEmerged(eventPlayer: mod.Player): void;
+
         /**
          * This will trigger when a Player enters an AreaTrigger.
          * Note: The AreaTrigger has to be placed in Godot scene, assigned an ObjId and a CollisionPolygon3D(volume).
@@ -225,6 +230,9 @@ declare namespace mod {
          * @param eventCapturePoint - The CapturePoint that the player entered.
          */
         export function OnPlayerEnterCapturePoint(eventPlayer: mod.Player, eventCapturePoint: mod.CapturePoint): void;
+
+        // This will trigger when a player enters water.
+        export function OnPlayerEnteredWater(eventPlayer: mod.Player): void;
 
         // This will trigger when a Player enters a Vehicle seat.
         export function OnPlayerEnterVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle): void;
@@ -255,6 +263,9 @@ declare namespace mod {
          */
         export function OnPlayerExitCapturePoint(eventPlayer: mod.Player, eventCapturePoint: mod.CapturePoint): void;
 
+        // This will trigger when a player exits water.
+        export function OnPlayerExitedWater(eventPlayer: mod.Player): void;
+
         // This will trigger when a Player exits a Vehicle.
         export function OnPlayerExitVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle): void;
 
@@ -279,6 +290,9 @@ declare namespace mod {
          * @param eventNumber - The id of the player that left the game.
          */
         export function OnPlayerLeaveGame(eventNumber: number): void;
+
+        // This will trigger when a player submerges in water.
+        export function OnPlayerSubmerged(eventPlayer: mod.Player): void;
 
         // This will trigger when a Player changes team.
         export function OnPlayerSwitchTeam(eventPlayer: mod.Player, eventTeam: mod.Team): void;

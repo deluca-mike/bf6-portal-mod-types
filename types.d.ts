@@ -32,6 +32,11 @@ declare namespace mod {
      */
     export type Array = { _opaque: typeof ArraySymbol };
 
+    // export type BlockingSphere = never;
+    // export type BlockingSphere = Any;
+    const BlockingSphereSymbol: unique symbol;
+    export type BlockingSphere = { _opaque: typeof BlockingSphereSymbol };
+
     // export type Bomb = never;
     // export type Bomb = Any;
     const BombSymbol: unique symbol;
@@ -339,6 +344,7 @@ declare namespace mod {
      */
     export type Object =
         | AreaTrigger
+        | BlockingSphere
         | Bomb
         | CapturePoint
         | EmplacementSpawner
