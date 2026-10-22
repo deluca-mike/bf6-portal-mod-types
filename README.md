@@ -37,20 +37,25 @@ is no runtime code.
 
 ## Version semantics
 
-The official BF6 Portal SDK uses a **four-part** version (e.g. `1.4.3.0`) for the `mod` namespace and does not follow
-semver. This package maps that to **three-part semver** by dropping the first segment, and replacing the last segment
-with an internal increment to track patch changes to the package (i.e. for added documentation or usability
-improvements).
+The official BF6 Portal SDK uses a **four-part** version (e.g. `a.b.c.d`) for the `mod` namespace and does not follow
+semver. We incorrectly assumed assumed the first segment would not change (i.e. no `2.b.c.d` release), but it did, so
+going forward, and until otherwise untenable, we will adopt the translation of:
+
+- `majorVersion = 2 + official.a + official.b`
+- `minorVersion = official.c`
+
+The patch segment will be used as an internal increment to track patch changes to the package (i.e. for added
+documentation or usability improvements).
 
 | Official SDK (mod namespace) | This package |
 | ---------------------------- | ------------ |
 | `a.b.c.d` (template)         | `b.c.x`      |
-| `1.4.2.0` (past)             | `4.2.x`      |
-| `1.4.3.0` (current)          | `4.3.x`      |
-| `1.4.4.0` (future example)   | `4.4.x`      |
+| `1.4.3.0` (past)             | `4.3.x`      |
+| `2.1.1.0` (current)          | `5.1.x`      |
+| `2.1.2.0` (future example)   | `5.2.x`      |
 
-- **Minor** version changes (e.g. `4.3.0` → `4.4.0`) align with a new official SDK release and may add or change APIs.
-- **Patch** versions (e.g. `4.3.0` → `4.3.1`) keep the same underlying SDK version and only add or improve documentation
+- **Minor** version changes (e.g. `5.1.0` → `5.2.0`) align with a new official SDK release and may add or change APIs.
+- **Patch** versions (e.g. `5.1.0` → `5.1.1`) keep the same underlying SDK version and only add or improve documentation
   and usability (no API surface change).
 
 When you upgrade patch versions, you can expect the same `mod` API with more or better JSDoc and no breaking changes.

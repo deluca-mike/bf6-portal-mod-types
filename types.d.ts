@@ -83,6 +83,11 @@ declare namespace mod {
     const FixedCameraSymbol: unique symbol;
     export type FixedCamera = { _opaque: typeof FixedCameraSymbol };
 
+    // export type GameEventNotificationData = never;
+    // export type GameEventNotificationData = Any;
+    const GameEventNotificationDataSymbol: unique symbol;
+    export type GameEventNotificationData = { _opaque: typeof GameEventNotificationDataSymbol };
+
     // export type HQ = never;
     // export type HQ = Any;
     const HQSymbol: unique symbol;
@@ -302,6 +307,11 @@ declare namespace mod {
      */
     export type VehicleSpawner = { _opaque: typeof VehicleSpawnerSymbol };
 
+    // export type Water = never;
+    // export type Water = Any;
+    const WaterSymbol: unique symbol;
+    export type Water = { _opaque: typeof WaterSymbol };
+
     // export type WaypointPath = never;
     // export type WaypointPath = Any;
     const WaypointPathSymbol: unique symbol;
@@ -367,6 +377,7 @@ declare namespace mod {
         | VFX
         | VL7Cloud
         | VO
+        | Water
         | WaypointPath
         | WorldIcon;
 }
