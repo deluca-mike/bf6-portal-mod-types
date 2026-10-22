@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 1.4.3.0
+// Version: 2.1.1.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -17,6 +17,7 @@
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
 /// <reference path="./runtime-spawn-enums/golmud-railway.d.ts" />
+/// <reference path="./runtime-spawn-enums/granite-carrier.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-downtown.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-marina.d.ts" />
 /// <reference path="./runtime-spawn-enums/granite-military-rnd.d.ts" />
@@ -483,7 +484,7 @@ declare namespace mod {
         impulseDirection: Vector
     ): void;
 
-    // Apply impulse  with given world position, direction and magnitude.
+    // Apply impulse with given world position, direction and magnitude.
     export function ApplyImpulse(vehicle: Vehicle, worldPosition: Vector, direction: Vector, magnitude: number): void;
 
     // Balances Team1 and Team2 while maintaining squad compositions, requires matching team and squad capacities.
@@ -500,6 +501,30 @@ declare namespace mod {
 
     // Enables the Water object.
     export function EnableWater(enabled: boolean): void;
+
+    // Starts a FadeIn for the given target, with a transition time in seconds.
+    export function FadeIn(fadeType: FadeTypes, fadeInSeconds: number, player: Player): void;
+
+    // Starts a FadeIn for the given target, with a transition time in seconds.
+    export function FadeIn(fadeType: FadeTypes, fadeInSeconds: number, team: Team): void;
+
+    // Starts a FadeIn for the given target, with a transition time in seconds.
+    export function FadeIn(fadeType: FadeTypes, fadeInSeconds: number, squad: Squad): void;
+
+    // Starts a FadeIn for the given target, with a transition time in seconds.
+    export function FadeIn(fadeType: FadeTypes, fadeInSeconds: number): void;
+
+    // Starts a FadeOut for the given target, with a transition time in seconds.
+    export function FadeOut(fadeType: FadeTypes, fadeOutSeconds: number, player: Player): void;
+
+    // Starts a FadeOut for the given target, with a transition time in seconds.
+    export function FadeOut(fadeType: FadeTypes, fadeOutSeconds: number, team: Team): void;
+
+    // Starts a FadeOut for the given target, with a transition time in seconds.
+    export function FadeOut(fadeType: FadeTypes, fadeOutSeconds: number, squad: Squad): void;
+
+    // Starts a FadeOut for the given target, with a transition time in seconds.
+    export function FadeOut(fadeType: FadeTypes, fadeOutSeconds: number): void;
 
     // Sends a move instruction to the Golmud Railway train.
     export function GolmudTrainSendMoveCommand(moveCommand: GolmudTrainMoveCommands): void;
@@ -567,7 +592,7 @@ declare namespace mod {
     // Deals a provided amount of damage to a target player. Can optionally specify damage giver.
     export function DealDamage(player: Player, damageAmount: number, damageGiver: Player): void;
 
-    // Deals a provided amount of damage to a target player. Can optionally specify damage giver.
+    // Deals a provided amount of damage to a target vehicle. Can optionally specify damage giver.
     export function DealDamage(vehicle: Vehicle, damageAmount: number): void;
 
     // Revives a target player who is in the mandown state.
@@ -629,7 +654,7 @@ declare namespace mod {
     // Sets the capturing time for target capture point to the provided number.
     export function SetCapturePointCapturingTime(capturePoint: CapturePoint, capturingTime: number): void;
 
-    // Sets the neutralization time for target capture point  to the provided number.
+    // Sets the neutralization time for target capture point to the provided number.
     export function SetCapturePointNeutralizationTime(capturePoint: CapturePoint, neutralizationTime: number): void;
 
     // Change the team controlling a capture point.
@@ -1019,6 +1044,58 @@ declare namespace mod {
 
     // Removes a UI Icon Widget from an object.
     export function RemoveUIIcon(objectWithIcon: mod.Object, visibility: Player | Team): void;
+
+    // Sends a GameEventNotificationData to everyone, a Team, or a Player
+    export function SendGameEventNotification(gameEventNotificationData: GameEventNotificationData): void;
+
+    // Sends a GameEventNotificationData to everyone, a Team, or a Player
+    export function SendGameEventNotification(
+        gameEventNotificationData: GameEventNotificationData,
+        receiver: Player | Team
+    ): void;
+
+    // Sets the color type for a GameEventNotificationData
+    export function SetColorForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        color: GameEventNotificationColors
+    ): void;
+
+    // Sets the icon for a GameEventNotificationData
+    export function SetIconForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        icon: WorldIconImages
+    ): void;
+
+    // Sets the message and optional sub-message for a GameEventNotificationData
+    export function SetMessageForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        message: Message
+    ): void;
+
+    // Sets the message and optional sub-message for a GameEventNotificationData
+    export function SetMessageForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        message: Message,
+        subMessage: Message
+    ): void;
+
+    // Sets the Objective for a GameEventNotificationData
+    export function SetObjectiveForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        objective: CapturePoint | MCOM
+    ): void;
+
+    // Sets the size for a GameEventNotificationData
+    export function SetSizeForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        size: GameEventNotificationSizes
+    ): void;
+
+    // Sets the style for a GameEventNotificationData
+    export function SetStyleForGameEventNotificationData(
+        gameEventNotificationData: GameEventNotificationData,
+        style: GameEventNotificationStyles
+    ): void;
 
     // Changes the color of a world icon.
     export function SetWorldIconColor(worldIcon: WorldIcon, newColor: Vector): void;
@@ -1822,6 +1899,9 @@ declare namespace mod {
     // Returns the variable specified by an object.
     export function ObjectVariable(ownerObject: mod.Object, variableIndex: number): Variable;
 
+    // Returns all objects of type WaypointPath.
+    export function GetAllWaypointPaths(): Array;
+
     // Returns the WaypointPath corresponding to the provided id.
     export function GetWaypointPath(objId: number): WaypointPath;
 
@@ -1855,20 +1935,38 @@ declare namespace mod {
     // Returns the value found at a provided index of an array.
     export function ValueInArray(array: Array, index: number): Any;
 
+    // Returns all objects of type SFX.
+    export function GetAllSFXs(): Array;
+
+    // Returns all objects of type VO.
+    export function GetAllVOs(): Array;
+
     // Returns the SFX corresponding to the provided id.
     export function GetSFX(objId: number): SFX;
 
     // Returns the VO corresponding to the provided id.
     export function GetVO(objId: number): VO;
 
+    // Returns all objects of type FixedCamera.
+    export function GetAllFixedCameras(): Array;
+
     // Returns the FixedCamera corresponding to the provided id.
     export function GetFixedCamera(objId: number): FixedCamera;
+
+    // Returns all objects of type VFX.
+    export function GetAllVFXs(): Array;
 
     // Returns the VFX corresponding to the provided id.
     export function GetVFX(objId: number): VFX;
 
+    // Returns all objects of type SpawnPoint.
+    export function GetAllSpawnPoints(): Array;
+
     // Returns the SpawnPoint corresponding to the provided id.
     export function GetSpawnPoint(objId: number): SpawnPoint;
+
+    // Returns all objects of type RingOfFire.
+    export function GetAllRingsOfFire(): Array;
 
     // Returns the current gamemode score of the provided player or team.
     export function GetGameModeScore(player: Player): number;
@@ -1893,6 +1991,30 @@ declare namespace mod {
 
     // Returns true if the provided team is using soldiers from the specified faction.
     export function IsFaction(team: Team, factions: Factions): boolean;
+
+    // Returns all objects of type AreaTrigger.
+    export function GetAllAreaTriggers(): Array;
+
+    // Returns all objects of type BlockingSphere.
+    export function GetAllBlockingSpheres(): Array;
+
+    // Returns all objects of type EmplacementSpawner.
+    export function GetAllEmplacementSpawners(): Array;
+
+    // Returns all objects of type InteractPoint.
+    export function GetAllInteractPoints(): Array;
+
+    // Returns all objects of type LootSpawner.
+    export function GetAllLootSpawners(): Array;
+
+    // Returns all objects of type Spawner.
+    export function GetAllSpawners(): Array;
+
+    // Returns all objects of type VL7Cloud.
+    export function GetAllVL7Clouds(): Array;
+
+    // Returns all objects of type VehicleSpawner.
+    export function GetAllVehicleSpawners(): Array;
 
     // Returns the AreaTrigger corresponding to the provided id.
     export function GetAreaTrigger(objId: number): AreaTrigger;
@@ -1980,7 +2102,8 @@ declare namespace mod {
             | RuntimeSpawn_Plaza
             | RuntimeSpawn_Isolated
             | RuntimeSpawn_Ocean
-            | RuntimeSpawn_Atoll,
+            | RuntimeSpawn_Atoll
+            | RuntimeSpawn_Granite_Carrier,
         position: Vector,
         rotation: Vector,
         scale: Vector
@@ -2015,7 +2138,8 @@ declare namespace mod {
             | RuntimeSpawn_Plaza
             | RuntimeSpawn_Isolated
             | RuntimeSpawn_Ocean
-            | RuntimeSpawn_Atoll,
+            | RuntimeSpawn_Atoll
+            | RuntimeSpawn_Granite_Carrier,
         position: Vector,
         rotation: Vector
     ): Any;
@@ -2194,8 +2318,15 @@ declare namespace mod {
     // Returns the tangent value of a specified angle in radians.
     export function TangentFromRadians(number: number): number;
 
-    // Returns an array of all capture points within a game.
+    /**
+     * Returns an array of all capture points within a game.
+     * @deprecated The method should not be used.
+     * @returns Array of all capture points within a game.
+     */
     export function AllCapturePoints(): Array;
+
+    // Returns all objects of type CapturePoint.
+    export function GetAllCapturePoints(): Array;
 
     // Returns the CapturePoint corresponding to the provided id.
     export function GetCapturePoint(objId: number): CapturePoint;
@@ -2209,14 +2340,26 @@ declare namespace mod {
     // Returns the team of the team currently capturing the provided capture point.
     export function GetOwnerProgressTeam(capturePoint: CapturePoint): Team;
 
-    // Returns a array of all players within the boundaries of a provided capture point.
+    // Returns an array of all players within the boundaries of a provided capture point.
     export function GetPlayersOnPoint(capturePoint: CapturePoint): Array;
 
     // Returns the previous owner team corresponding to the provided capture point.
     export function GetPreviousOwnerTeam(capturePoint: CapturePoint): Team;
 
+    // Returns all objects of type HQ.
+    export function GetAllHQs(): Array;
+
     // Returns the HQ corresponding to the provided id.
     export function GetHQ(objId: number): HQ;
+
+    // Returns all objects of type Bomb.
+    export function GetAllBombs(): Array;
+
+    // Returns all objects of type MCOM.
+    export function GetAllMCOMs(): Array;
+
+    // Returns all objects of type Sector.
+    export function GetAllSectors(): Array;
 
     // Returns the Bomb corresponding to the provided id.
     export function GetBomb(objId: number): Bomb;
@@ -2233,7 +2376,11 @@ declare namespace mod {
     // Return average Server side frame time.
     export function GetServerAverageFrameTime(): number;
 
-    // Returns an array of all players within a game.
+    /**
+     * Returns an array of all players within a game.
+     * @deprecated The method should not be used.
+     * @returns Array of all players within a game.
+     */
     export function AllPlayers(): Array;
 
     // Returns the closest alive player to a provided position. Can be filtered using a team. Note: If no players are alive when this block is called, the returned player will be invalid.
@@ -2247,6 +2394,9 @@ declare namespace mod {
 
     // Returns the farthest alive player from a provided position. Can be filtered using a team. Note: If no players are alive when this block is called, the returned player will be invalid.
     export function FarthestPlayerFrom(vector: Vector, team: Team): Player;
+
+    // Returns all objects of type Player.
+    export function GetAllPlayers(): Array;
 
     // Returns the Player corresponding to the provided id.
     export function GetPlayer(objId: number): Player;
@@ -2377,6 +2527,12 @@ declare namespace mod {
     // Returns the 'Z' component of a provided vector.
     export function ZComponentOf(vector: Vector): number;
 
+    // Returns a new GameEventNotificationData.
+    export function CreateGameEventNotificationData(): GameEventNotificationData;
+
+    // Returns all objects of type WorldIcon.
+    export function GetAllWorldIcons(): Array;
+
     // Returns the WorldIcon corresponding to the provided id.
     export function GetWorldIcon(objId: number): WorldIcon;
 
@@ -2503,11 +2659,18 @@ declare namespace mod {
     // Returns a boolean indicating if the UI Widget exists.
     export function HasUIWidgetWithName(name: string): boolean;
 
-    // Returns an array of all vehicles within a game.
+    /**
+     * Returns an array of all vehicles within a game.
+     * @deprecated The method should not be used.
+     * @returns Array of all vehicles within a game.
+     */
     export function AllVehicles(): Array;
 
     // Returns a boolean indicating if the target vehicle has the same name as the provided vehicle or if it is the same type as the provided vehicle type.
     export function CompareVehicleName(vehicle: Vehicle, vehicleList: VehicleList): boolean;
+
+    // Returns all objects of type Vehicle.
+    export function GetAllVehicles(): Array;
 
     // Returns the Vehicle corresponding to the provided id.
     export function GetVehicle(objId: number): Vehicle;
@@ -2530,7 +2693,7 @@ declare namespace mod {
     // Returns a boolean indicating if the target seat index number of target vehicle is a occupied by a player.
     export function IsVehicleSeatOccupied(vehicle: Vehicle, number: number): boolean;
 
-    // Returns a array of all players inside a provided vehicle.
+    // Returns an array of all players inside a provided vehicle.
     export function GetAllPlayersInVehicle(vehicle: Vehicle): Array;
 
     // Returns the player currently occupying the provided seat index number of the provided vehicle. Note: If no players are in the vehicle seat when this block is called, the returned player will be invalid.

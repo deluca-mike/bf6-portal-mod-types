@@ -107,6 +107,8 @@ declare namespace mod {
          */
         export function OngoingVehicleSpawner(eventVehicleSpawner: mod.VehicleSpawner): void;
 
+        export function OngoingWater(eventWater: mod.Water): void;
+
         /**
          * This will trigger per server tick for each WaypointPath.
          * @param eventWaypointPath - The WaypointPath that is being processed.
@@ -193,7 +195,7 @@ declare namespace mod {
         // This will trigger whenever a Player deploys.
         export function OnPlayerDeployed(eventPlayer: mod.Player): void;
 
-        // This will trigger whenever a Player dies.
+        // This will trigger whenever a Player dies. For self-inflicted deaths (eg. fall damage, redeploys, etc.) eventPlayer and eventOtherPlayer will be the same.
         export function OnPlayerDied(
             eventPlayer: mod.Player,
             eventOtherPlayer: mod.Player,
@@ -201,7 +203,7 @@ declare namespace mod {
             eventWeaponUnlock: mod.WeaponUnlock
         ): void;
 
-        // This will trigger when a Player earns a kill against another Player.
+        // This will trigger whenever a Player kills someone. For self-inflicted kills (eg. fall damage, redeploys, etc.) eventPlayer and eventOtherPlayer will be the same.
         export function OnPlayerEarnedKill(
             eventPlayer: mod.Player,
             eventOtherPlayer: mod.Player,
