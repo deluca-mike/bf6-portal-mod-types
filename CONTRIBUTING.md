@@ -46,10 +46,10 @@ otherwise untenable, we will adopt the translation of:
 - `majorVersion = 2 + official.a + official.b`
 - `minorVersion = official.c`
 
-- **bf6-portal-mod-types** `5.1.0` corresponds to the official **2.1.1.0** `mod` namespace.
-- **Patch** releases (e.g. `5.1.1`) = same official API, with additional JSDoc or usability improvements only.
-- When the Portal team releases a new SDK version (e.g. `2.1.2.0`), this package would move to a new **minor** (e.g.
-  `5.2.0`) and the root types would be updated from the new official `index.d.ts`.
+- **bf6-portal-mod-types** `5.2.0` corresponds to the official **2.1.2.0** `mod` namespace.
+- **Patch** releases (e.g. `5.2.1`) = same official API, with additional JSDoc or usability improvements only.
+- When the Portal team releases a new SDK version (e.g. `2.1.3.0`), this package would move to a new **minor** (e.g.
+  `5.3.0`) and the root types would be updated from the new official `index.d.ts`.
 
 ## Scripts
 
