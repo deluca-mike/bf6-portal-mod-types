@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version: 2.1.1.0
+// Version: 2.1.2.0
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -13,6 +13,7 @@
 /// <reference path="./runtime-spawn-enums/capstone.d.ts" />
 /// <reference path="./runtime-spawn-enums/common.d.ts" />
 /// <reference path="./runtime-spawn-enums/contaminated.d.ts" />
+/// <reference path="./runtime-spawn-enums/dry-lake.d.ts" />
 /// <reference path="./runtime-spawn-enums/dumbo.d.ts" />
 /// <reference path="./runtime-spawn-enums/eastwood.d.ts" />
 /// <reference path="./runtime-spawn-enums/fire-storm.d.ts" />
@@ -29,6 +30,7 @@
 /// <reference path="./runtime-spawn-enums/limestone.d.ts" />
 /// <reference path="./runtime-spawn-enums/ocean.d.ts" />
 /// <reference path="./runtime-spawn-enums/outskirts.d.ts" />
+/// <reference path="./runtime-spawn-enums/paradise.d.ts" />
 /// <reference path="./runtime-spawn-enums/plaza.d.ts" />
 /// <reference path="./runtime-spawn-enums/sand.d.ts" />
 /// <reference path="./runtime-spawn-enums/subsurface.d.ts" />
@@ -110,6 +112,55 @@ declare namespace mod {
 
     // Spawn one AI soldier from a specific AI Spawner.
     export function SpawnAIFromAISpawner(spawner: Spawner, name: Message, team: Team): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(spawner: Spawner, soldierVariation: AIVariation): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(
+        spawner: Spawner,
+        classToSpawn: SoldierClass,
+        soldierVariation: AIVariation
+    ): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(
+        spawner: Spawner,
+        classToSpawn: SoldierClass,
+        soldierVariation: AIVariation,
+        name: Message
+    ): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(
+        spawner: Spawner,
+        classToSpawn: SoldierClass,
+        soldierVariation: AIVariation,
+        name: Message,
+        team: Team
+    ): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(
+        spawner: Spawner,
+        classToSpawn: SoldierClass,
+        soldierVariation: AIVariation,
+        team: Team
+    ): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(
+        spawner: Spawner,
+        soldierVariation: AIVariation,
+        name: Message,
+        team: Team
+    ): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(spawner: Spawner, soldierVariation: AIVariation, team: Team): void;
+
+    // Spawn one AI soldier from a specific AI Spawner.
+    export function SpawnAIFromAISpawner(spawner: Spawner, soldierVariation: AIVariation, name: Message): void;
 
     // Unspawns all AIs who were spawned by a specific AI Spawner.
     export function UnspawnAllAIsFromAISpawner(spawner: Spawner): void;
@@ -325,6 +376,15 @@ declare namespace mod {
 
     // Enables or disables a player-specific screen effect.
     export function EnableScreenEffect(player: Player, screenEffect: ScreenEffects, enable: boolean): void;
+
+    // Customize parameters for ScreenEffects. Parameter values are shared to all players.
+    export function SetScreenEffectParameter(floatParameter: ScreenEffectFloatParameters, newValue: number): void;
+
+    // Customize parameters for ScreenEffects. Parameter values are shared to all players.
+    export function SetScreenEffectParameter(boolParameter: ScreenEffectBoolParameters, newValue: boolean): void;
+
+    // Customize parameters for ScreenEffects. Parameter values are shared to all players.
+    export function SetScreenEffectParameter(vectorParameter: ScreenEffectVectorParameters, newValue: Vector): void;
 
     // Enables or disables a visual effect.
     export function EnableVFX(vfx: VFX, enable: boolean): void;
@@ -2139,7 +2199,9 @@ declare namespace mod {
             | RuntimeSpawn_Isolated
             | RuntimeSpawn_Ocean
             | RuntimeSpawn_Atoll
-            | RuntimeSpawn_Granite_Carrier,
+            | RuntimeSpawn_Granite_Carrier
+            | RuntimeSpawn_DryLake
+            | RuntimeSpawn_Paradise,
         position: Vector,
         rotation: Vector
     ): Any;

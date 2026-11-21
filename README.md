@@ -51,11 +51,11 @@ documentation or usability improvements).
 | ---------------------------- | ------------ |
 | `a.b.c.d` (template)         | `b.c.x`      |
 | `1.4.3.0` (past)             | `4.3.x`      |
-| `2.1.1.0` (current)          | `5.1.x`      |
-| `2.1.2.0` (future example)   | `5.2.x`      |
+| `2.1.2.0` (current)          | `5.2.x`      |
+| `2.1.3.0` (future example)   | `5.3.x`      |
 
-- **Minor** version changes (e.g. `5.1.0` → `5.2.0`) align with a new official SDK release and may add or change APIs.
-- **Patch** versions (e.g. `5.1.0` → `5.1.1`) keep the same underlying SDK version and only add or improve documentation
+- **Minor** version changes (e.g. `5.2.0` → `5.3.0`) align with a new official SDK release and may add or change APIs.
+- **Patch** versions (e.g. `5.2.0` → `5.2.1`) keep the same underlying SDK version and only add or improve documentation
   and usability (no API surface change).
 
 When you upgrade patch versions, you can expect the same `mod` API with more or better JSDoc and no breaking changes.
